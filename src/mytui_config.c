@@ -9,12 +9,11 @@ void ini_conf_file(){
     print_info("ini_con_file");
     verification_init_file();
     print_info("terminada verificacion de existencia de archivos de configuracion");
-
 //bool exist_file(const char* path);
 }
 
 
-static void verification_init_file(){
+static bool verification_init_file(){
     const char* folder_home = get_home_folder();
 
     char conf_folder_resolution[ strlen(folder_home) + (strlen(SEPARATOR_FOLDER) * 3) +
@@ -47,5 +46,8 @@ static void verification_init_file(){
         strcpy(cmd_create_folder_mitui_conf, TOUCH);
         strcat(cmd_create_folder_mitui_conf, conf_folder_resolution);
         run_cmd_silent(cmd_create_folder_mitui_conf);
+        return false;
     }
+
+    return true;
 }

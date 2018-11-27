@@ -26,6 +26,9 @@ struct InfoTerm{
 
 struct InfoTerm get_info_term();
 
+/**
+ * ... text ...
+ */
 void run_cmd_silent(const char *cmd);
 
 void print_error( const char *msg, ...);

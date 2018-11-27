@@ -20,7 +20,7 @@ GHashTable* hash_conf;
 
 void ini_conf_file();
 
-
+/* si el archivo es nuevo devuelve un si */
 static void verification_init_file();
 
 #endif
