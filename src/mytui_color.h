@@ -1,3 +1,9 @@
+/** @file mytui_color.h
+*  @ingroup Conf
+*  @brief costantes de colores y foreground de la terminal
+*  @date 28-11-2018
+*  @author leonelsoriano3@gmail.com
+*/
 #ifndef __MYTUI_COLOR_H__
 #define __MYTUI_COLOR_H__
 

@@ -48,6 +48,5 @@ static bool verification_init_file(){
         run_cmd_silent(cmd_create_folder_mitui_conf);
         return false;
     }
-
     return true;
 }
