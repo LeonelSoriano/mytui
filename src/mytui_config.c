@@ -1,15 +1,37 @@
 #include "mytui_config.h"
 
-
-/** #define CONF_FOLDER .config
-  * #define TUI_FOLDER_CONF mytui
-  * #define CONF_FILE_NAME init.conf */
-
 void ini_conf_file(){
     print_info("ini_con_file");
     verification_init_file();
     print_info("terminada verificacion de existencia de archivos de configuracion");
-//bool exist_file(const char* path);
+    //bool exist_file(const char* path);
+    char *hola = "hola";
+get_file_conf_path(&hola);
+    printf("%s\n",hola );
+}
+
+static void create_default_conf(){
+    //FILE *f = fopen();
+
+
+
+}
+
+
+static void get_file_conf_path(char *path){
+    const char* folder_home = get_home_folder();
+
+    char conf_folder_resolution[ strlen(folder_home) + (strlen(SEPARATOR_FOLDER) * 3) +
+        strlen(CONF_FONDER) + strlen(TUI_FOLDER_CONF) + strlen(CONF_FILE_NAME)];
+
+    strcpy(conf_folder_resolution, folder_home);
+    strcat(conf_folder_resolution, SEPARATOR_FOLDER);
+    strcat(conf_folder_resolution, CONF_FONDER);
+    strcat(conf_folder_resolution, SEPARATOR_FOLDER);
+    strcat(conf_folder_resolution, TUI_FOLDER_CONF);
+    strcat(conf_folder_resolution, SEPARATOR_FOLDER);
+    strcat(conf_folder_resolution, CONF_FILE_NAME);
+    path = conf_folder_resolution;
 }
 
 
