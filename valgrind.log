@@ -1,0 +1,184 @@
+==14240== Memcheck, a memory error detector
+==14240== Copyright (C) 2002-2015, and GNU GPL'd, by Julian Seward et al.
+==14240== Using Valgrind-3.11.0 and LibVEX; rerun with -h for copyright info
+==14240== Command: ./test
+==14240== Parent PID: 7083
+==14240== 
+--14240-- 
+--14240-- Valgrind options:
+--14240--    --leak-check=full
+--14240--    --show-leak-kinds=all
+--14240--    -v
+--14240--    --log-file=valgrind.log
+--14240-- Contents of /proc/version:
+--14240--   Linux version 4.15.0-30-generic (buildd@lcy01-amd64-003) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10)) #32~16.04.1-Ubuntu SMP Thu Jul 26 20:25:39 UTC 2018
+--14240-- 
+--14240-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-avx-avx2-bmi
+--14240-- Page sizes: currently 4096, max supported 4096
+--14240-- Valgrind library directory: /usr/lib/valgrind
+--14240-- Reading syms from /home/lsoriano/dev/c/hol/mytui/test
+--14240-- Reading syms from /lib/x86_64-linux-gnu/ld-2.23.so
+--14240--   Considering /lib/x86_64-linux-gnu/ld-2.23.so ..
+--14240--   .. CRC mismatch (computed aa979a42 wanted 9019bbb7)
+--14240--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/ld-2.23.so ..
+--14240--   .. CRC is valid
+--14240-- Reading syms from /usr/lib/valgrind/memcheck-amd64-linux
+--14240--   Considering /usr/lib/valgrind/memcheck-amd64-linux ..
+--14240--   .. CRC mismatch (computed eea41ea9 wanted 2009db78)
+--14240--    object doesn't have a symbol table
+--14240--    object doesn't have a dynamic symbol table
+--14240-- Scheduler: using generic scheduler lock implementation.
+--14240-- Reading suppressions file: /usr/lib/valgrind/default.supp
+==14240== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-14240-by-lsoriano-on-???
+==14240== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-14240-by-lsoriano-on-???
+==14240== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-14240-by-lsoriano-on-???
+==14240== 
+==14240== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==14240== don't want to do, unless you know exactly what you're doing,
+==14240== or are doing some strange experiment):
+==14240==   /usr/lib/valgrind/../../bin/vgdb --pid=14240 ...command...
+==14240== 
+==14240== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==14240==   /path/to/gdb ./test
+==14240== and then give GDB the following command
+==14240==   target remote | /usr/lib/valgrind/../../bin/vgdb --pid=14240
+==14240== --pid is optional if only one valgrind process is running
+==14240== 
+--14240-- REDIR: 0x401cfd0 (ld-linux-x86-64.so.2:strlen) redirected to 0x3809e181 (???)
+--14240-- Reading syms from /usr/lib/valgrind/vgpreload_core-amd64-linux.so
+--14240--   Considering /usr/lib/valgrind/vgpreload_core-amd64-linux.so ..
+--14240--   .. CRC mismatch (computed 2567ccf6 wanted 49420590)
+--14240--    object doesn't have a symbol table
+--14240-- Reading syms from /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so
+--14240--   Considering /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so ..
+--14240--   .. CRC mismatch (computed 0e27c9a8 wanted ac585421)
+--14240--    object doesn't have a symbol table
+==14240== WARNING: new redirection conflicts with existing -- ignoring it
+--14240--     old: 0x0401cfd0 (strlen              ) R-> (0000.0) 0x3809e181 ???
+--14240--     new: 0x0401cfd0 (strlen              ) R-> (2007.0) 0x04c31020 strlen
+--14240-- REDIR: 0x401b920 (ld-linux-x86-64.so.2:index) redirected to 0x4c30bc0 (index)
+--14240-- REDIR: 0x401bb40 (ld-linux-x86-64.so.2:strcmp) redirected to 0x4c320d0 (strcmp)
+--14240-- REDIR: 0x401dd30 (ld-linux-x86-64.so.2:mempcpy) redirected to 0x4c35270 (mempcpy)
+--14240-- Reading syms from /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2
+--14240--    object doesn't have a symbol table
+--14240-- Reading syms from /lib/x86_64-linux-gnu/libc-2.23.so
+--14240--   Considering /lib/x86_64-linux-gnu/libc-2.23.so ..
+--14240--   .. CRC mismatch (computed 7a8ee3e4 wanted a5190ac4)
+--14240--   Considering /usr/lib/debug/lib/x86_64-linux-gnu/libc-2.23.so ..
+--14240--   .. CRC is valid
+--14240-- Reading syms from /lib/x86_64-linux-gnu/libpcre.so.3.13.2
+--14240--   Considering /lib/x86_64-linux-gnu/libpcre.so.3.13.2 ..
+--14240--   .. CRC mismatch (computed 276b70fd wanted 22183252)
+--14240--    object doesn't have a symbol table
+--14240-- Reading syms from /lib/x86_64-linux-gnu/libpthread-2.23.so
+--14240--   Considering /usr/lib/debug/.build-id/ce/17e023542265fc11d9bc8f534bb4f070493d30.debug ..
+--14240--   .. build-id is valid
+--14240-- REDIR: 0x51daa00 (libc.so.6:strcasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51d6280 (libc.so.6:strcspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51dccf0 (libc.so.6:strncasecmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51d86f0 (libc.so.6:strpbrk) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51d8a80 (libc.so.6:strspn) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51da14b (libc.so.6:memcpy@GLIBC_2.2.5) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51d6b20 (libc.so.6:strncmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51d4a80 (libc.so.6:index) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51da1b0 (libc.so.6:memset) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51d9bb0 (libc.so.6:bcmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51d4cd0 (libc.so.6:strcmp) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x5261210 (libc.so.6:__memcpy_chk) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51df3f0 (libc.so.6:memcpy@@GLIBC_2.14) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51d8400 (libc.so.6:rindex) redirected to 0x4c308a0 (rindex)
+--14240-- REDIR: 0x51d6720 (libc.so.6:strlen) redirected to 0x4c30f60 (strlen)
+--14240-- REDIR: 0x51cf130 (libc.so.6:malloc) redirected to 0x4c2db20 (malloc)
+--14240-- REDIR: 0x51cfd10 (libc.so.6:calloc) redirected to 0x4c2faa0 (calloc)
+--14240-- REDIR: 0x51cf4f0 (libc.so.6:free) redirected to 0x4c2ed80 (free)
+--14240-- REDIR: 0x51df470 (libc.so.6:__GI_memcpy) redirected to 0x4c32b00 (__GI_memcpy)
+--14240-- REDIR: 0x51d9060 (libc.so.6:__GI_strstr) redirected to 0x4c354d0 (__strstr_sse2)
+--14240-- REDIR: 0x51d9bf0 (libc.so.6:__GI_memcmp) redirected to 0x4c33b90 (__GI_memcmp)
+--14240-- REDIR: 0x51d4d10 (libc.so.6:__GI_strcmp) redirected to 0x4c31fe0 (__GI_strcmp)
+--14240-- REDIR: 0x51d4880 (libc.so.6:strcat) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51f37f0 (libc.so.6:__strcat_sse2_unaligned) redirected to 0x4c30c00 (strcat)
+--14240-- REDIR: 0x51e1760 (libc.so.6:strchrnul) redirected to 0x4c34da0 (strchrnul)
+--14240-- REDIR: 0x51da3b0 (libc.so.6:__GI_mempcpy) redirected to 0x4c34fa0 (__GI_mempcpy)
+--14240-- REDIR: 0x51d6b70 (libc.so.6:__GI_strncmp) redirected to 0x4c31710 (__GI_strncmp)
+--14240-- REDIR: 0x51d6160 (libc.so.6:strcpy) redirected to 0x4a286f0 (_vgnU_ifunc_wrapper)
+--14240-- REDIR: 0x51f09d0 (libc.so.6:__strcpy_sse2_unaligned) redirected to 0x4c31040 (strcpy)
+==14240== 
+==14240== HEAP SUMMARY:
+==14240==     in use at exit: 18,604 bytes in 6 blocks
+==14240==   total heap usage: 17 allocs, 11 frees, 26,030 bytes allocated
+==14240== 
+==14240== Searching for pointers to 6 not-freed blocks
+==14240== Checked 104,728 bytes
+==14240== 
+==14240== 4 bytes in 1 blocks are still reachable in loss record 1 of 6
+==14240==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==14240==    by 0x4EC81D2: ??? (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4EC8714: g_private_get (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4EA099C: g_slice_alloc (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4E7274D: g_hash_table_new_full (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4E9394A: ??? (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x40106B9: call_init.part.0 (dl-init.c:72)
+==14240==    by 0x40107CA: call_init (dl-init.c:30)
+==14240==    by 0x40107CA: _dl_init (dl-init.c:120)
+==14240==    by 0x4000C69: ??? (in /lib/x86_64-linux-gnu/ld-2.23.so)
+==14240== 
+==14240== 32 bytes in 1 blocks are still reachable in loss record 2 of 6
+==14240==    at 0x4C2FB55: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==14240==    by 0x4E89810: g_malloc0 (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4E727B4: g_hash_table_new_full (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4E9394A: ??? (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x40106B9: call_init.part.0 (dl-init.c:72)
+==14240==    by 0x40107CA: call_init (dl-init.c:30)
+==14240==    by 0x40107CA: _dl_init (dl-init.c:120)
+==14240==    by 0x4000C69: ??? (in /lib/x86_64-linux-gnu/ld-2.23.so)
+==14240== 
+==14240== 64 bytes in 1 blocks are still reachable in loss record 3 of 6
+==14240==    at 0x4C2FB55: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==14240==    by 0x4E89810: g_malloc0 (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4E7279F: g_hash_table_new_full (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4E9394A: ??? (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x40106B9: call_init.part.0 (dl-init.c:72)
+==14240==    by 0x40107CA: call_init (dl-init.c:30)
+==14240==    by 0x40107CA: _dl_init (dl-init.c:120)
+==14240==    by 0x4000C69: ??? (in /lib/x86_64-linux-gnu/ld-2.23.so)
+==14240== 
+==14240== 88 bytes in 1 blocks are still reachable in loss record 4 of 6
+==14240==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==14240==    by 0x4E897B8: g_malloc (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4EA09C2: g_slice_alloc (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4E7274D: g_hash_table_new_full (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4E9394A: ??? (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x40106B9: call_init.part.0 (dl-init.c:72)
+==14240==    by 0x40107CA: call_init (dl-init.c:30)
+==14240==    by 0x40107CA: _dl_init (dl-init.c:120)
+==14240==    by 0x4000C69: ??? (in /lib/x86_64-linux-gnu/ld-2.23.so)
+==14240== 
+==14240== 2,032 bytes in 1 blocks are still reachable in loss record 5 of 6
+==14240==    at 0x4C2FB55: calloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==14240==    by 0x4E89810: g_malloc0 (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4EA0C2B: g_slice_alloc (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4E7274D: g_hash_table_new_full (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4E9394A: ??? (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x40106B9: call_init.part.0 (dl-init.c:72)
+==14240==    by 0x40107CA: call_init (dl-init.c:30)
+==14240==    by 0x40107CA: _dl_init (dl-init.c:120)
+==14240==    by 0x4000C69: ??? (in /lib/x86_64-linux-gnu/ld-2.23.so)
+==14240== 
+==14240== 16,384 bytes in 1 blocks are still reachable in loss record 6 of 6
+==14240==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==14240==    by 0x4E897B8: g_malloc (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x4E9395B: ??? (in /lib/x86_64-linux-gnu/libglib-2.0.so.0.4800.2)
+==14240==    by 0x40106B9: call_init.part.0 (dl-init.c:72)
+==14240==    by 0x40107CA: call_init (dl-init.c:30)
+==14240==    by 0x40107CA: _dl_init (dl-init.c:120)
+==14240==    by 0x4000C69: ??? (in /lib/x86_64-linux-gnu/ld-2.23.so)
+==14240== 
+==14240== LEAK SUMMARY:
+==14240==    definitely lost: 0 bytes in 0 blocks
+==14240==    indirectly lost: 0 bytes in 0 blocks
+==14240==      possibly lost: 0 bytes in 0 blocks
+==14240==    still reachable: 18,604 bytes in 6 blocks
+==14240==         suppressed: 0 bytes in 0 blocks
+==14240== 
+==14240== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==14240== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

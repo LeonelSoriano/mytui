@@ -11,6 +11,8 @@
 #include "until.h"
 #include "mytui_std_conf.h"
 
+//#include "termbox.h"
+
 static const char* CONF_FONDER = ".config";
 static const char* TUI_FOLDER_CONF = "mytui";
 static const char* CONF_FILE_NAME = "init.conf";

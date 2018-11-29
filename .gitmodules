@@ -1,3 +1,3 @@
 [submodule "termbox"]
 	path = termbox
-url = https://github.com/nsf/termbox
+	url = https://github.com/nsf/termbox

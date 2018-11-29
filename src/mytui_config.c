@@ -26,7 +26,7 @@ static void create_default_conf(char* path_conf_file){
         exit(EXIT_FAILURE);
     }
     for (int i = 0; i < MYTUI_CONF_MAX; i++) {
-        fputs( mytui_std_conf[i] , f);
+        //fputs( mytui_std_conf1[i] , f);
         fputs("\n", f);
     }
     fclose(f);
