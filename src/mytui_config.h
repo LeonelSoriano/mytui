@@ -39,6 +39,6 @@ static void create_default_conf();
  */
 static bool verification_init_file();
 
-static void get_file_conf_path(char* path);
+static void get_file_conf_path(char* data);
 
 #endif

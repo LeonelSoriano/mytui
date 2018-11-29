@@ -5,9 +5,10 @@ void ini_conf_file(){
     verification_init_file();
     print_info("terminada verificacion de existencia de archivos de configuracion");
     //bool exist_file(const char* path);
-    char *hola = "hola";
-get_file_conf_path(&hola);
-    printf("%s\n",hola );
+    char *hola = "";
+get_file_conf_path(*hola);
+    printf("fuera %s\n",hola);
+   // printf("%s\n",);
 }
 
 static void create_default_conf(){
@@ -18,7 +19,7 @@ static void create_default_conf(){
 }
 
 
-static void get_file_conf_path(char *path){
+static void get_file_conf_path(char * data){
     const char* folder_home = get_home_folder();
 
     char conf_folder_resolution[ strlen(folder_home) + (strlen(SEPARATOR_FOLDER) * 3) +
@@ -31,7 +32,8 @@ static void get_file_conf_path(char *path){
     strcat(conf_folder_resolution, TUI_FOLDER_CONF);
     strcat(conf_folder_resolution, SEPARATOR_FOLDER);
     strcat(conf_folder_resolution, CONF_FILE_NAME);
-    path = conf_folder_resolution;
+
+    strcpy(data, conf_folder_resolution);
 }
 
 
