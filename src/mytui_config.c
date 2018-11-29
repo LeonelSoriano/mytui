@@ -2,24 +2,38 @@
 
 void ini_conf_file(){
     print_info("ini_con_file");
-    verification_init_file();
-    print_info("terminada verificacion de existencia de archivos de configuracion");
-    //bool exist_file(const char* path);
-    char *hola = "";
-get_file_conf_path(*hola);
-    printf("fuera %s\n",hola);
-   // printf("%s\n",);
+
+    char *mytui_conf_file = get_file_conf_path();
+    bool exist_file_conf = false;
+
+    if(exist_file(mytui_conf_file) == true){
+        exist_file_conf = true;
+    }
+
+   print_info("terminada verificacion de existencia de archivos de configuracion");
+
+    if(exist_file_conf == false){
+        print_info("recreando conf file");
+        create_default_conf(mytui_conf_file);
+    }
+
 }
 
-static void create_default_conf(){
-    //FILE *f = fopen();
-
-
-
+static void create_default_conf(char* path_conf_file){
+    FILE *f = fopen(path_conf_file, "w");
+    if(f == NULL){
+        print_error("create_default_conf: error al conseguir el archivo de conf: %s",path_conf_file );
+        exit(EXIT_FAILURE);
+    }
+    for (int i = 0; i < MYTUI_CONF_MAX; i++) {
+        fputs( mytui_std_conf[i] , f);
+        fputs("\n", f);
+    }
+    fclose(f);
 }
 
 
-static void get_file_conf_path(char * data){
+static char* get_file_conf_path(){
     const char* folder_home = get_home_folder();
 
     char conf_folder_resolution[ strlen(folder_home) + (strlen(SEPARATOR_FOLDER) * 3) +
@@ -33,7 +47,10 @@ static void get_file_conf_path(char * data){
     strcat(conf_folder_resolution, SEPARATOR_FOLDER);
     strcat(conf_folder_resolution, CONF_FILE_NAME);
 
-    strcpy(data, conf_folder_resolution);
+    static char response[sizeof folder_home + (sizeof SEPARATOR_FOLDER * 3) +  sizeof CONF_FONDER + 
+        sizeof TUI_FOLDER_CONF + sizeof CONF_FILE_NAME];
+    strcpy(response, conf_folder_resolution);
+    return response;
 }
 
 

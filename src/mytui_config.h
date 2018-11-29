@@ -7,8 +7,9 @@
 #ifndef __MYTUI_CONFIG__
 #define __MYTUI_CONFIG__
 
-#include <glib.h>
+//#include <glib.h>
 #include "until.h"
+#include "mytui_std_conf.h"
 
 static const char* CONF_FONDER = ".config";
 static const char* TUI_FOLDER_CONF = "mytui";
@@ -17,7 +18,7 @@ static const char* CONF_FILE_NAME = "init.conf";
 /**
  * tiene la informacion del archivo de conf en memoria
  */
-GHashTable* hash_conf;
+//GHashTable* hash_conf;
 
 #ifdef __MINGW32__
     static const char* SEPARATOR_FOLDER = "\\";
@@ -39,6 +40,5 @@ static void create_default_conf();
  */
 static bool verification_init_file();
 
-static void get_file_conf_path(char* data);
-
+static char* get_file_conf_path();
 #endif

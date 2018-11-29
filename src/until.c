@@ -33,7 +33,8 @@ void run_cmd_silent(const char *cmd){
 
 
 bool exist_file(const char* path){
-    return (access(path, F_OK != -1))? false: true;
+    struct stat buffer;
+    return (stat(path,&buffer) == 0)? true: false;
 }
 
 const char* get_home_folder(){
@@ -111,9 +112,9 @@ void print_info(const char *msg, ...){
     va_end (args);
 }
 
-GHashTable* read_file_conf(){
+/*GHashTable* read_file_conf(){
     GHashTable* hash = g_hash_table_new(g_str_hash, g_str_equal);
     return NULL;
-}
+}*/
 
 

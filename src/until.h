@@ -7,9 +7,9 @@
 #ifndef __UNTIL__
 #define __UNTIL__
 
-#include <stdbool.h>
-#include <unistd.h>
+#include <sys/stat.h>
 #include <sys/ioctl.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -17,7 +17,6 @@
 #include <string.h>
 #include <stdarg.h>
 #include <time.h>
-#include <glib.h>
 
 #include "mytui_color.h"
 #include "mytui_cmd.h"
@@ -76,6 +75,6 @@ const char* get_home_folder();
  * lee el archibo de conf y lo coloca en memoria
  * @return hash que posee la configuracion
  */
-GHashTable* read_file_conf();
+//GHashTable* read_file_conf();
 
 #endif
