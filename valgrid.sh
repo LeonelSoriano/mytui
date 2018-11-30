@@ -5,4 +5,5 @@ else
     echo "No, no existe Make"
     make
 fi
-valgrind --leak-check=full --show-leak-kinds=all -v --log-file="valgrind.log" ./test
+#--log-file="valgrind.log"
+valgrind --leak-check=full --show-leak-kinds=all -v  ./test

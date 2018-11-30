@@ -1,12 +1,12 @@
 //https://www.ibm.com/developerworks/linux/tutorials/l-glib/index.html
 //#include <stdio.h>
 
-//#include <glib.h>
+#include <glib.h>
 
 //#include "src/mytui_config.h"
 //#include "src/mytui.h"
 
-#include "./termbox/hola/usr/include/termbox.h"
+#include "./termbox/build/usr/include/termbox.h"
 
 //int main(int argc, char** argv) {
 //int ret = tb_init();
