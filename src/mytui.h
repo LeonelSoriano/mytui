@@ -9,6 +9,33 @@
 
 #include "mytui_config.h"
 
+#include "../termbox/build/usr/include/termbox.h"
+
+#include "mytui_buffer.h"
+
+/**
+ * global para administrar el buffer de pantalla
+ */
+NodeBufer *nodeBufer;
+
+/**
+ * inicia terbox
+ * @see init_mytui
+ */
+static void _init_termbox();
+
+/**
+ * termina y librera termbox
+ * @see end_mytui
+ */
+static void _free_termbox();
+
+/**
+ * tiene la implementacion de los click y otras cosas
+ * @see init_mytui
+ */
+void update_termbox();
+
 /**
  *  inicio de la libreria
  */
@@ -18,5 +45,6 @@ void init_mytui();
 * liberacion de recursos
 */
 void end_mytui();
+
 
 #endif

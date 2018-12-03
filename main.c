@@ -1,17 +1,19 @@
 //https://www.ibm.com/developerworks/linux/tutorials/l-glib/index.html
 //#include <stdio.h>
 
-#include <glib.h>
+//#include <glib.h>
 
 //#include "src/mytui_config.h"
-//#include "src/mytui.h"
+#include "src/mytui.h"
 
-#include "./termbox/build/usr/include/termbox.h"
+//#include "./termbox/build/usr/include/termbox.h"
 
-//int main(int argc, char** argv) {
+
+int main(int argc, char** argv) {
 //int ret = tb_init();
-//    init_mytui();
- //   end_mytui();
+    init_mytui();
+    update_termbox();
+    end_mytui();
 /*
  GHashTable* hash = g_hash_table_new(g_str_hash, g_str_equal);
  g_hash_table_insert(hash, "Virginia", "Richmond");
@@ -23,14 +25,14 @@
  printf("The value 'Virginia' was %sfound and removed\n", found ? "" : "not ");
  g_hash_table_destroy(hash);
 */
-// return 0;
+    return 0;
 
-//}
+}
 
 
 
 //#include "../termbox.h"
-#include <stdlib.h>
+/*#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -171,4 +173,4 @@ int main(int argv, char **argc) {
 		}
 		updateAndRedrawAll(mx, my);
 	}
-}
+}*/

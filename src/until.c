@@ -1,11 +1,8 @@
-
-
 #include "until.h"
 
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
-
 
 
 struct InfoTerm get_info_term(){
