@@ -1,6 +1,6 @@
 #include "mytui_buffer.h"
 
-void init_bufffer(NodeBufer **nodeBufer){
+void init_buffer(NodeBufer **nodeBufer){
     struct InfoTerm infoTerm = get_info_term();
     int max_buffer = (infoTerm.height)  * (infoTerm.width + 1) ;
     if(*nodeBufer != NULL){
@@ -61,6 +61,11 @@ void screen_manager(NodeBufer **nodeBufer){
 
 void reevaluete_screen_manager(NodeBufer **nodeBufer){
     free_buffer(nodeBufer);
-    init_bufffer(nodeBufer);
+    init_buffer(nodeBufer);
     screen_manager(nodeBufer);
+}
+
+
+void nodeTranformation_init(NodeTranformation **nodeTranformation){
+    *nodeTranformation = NULL;
 }

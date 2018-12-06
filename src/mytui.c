@@ -17,11 +17,9 @@ static void _free_termbox(){
 void init_mytui(){
 
     nodeBufer = NULL;
-
     //hash_conf = NULL;
     ini_conf_file();
-
-    init_bufffer(&nodeBufer);
+    init_buffer(&nodeBufer);
     _init_termbox();
     screen_manager(&nodeBufer);
 }

@@ -25,11 +25,19 @@ typedef struct NodeBufer{
     struct NodeBufer *next; /**< proximo nodo NodeBufer#next.*/
 }NodeBufer;
 
+typedef struct NodeTranformation{
+    int x;
+    int y;
+    int fg;
+    int bg;
+   struct NodeTranformation *next;
+}NodeTranformation;
+
 /**
  * inicia el buffer de pintado de la terminal
  * @param structura de nodos del buffer
  */
-void init_bufffer(NodeBufer **nodeBufer);
+void init_buffer(NodeBufer **nodeBufer);
 
 /**
  * libera memoria del buffer de pintado de la terminal
@@ -43,5 +51,11 @@ void free_buffer(NodeBufer **nodeBufer);
 void screen_manager(NodeBufer **nodeBufer);
 
 void reevaluete_screen_manager(NodeBufer **nodeBufer);
+
+void nodeTranformation_init(NodeTranformation **nodeTranformation);
+
+void nodeTranformation_add(NodeTranformation **nodeTranformation);
+
+void nodeTranformation_free(NodeTranformation **nodeTranformation);
 
 #endif
