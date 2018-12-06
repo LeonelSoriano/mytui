@@ -1,13 +1,11 @@
 #include "mytui.h"
 
-
 static void _init_termbox(){
     int ret = tb_init();
     if (ret) {
         print_error("_init_termbox: errror al iniciar terbox ");
         exit(EXIT_FAILURE);
 	}
-
 	//tb_select_input_mode( TB_INPUT_MOUSE);
 	tb_select_output_mode(TB_OUTPUT_NORMAL);
 }
@@ -41,11 +39,12 @@ void update_termbox(){
             switch (ev.key) {
             case TB_KEY_ESC:
                 tb_shutdown();
-                break;
+                
+                exit(EXIT_SUCCESS);
             }
             break;
         case TB_EVENT_RESIZE:
-            screen_manager(&nodeBufer);
+            reevaluete_screen_manager(&nodeBufer);
             break;
 		}
 	}

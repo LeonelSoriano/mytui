@@ -42,4 +42,6 @@ void free_buffer(NodeBufer **nodeBufer);
 */
 void screen_manager(NodeBufer **nodeBufer);
 
+void reevaluete_screen_manager(NodeBufer **nodeBufer);
+
 #endif
