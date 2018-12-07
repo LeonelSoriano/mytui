@@ -59,13 +59,106 @@ void screen_manager(NodeBufer **nodeBufer){
     tb_present();
 }
 
-void reevaluete_screen_manager(NodeBufer **nodeBufer){
+void init_screen_manager(NodeBufer **nodeBufer){
     free_buffer(nodeBufer);
     init_buffer(nodeBufer);
     screen_manager(nodeBufer);
 }
 
-
 void nodeTranformation_init(NodeTranformation **nodeTranformation){
     *nodeTranformation = NULL;
+}
+
+void nodeTranformation_add(NodeTranformation **nodeTranformation, int x, int y, int fg, int bg){
+    if(*nodeTranformation == NULL){
+        *nodeTranformation = (NodeTranformation *)malloc(sizeof(NodeTranformation));
+        (*nodeTranformation)->bg = bg;
+        (*nodeTranformation)->fg = fg;
+        (*nodeTranformation)->x = x;
+        (*nodeTranformation)->y = y;
+        (*nodeTranformation)->next = NULL;
+    }else{
+        NodeTranformation *tmp_old = (*nodeTranformation);
+        NodeTranformation *tmp_tranformation =
+            (NodeTranformation *)malloc(sizeof(NodeTranformation));
+        tmp_tranformation->bg = bg;
+        tmp_tranformation->fg = fg;
+        tmp_tranformation->x = x;
+        tmp_tranformation->y = y;
+
+        (*nodeTranformation) = tmp_tranformation;
+        (*nodeTranformation)->next = tmp_old;
+    }
+}
+
+void nodeTranformation_free(NodeTranformation **nodeTranformation){
+    if(*nodeTranformation == NULL){
+        print_error("nodeTranformation_free nodeTranformation(param) no puede ser NULL");
+        return;
+    }
+    for(;;){
+        if(*nodeTranformation == NULL){
+            return;
+        }else{
+            NodeTranformation *next_node = (*nodeTranformation)->next;
+            free(*nodeTranformation);
+            (*nodeTranformation) = next_node;
+        }
+    }
+}
+
+void node_bufffer_vs_tranformator(NodeBufer **nodeBufer, NodeTranformation *nodeTranformation){
+    print_info("hola");
+    if(*nodeBufer == NULL){
+        print_error("node_bufffer_vs_tranformator: *nodeBuffer is Null");
+        return;
+    }
+    if(nodeTranformation == NULL){
+        print_error("node_bufffer_vs_tranformator: *nodeTranformation");
+    }
+
+    struct InfoTerm infoTerm = get_info_term();
+
+    NodeTranformation *tmp_tranformation = nodeTranformation;
+    while(tmp_tranformation != NULL){
+        NodeBufer *tmp_nodeBuffer = *nodeBufer;
+
+        int index_find = (tmp_tranformation->y * infoTerm.width)  + tmp_tranformation->x;
+        int index = 0;
+
+        if(index_find == 0){
+            (*nodeBufer)->bg = tmp_tranformation->bg;
+            (*nodeBufer)->fg = tmp_tranformation->fg;
+            (*nodeBufer)->update = true;
+            printf("lotengo 1");
+        }else{
+            index = 1;
+            while((*nodeBufer)->next){
+                if(index == index_find){
+                    (*nodeBufer)->bg = tmp_tranformation->bg;
+                    (*nodeBufer)->fg = tmp_tranformation->fg;
+                    (*nodeBufer)->update = true;
+                    index = -1;
+
+            printf("lotengo 2");
+                    break;
+                }
+                (*nodeBufer) = (*nodeBufer)->next;
+                index++;
+            }
+            if((*nodeBufer) != NULL && index != -1){
+                index++;
+                (*nodeBufer)->bg = tmp_tranformation->bg;
+                (*nodeBufer)->fg = tmp_tranformation->fg;
+                (*nodeBufer)->update = true;
+
+            printf("lotengo 3");
+            }
+        }
+        tmp_tranformation = tmp_tranformation->next;
+        (*nodeBufer) = tmp_nodeBuffer;
+    }
+
+
+
 }
