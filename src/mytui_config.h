@@ -11,11 +11,11 @@
 #include "until.h"
 #include "mytui_std_conf.h"
 
-//#include "termbox.h"
-
-static const char* CONF_FONDER = ".config";
-static const char* TUI_FOLDER_CONF = "mytui";
-static const char* CONF_FILE_NAME = "init.conf";
+typedef struct ConfMap{
+    const char *key;
+    const char *value;
+    struct ConfMap  *next;
+}ConfMap;
 
 /**
  * tiene la informacion del archivo de conf en memoria
@@ -33,14 +33,6 @@ static const char* CONF_FILE_NAME = "init.conf";
 */
 void ini_conf_file();
 
-static void create_default_conf();
 
-/**
- *  @brief verifica archivo de conf
- *  @return si el archivo de configuracion no existia y es creado es false
- *  verifica si existe los path y archivos de confi de la lab
- */
-static bool verification_init_file();
 
-static char* get_file_conf_path();
 #endif

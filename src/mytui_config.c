@@ -1,5 +1,20 @@
 #include "mytui_config.h"
 
+static const char* CONF_FONDER = ".config";
+static const char* TUI_FOLDER_CONF = "mytui";
+static const char* CONF_FILE_NAME = "init.conf";
+
+static void create_default_conf();
+
+/**
+ *  @brief verifica archivo de conf
+ *  @return si el archivo de configuracion no existia y es creado es false
+ *  verifica si existe los path y archivos de confi de la lab
+ */
+static bool verification_init_file();
+
+static char* get_file_conf_path();
+
 void ini_conf_file(){
     print_info("ini_con_file");
 
@@ -10,7 +25,7 @@ void ini_conf_file(){
         exist_file_conf = true;
     }
 
-   print_info("terminada verificacion de existencia de archivos de configuracion");
+    print_info("terminada verificacion de existencia de archivos de configuracion");
 
     if(exist_file_conf == false){
         print_info("recreando conf file");
@@ -26,12 +41,11 @@ static void create_default_conf(char* path_conf_file){
         exit(EXIT_FAILURE);
     }
     for (int i = 0; i < MYTUI_CONF_MAX; i++) {
-        //fputs( mytui_std_conf1[i] , f);
+        fputs( mytui_std_conf[i] , f);
         fputs("\n", f);
     }
     fclose(f);
 }
-
 
 static char* get_file_conf_path(){
     const char* folder_home = get_home_folder();
@@ -47,12 +61,11 @@ static char* get_file_conf_path(){
     strcat(conf_folder_resolution, SEPARATOR_FOLDER);
     strcat(conf_folder_resolution, CONF_FILE_NAME);
 
-    static char response[sizeof folder_home + (sizeof SEPARATOR_FOLDER * 3) +  sizeof CONF_FONDER + 
+    static char response[sizeof folder_home + (sizeof SEPARATOR_FOLDER * 3) +  sizeof CONF_FONDER +
         sizeof TUI_FOLDER_CONF + sizeof CONF_FILE_NAME];
     strcpy(response, conf_folder_resolution);
     return response;
 }
-
 
 static bool verification_init_file(){
     const char* folder_home = get_home_folder();

@@ -39,18 +39,11 @@ void update_termbox(){
                         exit(EXIT_SUCCESS);
 
                     case TB_KEY_CTRL_A:{
-                        NodeTranformation *node = NULL;
-                        nodeTranformation_add(&node, 0, 0, 12,2);
+                        MiTuiWidget *widget;
 
-                        nodeTranformation_add(&node, 2, 0, 12,2);
-
-
-
-                        node_bufffer_vs_tranformator(&nodeBufer, node);
-
-                        nodeTranformation_free(&node);
+                        init_MyTuiWidgetEntry(&widget, 1, 1, 8, 8, 1);
+                        update_MyTuiWidgetEntry(widget);
                         screen_manager(&nodeBufer);
-
                         break;
                     }
                 }
