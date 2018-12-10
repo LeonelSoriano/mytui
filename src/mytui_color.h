@@ -13,4 +13,6 @@
 
 #define MYTUI_COLOR_BLUE "\x1B[34m"
 
+#define MYTUI_COLOR_DEFAULT 255
+
 #endif

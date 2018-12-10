@@ -7,7 +7,7 @@ static void _init_termbox(){
         exit(EXIT_FAILURE);
     }
     //tb_select_input_mode( TB_INPUT_MOUSE);
-    tb_select_output_mode(TB_OUTPUT_NORMAL);
+    tb_select_output_mode(TB_OUTPUT_256);
 }
 
 static void _free_termbox(){
@@ -29,7 +29,6 @@ void end_mytui(){
 }
 
 void update_termbox(){
-    static int a = 0;
     struct tb_event ev;
     while (tb_poll_event(&ev)) {
         switch (ev.type) {
@@ -41,8 +40,14 @@ void update_termbox(){
 
                     case TB_KEY_CTRL_A:{
                         NodeTranformation *node = NULL;
-                        nodeTranformation_add(&node, 0, 0, 1,1);
+                        nodeTranformation_add(&node, 0, 0, 12,2);
+
+                        nodeTranformation_add(&node, 2, 0, 12,2);
+
+
+
                         node_bufffer_vs_tranformator(&nodeBufer, node);
+
                         nodeTranformation_free(&node);
                         screen_manager(&nodeBufer);
 

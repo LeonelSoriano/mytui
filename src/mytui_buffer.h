@@ -12,6 +12,7 @@
 #include "../termbox/build/usr/include/termbox.h"
 
 #include "until.h"
+#include "./mytui_color.h"
 
 /**
  * @brief lista de buffer.
@@ -22,6 +23,7 @@ typedef struct NodeBufer{
     int fg; /**< Color de letra NodeBufer#fg. */
     int bg; /**< Color de fondo NodeBufer#bg. */
     bool update; /**< Verifica si se actualizara o no NodeBufer#update.*/
+    char ch;
     struct NodeBufer *next; /**< proximo nodo NodeBufer#next.*/
 }NodeBufer;
 
@@ -35,6 +37,7 @@ typedef struct NodeTranformation{
     int y; /**< Color de letra NodeTranformation#y. */
     int fg; /**< Color de letra NodeTranformation#fg. */
     int bg; /**< Color de letra NodeTranformation#bg. */
+    char ch;
     struct NodeTranformation *next;
 }NodeTranformation;
 
