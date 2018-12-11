@@ -17,8 +17,6 @@ void update_MyTuiWidgetEntry(MiTuiWidget *widget){
     }
     NodeTranformation *node = NULL;
 
-    int _x = widget->x;
-    int _y = widget->y;
                         //nodeTranformation_add(&node, 0, 0, 12,2);
                         //nodeTranformation_add(&node, 2, 0, 12,2);
                         //node_bufffer_vs_tranformator(&nodeBufer, node);
@@ -30,8 +28,6 @@ void update_MyTuiWidgetEntry(MiTuiWidget *widget){
             nodeTranformation_add(&node, j, i, 12,2);
         }
     }
-
     node_bufffer_vs_tranformator(&nodeBufer, node);
-
     nodeTranformation_free(&node);
 }

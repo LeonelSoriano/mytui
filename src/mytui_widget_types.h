@@ -2,7 +2,6 @@
 #define __MYTUI_WIDGET_TYPES_H__
 
 
-
 /**
  * @brief enumeracion de widget en el core.
  *
