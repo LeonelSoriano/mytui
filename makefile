@@ -1,6 +1,8 @@
 #https://stackoverflow.com/questions/3501338/c-read-file-line-by-line
 #minoca
 #termbox
+#"hisotirial de git
+#Plug 'cohama/agit.vim'
 #gcc -L/home/lsoriano/dev/c/hol/mytui/termbox/hola/usr/lib/ -Wl,-rpath=/home/lsoriano/dev/c/hol/mytui/termbox/hola/usr/lib/ -Wall -o test main.c -ltermbox
 #https://www.cprogramming.com/tutorial/shared-libraries-linux-gcc.html
 #git submodule update --init --recursive
