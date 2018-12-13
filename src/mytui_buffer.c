@@ -47,7 +47,6 @@ void free_buffer(NodeBufer** nodeBufer)
         free(*nodeBufer);
     }
 }
-
 void screen_manager(NodeBufer** nodeBufer)
 {
     unsigned int x = 0, y = 0;
