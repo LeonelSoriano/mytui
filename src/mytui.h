@@ -20,18 +20,6 @@
 NodeBufer *nodeBufer;
 
 /**
- * inicia terbox
- * @see init_mytui
- */
-static void _init_termbox();
-
-/**
- * termina y librera termbox
- * @see end_mytui
- */
-static void _free_termbox();
-
-/**
  * tiene la implementacion de los click y otras cosas
  * @see init_mytui
  */

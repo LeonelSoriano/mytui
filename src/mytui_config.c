@@ -37,11 +37,13 @@ void ini_conf_file(){
 static void create_default_conf(char* path_conf_file){
     FILE *f = fopen(path_conf_file, "w");
     if(f == NULL){
-        print_error("create_default_conf: error al conseguir el archivo de conf: %s",path_conf_file );
+        print_error
+            ("create_default_conf: error al conseguir el archivo de conf: %s",
+             path_conf_file );
         exit(EXIT_FAILURE);
     }
     for (int i = 0; i < MYTUI_CONF_MAX; i++) {
-        fputs( mytui_std_conf[i] , f);
+        fputs( mytui_std_conf_optiones[i] , f);
         fputs("\n", f);
     }
     fclose(f);
@@ -104,3 +106,37 @@ static bool verification_init_file(){
     }
     return true;
 }
+
+void init_conf_map(ConfMap *confMap){
+    if(confMap != NULL){
+        print_error("init_conf_map: confMap debe ser NULL");
+    }
+}
+
+void conf_map_add(ConfMap **confMap, const char* key, const char* value){
+    int value_len = strlen(value);
+    int key_len = strlen(key);
+    if( value_len > 255 ||  key_len > 255){
+        print_error("conf_map_add: problemas en el archivode configuracion "
+                "las opciones no puedne ser mayor a 255, elimine el archivo "
+                "en $HOME/.conf/mytui/init.conf este se recreara con una "
+                "configuracion valida");
+        exit(EXIT_FAILURE);
+    }
+    if(*confMap == NULL){
+        *confMap = (ConfMap*)malloc(sizeof(ConfMap));
+        (*confMap)->key = key;
+        (*confMap)->value = value;
+        (*confMap)->next = NULL;
+    }else{
+        /** (*nodeTranformation) = tmp_tranformation; */
+        /** (*nodeTranformation)->next = tmp_old; */
+        ConfMap* tmp_old = (*confMap);
+        ConfMap* tmp_confMap = (ConfMap*)malloc(sizeof(ConfMap));
+        (*confMap)->key = key;
+        (*confMap)->value = value;
+        (*confMap) =  tmp_confMap;
+        (*confMap)->next = tmp_old;
+    }
+}
+

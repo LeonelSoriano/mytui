@@ -8,6 +8,7 @@
 #define __MYTUI_CONFIG__
 
 //#include <glib.h>
+#include <string.h>
 #include "until.h"
 #include "mytui_std_conf.h"
 
@@ -34,5 +35,14 @@ typedef struct ConfMap{
 void ini_conf_file();
 
 
+void init_conf_map(ConfMap *confMap);
+
+/**
+ * agrega un key/value al hash de configuracion en memoria
+ * @param hash de la configuracion
+ * @param el key a agregar
+ * @param el value a agregar
+ */
+void add_conf_map_add(ConfMap **confMap, const char* key, const char* value);
 
 #endif

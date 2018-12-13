@@ -2,9 +2,6 @@
 #define __MYTUI_STD_CONF_H__
 
 #define MYTUI_CONF_MAX 2
-const char* mytui_std_conf[] = {
-    "entry.bg=30",
-    "pruebaXd=2"
-};
+extern const char* mytui_std_conf_optiones[];
 
 #endif

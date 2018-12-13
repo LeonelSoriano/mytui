@@ -1,4 +1,15 @@
 #include "mytui.h"
+/**
+ * inicia terbox
+ * @see init_mytui
+ */
+static void _init_termbox();
+
+/**
+ * termina y librera termbox
+ * @see end_mytui
+ */
+static void _free_termbox();
 
 static void _init_termbox(){
     int ret = tb_init();

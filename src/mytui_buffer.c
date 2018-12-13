@@ -84,7 +84,10 @@ void screen_manager(NodeBufer** nodeBufer)
 
 void init_screen_manager(NodeBufer** nodeBufer)
 {
-    free_buffer(nodeBufer);
+    if(*(nodeBufer) !=  NULL){
+	free_buffer(nodeBufer);
+    }
+
     init_buffer(nodeBufer);
     screen_manager(nodeBufer);
 }
