@@ -11,6 +11,7 @@
 #git submodule update --init --recursive
 #https://shapeshed.com/vim-netrw/
 #https://gist.github.com/danidiaz/37a69305e2ed3319bfff9631175c5d0f
+#http://simplestcodings.blogspot.com/2010/09/simple-xml-parser-in-c-using-libxml.html
 POST_L = -ltermbox #`pkg-config --cflags --libs glib-2.0`
 CC=gcc 
 CFLAGS=-c -Wall  -pedantic-errors  -Wextra -std=c99   $(shell pkg-config --cflags glib-2.0)
