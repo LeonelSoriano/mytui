@@ -233,4 +233,38 @@ const char* getValueConf(ConfMap *confMap, const char* key){
     return "";
 }
 
+char* resolve_value( ConfMap *confMap,char *type_conf,char* component_value){
+    print_info("tengo de entrada %s", component_value);
 
+    if(component_value != NULL || strcmp(component_value , "") != 0){
+
+        print_info("entro en el if");
+        return component_value;
+    }
+
+    char* memory_value = (char*)getValueConf(confMap,type_conf);
+
+    if(strcmp(memory_value , "") != 0){
+        return memory_value;
+    }
+
+    const char separator[1]= "=";
+    for(int i = 0; i < MYTUI_CONF_MAX; i++){
+
+        char *token;
+        const char* str = mytui_std_conf_optiones[i];
+        token = strtok((char*)str, separator);
+
+        bool exist_token = false;
+        char* key;
+        char* value;
+
+        if(token != NULL){
+            if(strcmp(token, type_conf) == 0){
+                token = strtok(NULL, separator);
+                return token;
+            }
+        }
+    }
+    return "";
+}

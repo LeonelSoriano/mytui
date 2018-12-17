@@ -12,6 +12,7 @@
 #include "until.h"
 #include "mytui_std_conf.h"
 
+
 typedef struct ConfMap{
     char *key;
     char *value;
@@ -61,5 +62,5 @@ const char* getValueConf(ConfMap *confMap, const char* key);
  *  cuenta
  * @return color luego de ser resuelto
  */
-char* resolve_value( ConfMap *ConfMap, char *type_conf, char* component_value);
+char* resolve_value( ConfMap *ConfMap,char *type_conf,char* component_value);
 #endif

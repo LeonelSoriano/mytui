@@ -27,7 +27,6 @@ void init_buffer(NodeBufer** nodeBufer)
             tmp_buffer->fg = MYTUI_COLOR_DEFAULT;
             tmp_buffer->ch = ' ';
             (*nodeBufer) = tmp_buffer;
-
         }
     }
 }

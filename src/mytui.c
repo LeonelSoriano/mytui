@@ -34,7 +34,9 @@ void init_mytui(){
 
     load_conf_map(&_confMap);
 
-    print_info("valor de conf %s", getValueConf(_confMap,"entry.hola"));
+    //print_info("valor de conf %s", getValueConf(_confMap,"entry.hola"));
+
+    print_info("resolve value que es %s", resolve_value(_confMap,"hola","hola"));
 
     init_buffer(&nodeBufer);
     _init_termbox();

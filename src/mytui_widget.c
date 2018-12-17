@@ -17,11 +17,6 @@ void update_MyTuiWidgetEntry(MiTuiWidget *widget){
     }
     NodeTranformation *node = NULL;
 
-                        //nodeTranformation_add(&node, 0, 0, 12,2);
-                        //nodeTranformation_add(&node, 2, 0, 12,2);
-                        //node_bufffer_vs_tranformator(&nodeBufer, node);
-                        //nodeTranformation_free(&node);
-
     for(int i = widget->y; i < (widget->h + widget->y) ; i++){
 
         for(int j = widget->x; j < (widget->w + widget->x); j++){
