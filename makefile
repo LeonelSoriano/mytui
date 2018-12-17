@@ -32,6 +32,10 @@ $(EXECUTABLE): $(OBJECTS)
 clean:
 	rm -f  $(OBJECTS) $(EXECUTABLE)
 
+clean_doc:
+	rm -rf ./html/
+	rm -rf ./latex/
+
 lnk:
 	@ln -fs ./termbox/build/usr/include/termbox.h termbox.h
 

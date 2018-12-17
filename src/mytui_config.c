@@ -34,6 +34,11 @@ void ini_conf_file(){
 
 }
 
+/**
+ * genera un archivo de configuracion con la informacion por defecto
+ * esta se enciuentra dentro de mytui_std_conf
+ * @param path de donde se creara el archivo
+ */
 static void create_default_conf(char* path_conf_file){
     FILE *f = fopen(path_conf_file, "w");
     if(f == NULL){
@@ -48,6 +53,7 @@ static void create_default_conf(char* path_conf_file){
     }
     fclose(f);
 }
+
 
 static char* get_file_conf_path(){
     const char* folder_home = get_home_folder();
@@ -113,7 +119,8 @@ void init_conf_map(ConfMap *confMap){
     }
 }
 
-void conf_map_add(ConfMap **confMap, const char* key, const char* value){
+void conf_map_add(ConfMap **confMap,  char* key,  char* value){
+
     int value_len = strlen(value);
     int key_len = strlen(key);
     if( value_len > 255 ||  key_len > 255){
@@ -123,20 +130,107 @@ void conf_map_add(ConfMap **confMap, const char* key, const char* value){
                 "configuracion valida");
         exit(EXIT_FAILURE);
     }
+
     if(*confMap == NULL){
         *confMap = (ConfMap*)malloc(sizeof(ConfMap));
-        (*confMap)->key = key;
-        (*confMap)->value = value;
+        (*confMap)->value  = (char*)malloc(  strlen(value) + 1);
+        strcpy((*confMap)->value , value);
+        (*confMap)->key  = (char*)malloc(strlen(key) + 1);
+        strcpy((*confMap)->key , key);
         (*confMap)->next = NULL;
     }else{
-        /** (*nodeTranformation) = tmp_tranformation; */
-        /** (*nodeTranformation)->next = tmp_old; */
-        ConfMap* tmp_old = (*confMap);
+        ConfMap* tmp_old = *confMap;
         ConfMap* tmp_confMap = (ConfMap*)malloc(sizeof(ConfMap));
-        (*confMap)->key = key;
-        (*confMap)->value = value;
+        (tmp_confMap)->key  = (char*)malloc(strlen(key) + 1);
+        strcpy((tmp_confMap)->key , key);
+        (tmp_confMap)->value  = (char*)malloc(  strlen(value) + 1);
+        strcpy((tmp_confMap)->value , value);
         (*confMap) =  tmp_confMap;
         (*confMap)->next = tmp_old;
     }
 }
+
+void free_conf_map(ConfMap **confMap){
+
+    if(*confMap == NULL){
+        print_error("free_conf_map: no puedes liberar confMap null");
+         return;
+    }
+    for(;;){
+        if(*confMap == NULL){
+            return;
+        }else{
+            ConfMap *next_node = (* confMap)->next;
+
+            if((*confMap)->key != NULL){
+                free((*confMap)->key);
+            }
+            if((*confMap)->value != NULL){
+
+                free((*confMap)->value);
+            }
+
+            if(*confMap != NULL){
+                free(*confMap);
+            }
+
+            (*confMap) = next_node;
+        }
+    }
+}
+
+void load_conf_map(ConfMap **confMap){
+    init_conf_map(*confMap);
+    int max_line = 1024;
+    char str[max_line];
+    char* path_conf_file = get_file_conf_path();
+    FILE *f = fopen(path_conf_file, "r");
+    const char separator[1]= "=";
+
+    if(f == NULL){
+        print_error("load_conf_map: no se consigue el archivo de configuracion");
+    }
+    while (fgets(str, max_line, f) != NULL){
+        char *token;
+
+        token = strtok(str, separator);
+        int validateKeyValue = 0;
+        char* key;
+        char*    value;
+
+        while( token != NULL ) {
+            validateKeyValue++;
+            if(validateKeyValue == 1){
+
+                key = token;
+            }else if( validateKeyValue == 2){
+                value = token;
+            }
+            token = strtok(NULL, separator);
+        }
+        if(validateKeyValue == 2){
+            conf_map_add(confMap, key, value);
+        }else{
+            print_error("load_conf_map: debe poseer key value cada linea de "
+                "la configuracion" );
+        }
+   }
+    fclose(f);
+}
+
+const char* getValueConf(ConfMap *confMap, const char* key){
+     ConfMap *confTmp =  confMap;
+
+    while(confTmp != NULL){
+
+        if(strcmp(confTmp->key, key) == 0){
+            return confTmp->value;
+        }
+        confTmp = confTmp->next;
+    }
+
+    print_info("valor no existe");
+    return "";
+}
+
 

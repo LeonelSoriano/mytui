@@ -13,8 +13,8 @@
 #include "mytui_std_conf.h"
 
 typedef struct ConfMap{
-    const char *key;
-    const char *value;
+    char *key;
+    char *value;
     struct ConfMap  *next;
 }ConfMap;
 
@@ -43,6 +43,23 @@ void init_conf_map(ConfMap *confMap);
  * @param el key a agregar
  * @param el value a agregar
  */
-void add_conf_map_add(ConfMap **confMap, const char* key, const char* value);
+void conf_map_add(ConfMap **confMap,  char* key,  char* value);
 
+void free_conf_map(ConfMap **confMap);
+
+void load_conf_map(ConfMap **confMap);
+
+const char* getValueConf(ConfMap *confMap, const char* key);
+
+/**
+ * resolve el valor de configuracion si se envia al componente es este, de lo
+ * contrario busca en memoria la configuracion cargada a memoria si no busca la
+ * por defecto
+ * @param hash de la configuracion
+ * @param typo o codigo de la configuracion
+ * @param valor enviado del componente si es "" o " " or null no se toma en 
+ *  cuenta
+ * @return color luego de ser resuelto
+ */
+char* resolve_value( ConfMap *ConfMap, char *type_conf, char* component_value);
 #endif

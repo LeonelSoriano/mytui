@@ -5,6 +5,7 @@
  */
 static void _init_termbox();
 
+ConfMap *_confMap;
 /**
  * termina y librera termbox
  * @see end_mytui
@@ -25,18 +26,26 @@ static void _free_termbox(){
     tb_shutdown();
 }
 
+/*inicia todo*/
 void init_mytui(){
     nodeBufer = NULL;
     //hash_conf = NULL;
     ini_conf_file();
+
+    load_conf_map(&_confMap);
+
+    print_info("valor de conf %s", getValueConf(_confMap,"entry.hola"));
+
     init_buffer(&nodeBufer);
     _init_termbox();
     screen_manager(&nodeBufer);
 }
 
 void end_mytui(){
-    free_buffer(&nodeBufer);
     _free_termbox();
+    free_conf_map(&_confMap);
+    free_buffer(&nodeBufer);
+
 }
 
 void update_termbox(){
@@ -46,7 +55,7 @@ void update_termbox(){
             case TB_EVENT_KEY:
                 switch (ev.key) {
                     case TB_KEY_ESC:
-                        tb_shutdown();
+                        end_mytui();
                         exit(EXIT_SUCCESS);
 
                     case TB_KEY_CTRL_A:{
