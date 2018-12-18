@@ -233,15 +233,16 @@ const char* getValueConf(ConfMap *confMap, const char* key){
     return "";
 }
 
-char* resolve_value( ConfMap *confMap,char *type_conf,char* component_value){
-    print_info("tengo de entrada %s", component_value);
 
-    if(component_value != NULL || strcmp(component_value , "") != 0){
 
+  char* resolve_value( ConfMap *confMap,char *type_conf,char* component_value){
+
+    if(component_value != NULL && strcmp(component_value , "") != 0){
         print_info("entro en el if");
         return component_value;
     }
 
+    //print_info("luego de null");
     char* memory_value = (char*)getValueConf(confMap,type_conf);
 
     if(strcmp(memory_value , "") != 0){
@@ -249,21 +250,31 @@ char* resolve_value( ConfMap *confMap,char *type_conf,char* component_value){
     }
 
     const char separator[1]= "=";
+
+    bool isFound = false;
+    static char* tokenResult;
+
     for(int i = 0; i < MYTUI_CONF_MAX; i++){
 
         char *token;
-        const char* str = mytui_std_conf_optiones[i];
-        token = strtok((char*)str, separator);
 
-        bool exist_token = false;
-        char* key;
-        char* value;
+        char str[ strlen(mytui_std_conf_optiones[i])];
+        strcpy(str, mytui_std_conf_optiones[i]);
+        token = strtok(str, separator);
 
-        if(token != NULL){
-            if(strcmp(token, type_conf) == 0){
+        while( token != NULL ){
+            if(strcmp(token, type_conf) == 0 &&  isFound == false){
                 token = strtok(NULL, separator);
-                return token;
+                //strcpy( tokenResult, token);
+                tokenResult = token;
+                isFound = true;
             }
+            token = strtok(NULL, separator);
+        }
+
+        if(isFound == true){
+
+            return    tokenResult;
         }
     }
     return "";

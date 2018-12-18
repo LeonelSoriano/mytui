@@ -63,4 +63,5 @@ const char* getValueConf(ConfMap *confMap, const char* key);
  * @return color luego de ser resuelto
  */
 char* resolve_value( ConfMap *ConfMap,char *type_conf,char* component_value);
+
 #endif
