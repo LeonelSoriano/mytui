@@ -55,6 +55,7 @@ const char* getValueConf(ConfMap *confMap, const char* key);
 /**
  * resolve el valor de configuracion si se envia al componente es este, de lo
  * contrario busca en memoria la configuracion cargada a memoria si no busca la
+ * OJO no sirve en hilos de ejecucion usa static para el return
  * por defecto
  * @param hash de la configuracion
  * @param typo o codigo de la configuracion
@@ -62,6 +63,6 @@ const char* getValueConf(ConfMap *confMap, const char* key);
  *  cuenta
  * @return color luego de ser resuelto
  */
-char* resolve_value( ConfMap *ConfMap,char *type_conf,char* component_value);
+char* resolve_value( ConfMap *ConfMap,char *type_conf,const char* component_value);
 
 #endif

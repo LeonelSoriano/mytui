@@ -9,7 +9,6 @@
 #include "mytui_buffer.h"
 
 
-
 /**
  * @brief lista de buffer.
  *

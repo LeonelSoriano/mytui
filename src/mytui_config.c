@@ -233,16 +233,12 @@ const char* getValueConf(ConfMap *confMap, const char* key){
     return "";
 }
 
-
-
-  char* resolve_value( ConfMap *confMap,char *type_conf,char* component_value){
-
+char* resolve_value( ConfMap *confMap,char *type_conf,const char* component_value ){
     if(component_value != NULL && strcmp(component_value , "") != 0){
         print_info("entro en el if");
-        return component_value;
+        return (char*)component_value;
     }
 
-    //print_info("luego de null");
     char* memory_value = (char*)getValueConf(confMap,type_conf);
 
     if(strcmp(memory_value , "") != 0){
@@ -252,7 +248,9 @@ const char* getValueConf(ConfMap *confMap, const char* key){
     const char separator[1]= "=";
 
     bool isFound = false;
-    static char* tokenResult;
+
+    //salida para el caso de std
+    static char tokenResult[255];
 
     for(int i = 0; i < MYTUI_CONF_MAX; i++){
 
@@ -265,16 +263,19 @@ const char* getValueConf(ConfMap *confMap, const char* key){
         while( token != NULL ){
             if(strcmp(token, type_conf) == 0 &&  isFound == false){
                 token = strtok(NULL, separator);
-                //strcpy( tokenResult, token);
-                tokenResult = token;
+                if(strlen(token) > 255){
+                    print_error("resolve_value: un value no puede ser mayor"
+                        " a 255");
+                    return "";
+                }
+                strcpy(tokenResult, token);
                 isFound = true;
             }
             token = strtok(NULL, separator);
         }
-
         if(isFound == true){
-
-            return    tokenResult;
+            print_info("valor debe ser de %s", tokenResult);
+            return tokenResult;
         }
     }
     return "";
