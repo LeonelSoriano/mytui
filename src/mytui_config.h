@@ -9,9 +9,10 @@
 
 //#include <glib.h>
 #include <string.h>
+#include <stdbool.h>
+
 #include "until.h"
 #include "mytui_std_conf.h"
-
 
 typedef struct ConfMap{
     char *key;
@@ -53,16 +54,19 @@ void load_conf_map(ConfMap **confMap);
 const char* getValueConf(ConfMap *confMap, const char* key);
 
 /**
- * resolve el valor de configuracion si se envia al componente es este, de lo
- * contrario busca en memoria la configuracion cargada a memoria si no busca la
- * OJO no sirve en hilos de ejecucion usa static para el return
+ * resolve el valor de configuración si se envía al componente es este, de lo
+ * contrario busca en memoria la configuración cargada a memoria si no busca la
+ * OJO no sirve en hilos de ejecución usa static para el return
  * por defecto
- * @param hash de la configuracion
- * @param typo o codigo de la configuracion
- * @param valor enviado del componente si es "" o " " or null no se toma en 
+ * @param hash de la configuración
+ * @param typo o código de la configuración
+ * @param valor enviado del componente si es "" o " " or null no se toma en
  *  cuenta
  * @return color luego de ser resuelto
  */
 char* resolve_value( ConfMap *ConfMap,char *type_conf,const char* component_value);
+
+
+char* find_std_values();
 
 #endif

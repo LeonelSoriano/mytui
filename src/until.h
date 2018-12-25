@@ -17,12 +17,11 @@
 #include <string.h>
 #include <stdarg.h>
 #include <time.h>
-
+#include <ctype.h>
 
 
 #include "mytui_color.h"
 #include "mytui_cmd.h"
-
 
 
 //#define NUMARGS(...)  (sizeof((int[]){__VA_ARGS__})/sizeof(int))
@@ -80,5 +79,13 @@ const char* get_home_folder();
  * @return hash que posee la configuracion
  */
 //GHashTable* read_file_conf();
+
+/**
+ * verifica si todos los caracteres de un string son enteros
+ * @param cadena de texto a verificar
+ * @return verdadero si todos son enteros
+ */
+bool strIsInt(const char *str);
+
 
 #endif

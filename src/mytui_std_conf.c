@@ -2,6 +2,6 @@
 
 //los value no pueden ser amor a 255 pendiente con eso
 const char* mytui_std_conf_optiones[] = {
-    "entry.bg=30",
+    "entry.bg=12",
     "pruebaXd=2"
 };

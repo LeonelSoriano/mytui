@@ -109,6 +109,21 @@ void print_info(const char *msg, ...){
     va_end (args);
 }
 
+bool strIsInt(const char *str){
+    if(str == NULL){
+        print_error("strIsInt: no se puede verficiar un string NULL");
+        return false;
+    }
+    unsigned int i = 0;
+    while (str[i] != '\0'){
+        if(!isdigit(str[i]) && str[i] == '\0'){
+            return false;
+        }
+        ++i;
+    }
+    return true;
+}
+
 /*GHashTable* read_file_conf(){
     GHashTable* hash = g_hash_table_new(g_str_hash, g_str_equal);
     return NULL;

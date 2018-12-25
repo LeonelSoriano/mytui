@@ -13,11 +13,13 @@
 
 #include "mytui_buffer.h"
 #include "mytui_widget.h"
-
+#include "mytui_container_tui.h"
 /**
  * global para administrar el buffer de pantalla
  */
 NodeBufer *nodeBufer;
+
+ConfMap *_confMap;
 
 /**
  * tiene la implementacion de los click y otras cosas

@@ -25,7 +25,7 @@ typedef struct NodeBufer{
     int fg; /**< Color de letra NodeBufer#fg. */
     int bg; /**< Color de fondo NodeBufer#bg. */
     bool update; /**< Verifica si se actualizara o no NodeBufer#update.*/
-    char ch;
+    uint32_t ch;
     struct NodeBufer *next; /**< proximo nodo NodeBufer#next.*/
 }NodeBufer;
 
@@ -39,7 +39,7 @@ typedef struct NodeTranformation{
     int y; /**< Color de letra NodeTranformation#y. */
     int fg; /**< Color de letra NodeTranformation#fg. */
     int bg; /**< Color de letra NodeTranformation#bg. */
-    char ch;
+    uint32_t ch;
     struct NodeTranformation *next;
 }NodeTranformation;
 
@@ -71,7 +71,7 @@ void init_screen_manager(NodeBufer **nodeBufer);
  */
 void nodeTranformation_init(NodeTranformation **nodeTranformation);
 
-void nodeTranformation_add(NodeTranformation **nodeTranformation, int x, int y, int fg, int bg);
+void nodeTranformation_add(NodeTranformation **nodeTranformation, int x, int y, int fg, int bg, uint32_t ch);
 
 void nodeTranformation_free(NodeTranformation **nodeTranformation);
 

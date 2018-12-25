@@ -15,4 +15,6 @@
 
 #define MYTUI_COLOR_DEFAULT 255
 
+#define MAX_COLORS_VALUES 256
+
 #endif

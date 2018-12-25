@@ -95,7 +95,8 @@ void nodeTranformation_init(NodeTranformation** nodeTranformation)
     *nodeTranformation = NULL;
 }
 
-void nodeTranformation_add(NodeTranformation** nodeTranformation, int x, int y, int fg, int bg)
+void nodeTranformation_add(NodeTranformation** nodeTranformation, int x, int y,
+    int fg, int bg,uint32_t ch)
 {
     if (*nodeTranformation == NULL) {
         *nodeTranformation = (NodeTranformation*)malloc(sizeof(NodeTranformation));
@@ -103,6 +104,7 @@ void nodeTranformation_add(NodeTranformation** nodeTranformation, int x, int y, 
         (*nodeTranformation)->fg = fg;
         (*nodeTranformation)->x = x;
         (*nodeTranformation)->y = y;
+        (*nodeTranformation)->ch = ch;
         (*nodeTranformation)->next = NULL;
     } else {
         NodeTranformation* tmp_old = (*nodeTranformation);
@@ -110,6 +112,7 @@ void nodeTranformation_add(NodeTranformation** nodeTranformation, int x, int y, 
         tmp_tranformation->bg = bg;
         tmp_tranformation->fg = fg;
         tmp_tranformation->x = x;
+        tmp_tranformation->ch = ch;
         tmp_tranformation->y = y;
 
         (*nodeTranformation) = tmp_tranformation;
@@ -158,9 +161,9 @@ void node_bufffer_vs_tranformator(NodeBufer** nodeBufer, NodeTranformation* node
             if (index == index_find) {
                 (*nodeBufer)->bg = tmp_tranformation->bg;
                 (*nodeBufer)->fg = tmp_tranformation->fg;
+                (*nodeBufer)->ch = tmp_tranformation->ch;
                 (*nodeBufer)->update = true;
                 index = -1;
-
                 break;
             }
             (*nodeBufer) = (*nodeBufer)->next;
@@ -170,6 +173,7 @@ void node_bufffer_vs_tranformator(NodeBufer** nodeBufer, NodeTranformation* node
             index++;
             (*nodeBufer)->bg = tmp_tranformation->bg;
             (*nodeBufer)->fg = tmp_tranformation->fg;
+            (*nodeBufer)->ch = tmp_tranformation->ch;
             (*nodeBufer)->update = true;
         }
         tmp_tranformation = tmp_tranformation->next;
