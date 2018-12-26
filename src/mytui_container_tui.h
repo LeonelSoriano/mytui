@@ -10,7 +10,7 @@
 
 typedef enum {
     MYTUI_CONTAINER_ROOT = 1, /**< Componente vacio Container#root. */
-    win = 2
+    MYTUI_CONTAINER_WIN = 2
 }ContainerTypes;
 
 typedef struct mytuiContainer MytuiContainer;

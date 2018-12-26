@@ -70,8 +70,14 @@ void update_termbox()
 
                 INIT_MYTUI_CONTAINER(type);
 
-                //type.type = MYTUI_CONTAINER_ROOT;
+                type.type = MYTUI_CONTAINER_ROOT;
+            //    type.type = MYTUI_CONTAINER_WIN;
+                type.w = 20;
+                type.h = 10;
+                type.x = 30;
+                type.y = 20;
                 type.decoration = true;
+
                 mytui_inicialize_container(&stance, type);
                 update_MytuiContainer(stance);
                 free_mytui_container(&stance);
@@ -82,7 +88,7 @@ void update_termbox()
             }
             break;
         case TB_EVENT_RESIZE:
-            init_screen_manager(&nodeBufer);
+//            init_screen_manager(&nodeBufer);
             break;
         }
     }
