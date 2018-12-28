@@ -18,19 +18,22 @@ typedef struct mytuiContainer MytuiContainer;
 
 typedef struct MytuiContainerParam{
     int bg;
+    int border;
     int x;
     int y;
     int w;
     int h;
     bool decoration;
+    int closeColor;
+    int minimizeColor;
     ContainerTypes type;
 }MytuiContainerParam;
 
-#define INIT_MYTUI_CONTAINER(X) MytuiContainerParam  X = {.bg = 255, .x = -1,\
-    .y = -1, .w = -1, .h = -1, .decoration = false, .type = MYTUI_CONTAINER_ROOT}
+#define INIT_MYTUI_CONTAINER(X) MytuiContainerParam  X = {.bg = -1, .border = -1,\
+    .x = -1,.y = -1, .w = -1, .h = -1,.decoration = false, .closeColor = -1,\
+    .minimizeColor=-1, .type = MYTUI_CONTAINER_ROOT}
 
 void mytui_inicialize_container(MytuiContainer **stance, MytuiContainerParam param);
-
 
 void update_MytuiContainer(MytuiContainer *cotainer);
 

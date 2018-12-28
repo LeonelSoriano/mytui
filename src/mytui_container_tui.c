@@ -5,13 +5,15 @@
      * Esta estructura maneja el buffer para pintado de la terminal.
 */
 struct mytuiContainer{
-    int x; /**< posición x MytuiContainer#x. */
-    int y; /**< posición y MytuiContainer#y. */
-    int w; /**< ancho MytuiContainer#w. */
-    int h; /**< posición y NodeTranformation#y. */
-    int fg; /**< Color de letra NodeTranformation#fg. */
+    int x; /**< posición x mytuiContainer#x. */
+    int y; /**< posición y mytuiContainer#y. */
+    int w; /**< ancho mytuiContainer#w. */
+    int h; /**< altura mytuiContainer#h. */
     int bg; /**< Color de letra NodeTranformation#bg. */
     bool decoration; /**< Si posee decoracion NodeTranformation#decoration. */
+    int border; /**< Color del borde mytuiContainer#border. */
+    int closeColor; /**< Color boton de cerrar mytuiContainer#coloseColor. */
+    int minimizeColor;
     ContainerTypes type;
 };
 
@@ -26,7 +28,10 @@ void mytui_inicialize_container(MytuiContainer **stance, MytuiContainerParam par
     (*stance)->y = param.y;
     (*stance)->h = param.h;
     (*stance)->w = param.w;
+    (*stance)-> border = param. border;
     (*stance)->type = param.type;
+    (*stance)->closeColor = param.closeColor;
+    (*stance)->minimizeColor = param.minimizeColor;
     (*stance)->decoration = param.decoration;
 }
 
@@ -38,6 +43,74 @@ void update_MytuiContainer(MytuiContainer *container)
             "No se puede inicializar un Entry en NULL");
     }
     NodeTranformation *node = NULL;
+
+
+    //evaluacion del container bg
+    char* container_bg;
+    if(container->bg < 0){
+        container_bg = resolve_value(_confMap, "container.bg", NULL);
+    }else{
+        char buffer_str[255];
+        sprintf(buffer_str, "%d", container->bg);
+        container_bg = resolve_value(_confMap, "container.bg", buffer_str);
+    }
+    if(!strIsInt(container_bg)){
+         print_error("update_MytuiContainer: valor container.bg debe ser entero");
+    }
+    unsigned int container_bg_int = atoi(container_bg);
+    //end evaluacion del container bg
+
+    //evaluacion del container close
+    char* container_close_color;
+    if(container->closeColor < 0){
+        container_close_color = resolve_value(_confMap, "container.close", NULL);
+    }else{
+        char buffer_str[255];
+        sprintf(buffer_str, "%d", container->bg);
+        container_close_color =
+            resolve_value(_confMap, "container.close", buffer_str);
+    }
+    if(!strIsInt(container_close_color)){
+         print_error("update_MytuiContainer: valor"
+            "container.close debe ser entero");
+    }
+    unsigned int container_close_color_int = atoi(container_close_color);
+    //end evaluacion del container close color
+
+    //evaluacion del container close
+    char* container_minimize_color;
+    if(container->minimizeColor < 0){
+         container_minimize_color = resolve_value(_confMap,
+            "container.minimize", NULL);
+    }else{
+        char buffer_str[255];
+        sprintf(buffer_str, "%d", container->minimizeColor);
+        container_close_color =
+            resolve_value(_confMap, "container.minimize", buffer_str);
+    }
+    if(!strIsInt( container_minimize_color)){
+         print_error("update_MytuiContainer: valor"
+            "container.minimize debe ser entero");
+    }
+    unsigned int container_minimize_color_int = atoi(container_minimize_color);
+    //end evaluacion del container close color
+
+
+    //evaluacion del container border
+    char* container_border;
+    if(container->border < 0){
+        container_border = resolve_value(_confMap, "container.border", NULL);
+    }else{
+        char buffer_str[255];
+        sprintf(buffer_str, "%d", container->border);
+        container_border = resolve_value(_confMap, "container.border", buffer_str);
+    }
+    if(!strIsInt(container_border)){
+         print_error("update_MytuiContainer: valor container.bg debe ser entero");
+    }
+    unsigned int container_border_int = atoi(container_border);
+    //end evaluacion del container border
+
 
     if(container->type == MYTUI_CONTAINER_ROOT){
         struct InfoTerm infoTerm = get_info_term();
@@ -54,16 +127,22 @@ void update_MytuiContainer(MytuiContainer *container)
                     //caracter de la decoracion
                     uint32_t decoration = ' ';
 
-                    //iconos de cerrar agrandar para la ventana
+                    //para agregar extra colores como para el cerrar manimizar
+                    unsigned int resolution_extra_color = container_bg_int;
 
+                    //iconos de cerrar agrandar para la ventana
                     if(container->type == MYTUI_CONTAINER_WIN &&
                         (container->w + container->x) - 2 == j &&
                         i == container->y  ){
                         decoration = 0x2591;
+                        resolution_extra_color =container_close_color_int;
+
                     }else if(container->type == MYTUI_CONTAINER_WIN &&
                         (container->w + container->x) - 3 == j &&
                         i == container->y){
                         decoration = 0x2591;
+                        resolution_extra_color = container_minimize_color_int;
+
                     }else if(j == container->x && i == container->y){
                         //┌
                         decoration = 0x250C;
@@ -83,16 +162,21 @@ void update_MytuiContainer(MytuiContainer *container)
                         //─
                         decoration = 0x2500;
                     }
-                    nodeTranformation_add(&node, j, i, 12,16, decoration);
+                    nodeTranformation_add(&node, j, i, resolution_extra_color,
+                        container_border_int, decoration);
+
                 }else if(j == container->x || j ==
                         (container->w + container->x)- 1){
                     //'|'
-                    nodeTranformation_add(&node, j, i, 12,16, 0x2502);
+                    nodeTranformation_add(&node, j, i,
+                        container_bg_int,container_border_int, 0x2502);
                 }else{
-                    nodeTranformation_add(&node, j, i, 12,MYTUI_COLOR_DEFAULT, ' ');
+                    nodeTranformation_add(&node, j, i,
+                        container_bg_int,MYTUI_COLOR_DEFAULT, ' ');
                 }
             }else{
-                nodeTranformation_add(&node, j, i, 12,MYTUI_COLOR_DEFAULT, ' ');
+                nodeTranformation_add(&node, j, i, container_bg_int,
+                    MYTUI_COLOR_DEFAULT, ' ');
             }
         }
     }

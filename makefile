@@ -6,6 +6,7 @@
 #Plug 'ap/vim-css-color'
 #grep -H -r "<<<<<<< HEAD" ./
 #Plug 'sodapopcan/vim-twiggy'
+#https://jonasjacek.github.io/colors/
 #gcc -L/home/lsoriano/dev/c/hol/mytui/termbox/hola/usr/lib/ -Wl,-rpath=/home/lsoriano/dev/c/hol/mytui/termbox/hola/usr/lib/ -Wall -o test main.c -ltermbox
 #https://www.cprogramming.com/tutorial/shared-libraries-linux-gcc.html
 #git submodule update --init --recursive

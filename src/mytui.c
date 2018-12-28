@@ -70,8 +70,8 @@ void update_termbox()
 
                 INIT_MYTUI_CONTAINER(type);
 
-                type.type = MYTUI_CONTAINER_ROOT;
-            //    type.type = MYTUI_CONTAINER_WIN;
+           //     type.type = MYTUI_CONTAINER_ROOT;
+                type.type = MYTUI_CONTAINER_WIN;
                 type.w = 20;
                 type.h = 10;
                 type.x = 30;

@@ -88,4 +88,12 @@ const char* get_home_folder();
 bool strIsInt(const char *str);
 
 
+/**
+ * verififica si el el valor es un valor(int) por defecto por ahora -1
+ * @param valor a verificar
+ * @return valor por defecto
+ */
+int isDefaulValueInt(int value);
+
+
 #endif

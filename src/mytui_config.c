@@ -23,14 +23,14 @@ void ini_conf_file()
     bool exist_file_conf = false;
 
     if (exist_file(mytui_conf_file) == true) {
-	exist_file_conf = true;
+	    exist_file_conf = true;
     }
 
     print_info("terminada verificacion de existencia de archivos de configuracion");
 
     if (exist_file_conf == false) {
-	print_info("recreando conf file");
-	create_default_conf(mytui_conf_file);
+	    print_info("recreando conf file");
+	    create_default_conf(mytui_conf_file);
     }
 }
 
@@ -43,13 +43,13 @@ static void create_default_conf(char* path_conf_file)
 {
     FILE* f = fopen(path_conf_file, "w");
     if (f == NULL) {
-	print_error("create_default_conf: error al conseguir el archivo de conf: %s",
-	    path_conf_file);
-	exit(EXIT_FAILURE);
+        print_error("create_default_conf: error al conseguir el archivo de conf: %s",
+        path_conf_file);
+        exit(EXIT_FAILURE);
     }
     for (int i = 0; i < MYTUI_CONF_MAX; i++) {
-	fputs(mytui_std_conf_optiones[i], f);
-	fputs("\n", f);
+        fputs(mytui_std_conf_optiones[i], f);
+        fputs("\n", f);
     }
     fclose(f);
 }
@@ -231,15 +231,14 @@ const char* getValueConf(ConfMap* confMap, const char* key)
 	}
 		confTmp = confTmp->next;
     }
-
-    print_info("valor no existe");
+    //TODO: sgtegar aca el modo debug
+    print_info("getValueConf: valor no existe %s", key);
     return "";
 }
 
 char* resolve_value(ConfMap* confMap, char* type_conf, const char* component_value)
 {
     if (component_value != NULL && strcmp(component_value, "") != 0) {
-		print_info("entro en el if");
 		return (char*)component_value;
     }
 
