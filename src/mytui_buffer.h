@@ -10,7 +10,6 @@
 #include <stdbool.h>
 
 #include "../termbox/build/usr/include/termbox.h"
-
 #include "until.h"
 #include "./mytui_color.h"
 

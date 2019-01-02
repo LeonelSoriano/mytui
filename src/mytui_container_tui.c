@@ -9,13 +9,15 @@ struct mytuiContainer{
     int y; /**< posición y mytuiContainer#y. */
     int w; /**< ancho mytuiContainer#w. */
     int h; /**< altura mytuiContainer#h. */
-    int bg; /**< Color de letra NodeTranformation#bg. */
-    bool decoration; /**< Si posee decoracion NodeTranformation#decoration. */
+    int bg; /**< Color de letra mytuiContainer#bg. */
+    bool decoration; /**< Si posee decoración mytuiContainer#decoration. */
     int border; /**< Color del borde mytuiContainer#border. */
-    int closeColor; /**< Color boton de cerrar mytuiContainer#coloseColor. */
-    int minimizeColor;
-    ContainerTypes type;
+    int closeColor; /**< Color botón de cerrar mytuiContainer#coloseColor. */
+    int minimizeColor; /**< color del icono de minimizar mytuiContainer#minimize.*/
+    ContainerTypes type; /**<typo de contenedor mytuiContainer#type. */
+    struct ChildContainer *childContainer;
 };
+
 
 void mytui_inicialize_container(MytuiContainer **stance, MytuiContainerParam param)
 {
@@ -186,6 +188,71 @@ void update_MytuiContainer(MytuiContainer *container)
 
 void free_mytui_container(MytuiContainer **stance){
     if (*stance != NULL) {
+        while((*stance)->childContainer  != NULL){
+            print_error("error");
+            ChildContainer *tmpChildContainer = (*stance)->childContainer->next;
+            free((*stance)->childContainer);
+            (*stance)->childContainer = tmpChildContainer;
+        }
         free(*stance);
     }
 }
+
+
+void add_ChildContainer(MytuiContainer **stance){
+    if((*stance)->childContainer == NULL){
+        (*stance)->childContainer =
+            (ChildContainer*)malloc(sizeof(ChildContainer));
+        (*stance)->childContainer->next = NULL;
+    }else{
+        ChildContainer *tmp_old = (*stance)->childContainer;
+
+        ChildContainer *tmpChildContainer =
+            (ChildContainer*)malloc(sizeof(ChildContainer));
+
+         (*stance)->childContainer = tmpChildContainer;
+        (*stance)->childContainer->next = tmp_old;
+
+    }
+}
+
+void add_childContainerWidget(ChildContainer **childContainer,
+    float margin_left, float margin_right, float margin_bottom, float margin_top,
+    MiTuiWidget **miTuiWidget){
+    if((*childContainer) == NULL){
+        print_error("add_childContainerWidget: childContainerWidget no puede"
+            " ser null");
+    }
+
+    if((*miTuiWidget) == NULL){
+        print_error("add_childContainerWidget: miTuiWidget no puede ser NULL");
+    }
+
+    if((*childContainer)->childContainerWidget == NULL){
+        ChildContainerWidget *containerWidget =
+            (ChildContainerWidget*)malloc(sizeof(ChildContainerWidget));
+        containerWidget->margin_bottom = margin_bottom;
+        containerWidget->margin_left = margin_left;
+        containerWidget->margin_top = margin_top;
+        containerWidget->margin_bottom = margin_bottom;
+        containerWidget->next = NULL;
+        containerWidget->widget = (*miTuiWidget);
+        (*childContainer)->childContainerWidget = containerWidget;
+    }else{
+
+        ChildContainerWidget* tmp_old = (*childContainer)->childContainerWidget;
+
+        ChildContainerWidget *tmpContainerWidget =
+            (ChildContainerWidget*)malloc(sizeof(ChildContainerWidget));
+        tmpContainerWidget->margin_bottom = margin_bottom;
+        tmpContainerWidget->margin_left = margin_left;
+        tmpContainerWidget->margin_top = margin_top;
+        tmpContainerWidget->margin_bottom = margin_bottom;
+        tmpContainerWidget->widget = (* miTuiWidget);
+
+        (*childContainer)->childContainerWidget = tmpContainerWidget;
+        (*childContainer)->childContainerWidget->next = tmp_old;
+    }
+
+}
+

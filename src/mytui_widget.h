@@ -6,7 +6,6 @@
 #include "mytui_color.h"
 #include "mytui.h"
 #include "mytui_config.h"
-#include "mytui_config.h"
 #include "mytui_buffer.h"
 
 
@@ -27,7 +26,6 @@ typedef struct MiTuiWidget{
 void init_MyTuiWidgetEntry(MiTuiWidget ** widget, int x, int y, int w, int h, int bc);
 
 void update_MyTuiWidgetEntry(MiTuiWidget *widget);
-
 
 void free_MyTuiWidgetEntry(MiTuiWidget **widget);
 

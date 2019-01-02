@@ -5,7 +5,7 @@ syntax enable
 "set background=dark
 
 "materialize claro para la noche
-"set t_Co=256   
+"set t_Co=256
 "set background=light
 
 
@@ -30,13 +30,15 @@ Plug 'tweekmonster/startuptime.vim'
 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-
 "-> completado
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': './install.sh',
-    \ }
+	    \ }
 Plug 'junegunn/fzf'
+	
+Plug 'huawenyu/neogdb.vim'
+
 
 
 Plug 'roxma/nvim-yarp'
@@ -58,7 +60,7 @@ Plug 'ncm2/ncm2-snipmate'
 "Plug 'ncm2/ncm2-tern',  {'do': 'npm install'}
 "Plug 'ncm2/ncm2-jedi'
 "Plug 'ObserverOfTime/ncm2-jc2', {'for': ['java', 'jsp']}
-Plug 'artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']}
+"Plug 'artur-shaik/vim-javacomplete2', {'for': ['java', 'jsp']}
 Plug 'ncm2/ncm2-pyclang'
 
 Plug 'tomtom/tlib_vim'
@@ -67,9 +69,9 @@ Plug 'garbas/vim-snipmate'
 
 Plug 'w0rp/ale'
 
-Plug 'chiel92/vim-autoformat'
-"Plug 'sbdchd/neoformat'
-
+"Plug 'chiel92/vim-autoformat'
+Plug 'sbdchd/neoformat'
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
 
 
 " -> solo c
@@ -160,6 +162,12 @@ Plug 'eugen0329/vim-esearch'
 
 "para rezise los split con control mas flecha
 Plug 'talek/obvious-resize'
+
+
+
+
+Plug 'huawenyu/neogdb.vim'
+
 
 
 
@@ -267,7 +275,7 @@ let ncm2#complete_length = [[4, 4]]
 let g:ncm2#matcher = 'substrfuzzy'
 
 
-
+	
 "" Map leader to ,
 let mapleader='\'
 
@@ -325,7 +333,7 @@ noremap <silent> <C-Left> :<C-U>ObviousResizeLeft<CR>
 noremap <silent> <C-Right> :<C-U>ObviousResizeRight<CR>
 
 
-let g:ale_linters = {'c': ['clang', 'gcc'], 'cpp': ['clang', 'gcc']}
+let g:ale_linters = {'c': ['gcc', 'clang'], 'cpp': ['clang', 'gcc']}
 
 if exists("g:ale_enabled")
 	let g:ale_c_clang_options = "-DHAVE_CONFIG_H -Wall -Wextra -std=ansi -pedantic"
@@ -347,6 +355,17 @@ if exists("g:ale_enabled")
 		\ "alsa",
 		\ "libnotify"])
 endif
+
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_fixers = {'javascript': ['prettier'], 'scss': ['stylelint'], 'python': ['yapf', 'isort']}
+let g:ale_set_highlights = 1
+let g:ale_set_signs = 1
+let g:ale_sign_column_always = 1
+
+
 
 " Set to auto read when a file is changed from the outside
 "set autoread
@@ -872,7 +891,6 @@ set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*
 let NERDTreeRespectWildIgnore=1
 
 
-
 set sessionoptions=buffers,curdir,folds,options,tabpages,winsize
 function! Mksession()
 	"let path = 'session' . fnamemodify(bufname('%'),':p')
@@ -895,8 +913,8 @@ command MksessionLoad call MksessionLoad()
 
 augroup mksession_auto
   autocmd!
-  au VimEnter * nested call MksessionLoad()
-  au VimLeavePre * call Mksession()
+"  au VimEnter * nested call MksessionLoad()
+"  au VimLeavePre * call Mksession()
 augroup END
 
 

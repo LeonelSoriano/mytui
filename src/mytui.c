@@ -59,7 +59,7 @@ void update_termbox()
 
             case TB_KEY_CTRL_A: {
 
-                MiTuiWidget* widget;
+ /*               MiTuiWidget* widget;
 
                 init_MyTuiWidgetEntry(&widget, 1, 1, 8, 8, 1);
                 update_MyTuiWidgetEntry(widget);
@@ -81,6 +81,22 @@ void update_termbox()
                 mytui_inicialize_container(&stance, type);
                 update_MytuiContainer(stance);
                 free_mytui_container(&stance);
+*/
+
+
+
+                MytuiContainer* mytuiContainer = NULL;
+                INIT_MYTUI_CONTAINER(paramContainer);
+                paramContainer.type = MYTUI_CONTAINER_ROOT;
+                paramContainer.decoration = true;
+                mytui_inicialize_container(&mytuiContainer, paramContainer);
+                add_ChildContainer(&mytuiContainer);
+
+
+
+
+                update_MytuiContainer(mytuiContainer);
+                free_mytui_container(&mytuiContainer);
 
                 screen_manager(&nodeBufer);
                 break;

@@ -108,13 +108,13 @@ void nodeTranformation_add(NodeTranformation** nodeTranformation, int x, int y,
         (*nodeTranformation)->next = NULL;
     } else {
         NodeTranformation* tmp_old = (*nodeTranformation);
-        NodeTranformation* tmp_tranformation = (NodeTranformation*)malloc(sizeof(NodeTranformation));
+        NodeTranformation* tmp_tranformation =
+            (NodeTranformation*)malloc(sizeof(NodeTranformation));
         tmp_tranformation->bg = bg;
         tmp_tranformation->fg = fg;
         tmp_tranformation->x = x;
         tmp_tranformation->ch = ch;
         tmp_tranformation->y = y;
-
         (*nodeTranformation) = tmp_tranformation;
         (*nodeTranformation)->next = tmp_old;
     }
