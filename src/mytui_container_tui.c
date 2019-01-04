@@ -35,6 +35,7 @@ void mytui_inicialize_container(MytuiContainer **stance, MytuiContainerParam par
     (*stance)->closeColor = param.closeColor;
     (*stance)->minimizeColor = param.minimizeColor;
     (*stance)->decoration = param.decoration;
+    (* stance)->childContainer = NULL;
 }
 
 
@@ -189,7 +190,6 @@ void update_MytuiContainer(MytuiContainer *container)
 void free_mytui_container(MytuiContainer **stance){
     if (*stance != NULL) {
         while((*stance)->childContainer  != NULL){
-            print_error("error");
             ChildContainer *tmpChildContainer = (*stance)->childContainer->next;
             free((*stance)->childContainer);
             (*stance)->childContainer = tmpChildContainer;

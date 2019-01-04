@@ -94,7 +94,6 @@ void update_termbox()
 
 
 
-
                 update_MytuiContainer(mytuiContainer);
                 free_mytui_container(&mytuiContainer);
 
