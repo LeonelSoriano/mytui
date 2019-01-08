@@ -3,7 +3,6 @@
 #minoca
 #termbox
 #"hisotirial de git
-#Plug 'cohama/agit.vim'
 #Plug 'ap/vim-css-color'
 #grep -H -r "<<<<<<< HEAD" ./
 #https://jonasjacek.github.io/colors/
@@ -36,26 +35,32 @@
 POST_L = -ltermbox #`pkg-config --cflags --libs glib-2.0`
 CC=gcc
 CFLAGS=-c -g -Wall  -pedantic-errors  -Wextra -std=c99   $(shell pkg-config --cflags glib-2.0)
-LDFLAGS=   -L/home/leonel/dev/c/mytui/termbox/build/usr/lib/ -Wl,-rpath=/home/leonel/dev/c/mytui/termbox/build/usr/lib/
-SOURCES=main.c  ./src/until.c  ./src/mytui_config.c ./src/mytui.c ./src/mytui_buffer.c ./src/mytui_widget.c ./src/mytui_std_conf.c ./src/mytui_container_tui.c
+LDFLAGS= -L/home/lsoriano/dev/c/mytui/termbox/build/usr/lib/ -Wl,-rpath=/home/lsoriano/dev/c/mytui/termbox/build/usr/lib/
 
-OBJECTS=$(SOURCES:.c=.o)
+MAIN=main.c
+MAIN_TEST=./test/test.c
 
-SOURCES_TEST=./test/test.c
+SOURCES=./src/until.c  ./src/mytui_config.c ./src/mytui.c ./src/mytui_buffer.c ./src/mytui_widget.c ./src/mytui_std_conf.c ./src/mytui_container_tui.c
+
+OBJECTS =  $(SOURCES:.c=.o)
+OBJECTS_MAIN = $(MAIN:.c=.o) $(SOURCES:.c=.o)
+OBJECTS_TEST = $(MAIN_TEST:.c=.o) $(SOURCES_TEST:.c=.o)
+
+SOURCES_TEST=#./test/test.c
 
 LDLIBS_TEST = -lcmocka
 LDFLAGS_TEST = -Wl,--wrap=write -Wl,--wrap=read
 
-OBJECTS_TEST=$(SOURCES_TEST:.c=.o)
+
 
 EXECUTABLE=mytui
 
 EXECUTABLE_TEST=mytui_test
 
-all: $(SOURCES)  $(EXECUTABLE)
+all: $(MAIN) $(SOURCES)  $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS)
-	$(CC)   $(LDFLAGS)  $(OBJECTS) $(POST_L)  -o $@
+	$(CC)   $(LDFLAGS)  $(OBJECTS_MAIN) $(POST_L)  -o $@
 
 .c.o:
 	$(CC) $(CFLAGS) $< -o $@
@@ -70,12 +75,10 @@ clean_doc:
 	rm -rf ./latex/
 
 
-unit: $(SOURCES_TEST)  $(EXECUTABLE_TEST)
+unit: $(MAIN_TEST) $(SOURCES_TEST) $(SOURCES)  $(EXECUTABLE_TEST)
 
-$(EXECUTABLE_TEST): $(OBJECTS_TEST)
-	$(CC)  $(LDLIBS_TEST)  $(LDFLAGS) $(LDFLAGS_TEST) $(OBJECTS_TEST) $(POST_L)  -o $@
-
-
+$(EXECUTABLE_TEST): $(OBJECTS_TEST) $(OBJECTS)
+	$(CC)   $(LDFLAGS) $(LDFLAGS_TEST) $(OBJECTS) $(OBJECTS_TEST) $(POST_L) $(LDLIBS_TEST)   -o $@
 
 doc:
 	doxygen

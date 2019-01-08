@@ -6,4 +6,4 @@ else
     make
 fi
 #--log-file="valgrind.log"
-valgrind --leak-check=full --show-leak-kinds=all -v  ./test
+valgrind --leak-check=full --show-leak-kinds=all -v  ./mytui

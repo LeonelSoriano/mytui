@@ -57,8 +57,9 @@ void update_MytuiContainer(MytuiContainer *container)
         sprintf(buffer_str, "%d", container->bg);
         container_bg = resolve_value(_confMap, "container.bg", buffer_str);
     }
+    print_error("El valor es de : %d", strIsInt(container_bg));
     if(!strIsInt(container_bg)){
-         print_error("update_MytuiContainer: valor container.bg debe ser entero");
+         print_error("update_MytuiContainer: valor container.bg debe ser entero: %s", container_bg);
     }
     unsigned int container_bg_int = atoi(container_bg);
     //end evaluacion del container bg

@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
+#include <limits.h>
 
 
 struct InfoTerm get_info_term(){
@@ -116,7 +117,8 @@ bool strIsInt(const char *str){
     }
     unsigned int i = 0;
     while (str[i] != '\0'){
-        if(!isdigit(str[i]) && str[i] == '\0'){
+        print_info("veo el valor: %d", str[i]);
+        if(  str[i] != '-' && (isdigit(str[i]) == 0 || str[i] == '\0')){
             return false;
         }
         ++i;
