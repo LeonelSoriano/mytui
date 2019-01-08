@@ -4,6 +4,8 @@
 //#include <glib.h>
 
 //#include "src/mytui_config.h"
+//
+#include <string.h>
 #include "src/mytui.h"
 
 //#include "./termbox/build/usr/include/termbox.h"
@@ -11,6 +13,22 @@
 
 int main(int argc, char** argv) {
 //int ret = tb_init();
+
+    if(argc > 1){
+        for (int i = 1;  i < argc; i++) {
+            if(strcmp(argv[i], "-TEST") == 0){
+# define TEST
+            }
+        }
+
+
+    }
+
+
+#ifdef TEST
+    printf("hlaaaa");
+
+#endif
     init_mytui();
     update_termbox();
     end_mytui();

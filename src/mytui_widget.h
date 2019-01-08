@@ -1,3 +1,9 @@
+/** @file until.h
+*  @ingroup Conf
+*  @brief widget de mytui
+*  @date 06-01-2019
+*  @author leonelsoriano3@gmail.com
+*/
 #ifndef __MYTUI_WIDGET_H__
 #define __MYTUI_WIDGET_H__
 

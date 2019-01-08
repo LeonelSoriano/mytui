@@ -14,7 +14,7 @@
 #http://simplestcodings.blogspot.com/2010/09/simple-xml-parser-in-c-using-libxml.html
 #sudo pacman -Syy
 #sudo pacman -Su
-
+#amixer -D pulse sset Master 50%+
 #https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/developer_guide/debugging-running-application
 #https://sourcegraph.com/github.com/neovim/neovim/-/blob/src/nvim/tui/terminfo.c
 
@@ -38,6 +38,7 @@ CC=gcc
 CFLAGS=-c -g -Wall  -pedantic-errors  -Wextra -std=c99   $(shell pkg-config --cflags glib-2.0)
 LDFLAGS=   -L/home/leonel/dev/c/mytui/termbox/build/usr/lib/ -Wl,-rpath=/home/leonel/dev/c/mytui/termbox/build/usr/lib/
 SOURCES=main.c  ./src/until.c  ./src/mytui_config.c ./src/mytui.c ./src/mytui_buffer.c ./src/mytui_widget.c ./src/mytui_std_conf.c ./src/mytui_container_tui.c
+
 OBJECTS=$(SOURCES:.c=.o)
 
 SOURCES_TEST=./test/test.c
