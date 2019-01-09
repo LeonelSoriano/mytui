@@ -32,10 +32,12 @@
 #break en file  break /Full/path/to/service.cpp:45
 #inflo variables, info locals, info args
 
+ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
+
 POST_L = -ltermbox #`pkg-config --cflags --libs glib-2.0`
 CC=gcc
 CFLAGS=-c -g -Wall  -pedantic-errors  -Wextra -std=c99   $(shell pkg-config --cflags glib-2.0)
-LDFLAGS= -L/home/lsoriano/dev/c/mytui/termbox/build/usr/lib/ -Wl,-rpath=/home/lsoriano/dev/c/mytui/termbox/build/usr/lib/
+LDFLAGS= -L$(ROOT_DIR)/termbox/build/usr/lib/ -Wl,-rpath=$(ROOT_DIR)/termbox/build/usr/lib/
 
 MAIN=main.c
 MAIN_TEST=./test/test.c
