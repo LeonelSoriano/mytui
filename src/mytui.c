@@ -92,9 +92,17 @@ void update_termbox()
                 mytui_inicialize_container(&mytuiContainer, paramContainer);
                 add_ChildContainer(&mytuiContainer);
 
+                MiTuiWidget* widget;
+                init_MyTuiWidgetEntry(&widget, 1, 1, 8, 8, 1);
+
+                //update_MyTuiWidgetEntry(widget);
+
+                add_childContainerWidget(&mytuiContainer,0,0,0,0,&widget);
 
 
                 update_MytuiContainer(mytuiContainer);
+
+
                 free_mytui_container(&mytuiContainer);
 
                 screen_manager(&nodeBufer);

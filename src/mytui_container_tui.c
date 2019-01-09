@@ -47,7 +47,6 @@ void update_MytuiContainer(MytuiContainer *container)
     }
     NodeTranformation *node = NULL;
 
-
     //evaluacion del container bg
     char* container_bg;
     if(container->bg < 0){
@@ -194,8 +193,19 @@ void update_MytuiContainer(MytuiContainer *container)
 
 void free_mytui_container(MytuiContainer **stance){
     if (*stance != NULL) {
+
         while((*stance)->childContainer  != NULL){
             ChildContainer *tmpChildContainer = (*stance)->childContainer->next;
+
+            while((*stance)->childContainer->childContainerWidget != NULL){
+                ChildContainerWidget *tmpChildContainer =
+                    (*stance)->childContainer->childContainerWidget->next;
+                free((*stance)->childContainer->childContainerWidget->widget);
+                free((*stance)->childContainer->childContainerWidget);
+
+                (*stance)->childContainer->childContainerWidget = tmpChildContainer;
+            }
+
             free((*stance)->childContainer);
             (*stance)->childContainer = tmpChildContainer;
         }
@@ -209,6 +219,7 @@ void add_ChildContainer(MytuiContainer **stance){
         (*stance)->childContainer =
             (ChildContainer*)malloc(sizeof(ChildContainer));
         (*stance)->childContainer->next = NULL;
+        (*stance)->childContainer->childContainerWidget = NULL;
     }else{
         ChildContainer *tmp_old = (*stance)->childContainer;
 
@@ -216,15 +227,20 @@ void add_ChildContainer(MytuiContainer **stance){
             (ChildContainer*)malloc(sizeof(ChildContainer));
 
          (*stance)->childContainer = tmpChildContainer;
+
+        (*stance)->childContainer->childContainerWidget = NULL;
+
         (*stance)->childContainer->next = tmp_old;
 
     }
+
+
 }
 
-void add_childContainerWidget(ChildContainer **childContainer,
+void add_childContainerWidget(MytuiContainer **mytuiContainer,
     float margin_left, float margin_right, float margin_bottom, float margin_top,
     MiTuiWidget **miTuiWidget){
-    if((*childContainer) == NULL){
+    if( (*mytuiContainer)->childContainer == NULL){
         print_error("add_childContainerWidget: childContainerWidget no puede"
             " ser null");
     }
@@ -233,7 +249,7 @@ void add_childContainerWidget(ChildContainer **childContainer,
         print_error("add_childContainerWidget: miTuiWidget no puede ser NULL");
     }
 
-    if((*childContainer)->childContainerWidget == NULL){
+    if((*mytuiContainer)->childContainer->childContainerWidget == NULL){
         ChildContainerWidget *containerWidget =
             (ChildContainerWidget*)malloc(sizeof(ChildContainerWidget));
         containerWidget->margin_bottom = margin_bottom;
@@ -242,10 +258,11 @@ void add_childContainerWidget(ChildContainer **childContainer,
         containerWidget->margin_bottom = margin_bottom;
         containerWidget->next = NULL;
         containerWidget->widget = (*miTuiWidget);
-        (*childContainer)->childContainerWidget = containerWidget;
+        (*mytuiContainer)->childContainer->childContainerWidget = containerWidget;
     }else{
 
-        ChildContainerWidget* tmp_old = (*childContainer)->childContainerWidget;
+        ChildContainerWidget* tmp_old = (*mytuiContainer)->
+            childContainer->childContainerWidget;
 
         ChildContainerWidget *tmpContainerWidget =
             (ChildContainerWidget*)malloc(sizeof(ChildContainerWidget));
@@ -255,8 +272,8 @@ void add_childContainerWidget(ChildContainer **childContainer,
         tmpContainerWidget->margin_bottom = margin_bottom;
         tmpContainerWidget->widget = (* miTuiWidget);
 
-        (*childContainer)->childContainerWidget = tmpContainerWidget;
-        (*childContainer)->childContainerWidget->next = tmp_old;
+        (*mytuiContainer)->childContainer->childContainerWidget = tmpContainerWidget;
+        (*mytuiContainer)->childContainer->childContainerWidget->next = tmp_old;
     }
 
 }

@@ -96,4 +96,6 @@ bool strIsInt(const char *str);
 int isDefaulValueInt(int value);
 
 
+int dump(void *myStruct, long size);
+
 #endif

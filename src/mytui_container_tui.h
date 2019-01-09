@@ -91,15 +91,16 @@ void free_mytui_container(MytuiContainer **stance);
 void add_ChildContainer(MytuiContainer **stance);
 
 /**
-* agrega un widget a un child container
-* @param referencia al child container
+* agrega un widget a un child container el free para este metrodo lo tiene el
+* free continer el cual libera los recursos de manera dinamica
+* @param referencia al container que posee el child container
 * @param margen derecho en porcentaje
 * @param margen izquierdo en porcentaje
 * @param margen inferion en pixeles
 * @param margen superior en pixeles
 * @param widget que se agregara al container
 */
-void add_childContainerWidget(ChildContainer **childContainer,
+void add_childContainerWidget(MytuiContainer **mytuiContainer,
     float margin_left, float margin_right, float margin_bottom, float margin_top,
     struct MiTuiWidget **miTuiWidget);
 
