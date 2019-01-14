@@ -45,7 +45,6 @@ typedef struct childContainerWidget{
     struct childContainerWidget *next;
 }ChildContainerWidget;
 
-
 typedef struct MytuiContainerParam{
     int bg;
     int border;
@@ -91,12 +90,12 @@ void free_mytui_container(MytuiContainer **stance);
 void add_ChildContainer(MytuiContainer **stance);
 
 /**
-* agrega un widget a un child container el free para este metrodo lo tiene el
-* free continer el cual libera los recursos de manera dinamica
+* agrega un widget a un child container el free para este método lo tiene el
+* free container el cual libera los recursos de manera dinámica
 * @param referencia al container que posee el child container
 * @param margen derecho en porcentaje
 * @param margen izquierdo en porcentaje
-* @param margen inferion en pixeles
+* @param margen inferior en pixeles
 * @param margen superior en pixeles
 * @param widget que se agregara al container
 */
@@ -104,11 +103,17 @@ void add_childContainerWidget(MytuiContainer **mytuiContainer,
     float margin_left, float margin_right, float margin_bottom, float margin_top,
     struct MiTuiWidget **miTuiWidget);
 
+
+/**
+* actualiza para dibujar todos los widget en el child
+* @param contenedor
+*/
+void update_MytuiContainer_childContainer(MytuiContainer *container);
+
+
 /**
  * método que inicializa un ChildContainer
  * @param referencia del ChildContainer
  * @return valor por defecto
  */
-
-
 #endif

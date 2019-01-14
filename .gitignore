@@ -52,3 +52,6 @@ dkms.conf
 #doc
 html/
 latex/
+
+#exe
+mytui

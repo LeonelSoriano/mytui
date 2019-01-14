@@ -1,7 +1,7 @@
 #include "mytui_widget.h"
 
 void init_MyTuiWidgetEntry(MiTuiWidget** widget, int x, int y, int w, int h,
- int bc){
+    int bc){
     *widget = (MiTuiWidget*)malloc(sizeof(MiTuiWidget));
     (*widget)->type = entry;
     (*widget)->h = h;
@@ -17,13 +17,21 @@ void update_MyTuiWidgetEntry(MiTuiWidget* widget){
     }
     NodeTranformation* node = NULL;
 
-    const char* bg_str = resolve_value(_confMap, "entry.bg", NULL);
+    char* bg_str;
 
-    unsigned int bg = 0;
+    unsigned int bg = widget->bc;
+    if(widget->bc < 0){
+        bg_str = resolve_value(_confMap, "entry.bg", NULL);
+    }else{
+        char buffer_str[255];
+        sprintf(buffer_str, "%d", widget->bc);
+        bg_str = resolve_value(_confMap, "entry.bg", buffer_str);
+    }
 
-    //validaciones para datos de entrada
     if (strIsInt(bg_str) == true) {
+
         bg = atoi(bg_str);
+
         if (bg > MAX_COLORS_VALUES) {
             char* std_value = find_std_values("entry.bg");
             bg = atoi(std_value);
@@ -32,6 +40,7 @@ void update_MyTuiWidgetEntry(MiTuiWidget* widget){
         //si tiene mal el valor en conf sera el por defecto
         bg = MYTUI_COLOR_DEFAULT;
     }
+
 
     for (int i = widget->y; i < (widget->h + widget->y); i++) {
         for (int j = widget->x; j < (widget->w + widget->x); j++) {

@@ -238,7 +238,7 @@ void add_ChildContainer(MytuiContainer **stance){
 }
 
 void add_childContainerWidget(MytuiContainer **mytuiContainer,
-    float margin_left, float margin_right, float margin_bottom, float margin_top,
+    float margin_top, float margin_left, float margin_bottom, float margin_right,
     MiTuiWidget **miTuiWidget){
     if( (*mytuiContainer)->childContainer == NULL){
         print_error("add_childContainerWidget: childContainerWidget no puede"
@@ -255,7 +255,7 @@ void add_childContainerWidget(MytuiContainer **mytuiContainer,
         containerWidget->margin_bottom = margin_bottom;
         containerWidget->margin_left = margin_left;
         containerWidget->margin_top = margin_top;
-        containerWidget->margin_bottom = margin_bottom;
+        containerWidget->margin_right = margin_right;
         containerWidget->next = NULL;
         containerWidget->widget = (*miTuiWidget);
         (*mytuiContainer)->childContainer->childContainerWidget = containerWidget;
@@ -269,7 +269,7 @@ void add_childContainerWidget(MytuiContainer **mytuiContainer,
         tmpContainerWidget->margin_bottom = margin_bottom;
         tmpContainerWidget->margin_left = margin_left;
         tmpContainerWidget->margin_top = margin_top;
-        tmpContainerWidget->margin_bottom = margin_bottom;
+        tmpContainerWidget->margin_right =  margin_right;
         tmpContainerWidget->widget = (* miTuiWidget);
 
         (*mytuiContainer)->childContainer->childContainerWidget = tmpContainerWidget;
@@ -278,3 +278,50 @@ void add_childContainerWidget(MytuiContainer **mytuiContainer,
 
 }
 
+
+
+void update_MytuiContainer_childContainer(MytuiContainer *container)
+{
+    ChildContainer *childContainer = container->childContainer;
+
+    struct InfoTerm  infoTerm = get_info_term();
+
+    while(childContainer != NULL){
+
+        ChildContainerWidget *childContainerWidget =
+            childContainer->childContainerWidget;
+
+        int counter_container_height = 0;
+        ChildContainerWidget *beforeChildContainerWidget = NULL;
+
+        while(childContainerWidget != NULL){
+            if(childContainerWidget->widget != NULL){
+
+                //CONTAINER_ROT
+                if( container->type == MYTUI_CONTAINER_ROOT){
+                    childContainerWidget->widget->x = childContainerWidget->margin_right;
+
+
+                    if(beforeChildContainerWidget != NULL){
+                        counter_container_height += childContainerWidget->margin_bottom;
+                    }
+
+                    childContainerWidget->widget->y = counter_container_height +
+                        childContainerWidget->margin_top;
+
+                    childContainerWidget->widget->w = infoTerm.width -
+                        childContainerWidget->margin_left - childContainerWidget->margin_right;
+
+                    counter_container_height += childContainerWidget->widget->h + childContainerWidget->margin_top;
+                    update_MyTuiWidgetEntry(childContainerWidget->widget);
+
+                }
+
+            }
+            beforeChildContainerWidget = childContainerWidget;
+            childContainerWidget = childContainerWidget->next;
+        }
+
+        childContainer = childContainer->next;
+    }
+}

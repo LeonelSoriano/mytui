@@ -84,7 +84,6 @@ void update_termbox()
 */
 
 
-
                 MytuiContainer* mytuiContainer = NULL;
                 INIT_MYTUI_CONTAINER(paramContainer);
                 paramContainer.type = MYTUI_CONTAINER_ROOT;
@@ -93,15 +92,23 @@ void update_termbox()
                 add_ChildContainer(&mytuiContainer);
 
                 MiTuiWidget* widget;
-                init_MyTuiWidgetEntry(&widget, 1, 1, 8, 8, 1);
+                init_MyTuiWidgetEntry(&widget, 1, 1, 2, 8, -1);
 
                 //update_MyTuiWidgetEntry(widget);
 
-                add_childContainerWidget(&mytuiContainer,0,0,0,0,&widget);
+                add_childContainerWidget(&mytuiContainer,0,1,1,3,&widget);
 
 
-                update_MytuiContainer(mytuiContainer);
+                MiTuiWidget* widget2;
+                init_MyTuiWidgetEntry(&widget2, 1, 1, 8, 8, 2);
 
+
+                add_childContainerWidget(&mytuiContainer,0,0,1,2,&widget2);
+
+
+                //el update
+                //update_MytuiContainer(mytuiContainer);
+                update_MytuiContainer_childContainer(mytuiContainer);
 
                 free_mytui_container(&mytuiContainer);
 

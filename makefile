@@ -32,6 +32,8 @@
 #break en file  break /Full/path/to/service.cpp:45
 #inflo variables, info locals, info args
 
+
+#https://www.sanfoundry.com/c-program-queue-using-linked-list/
 ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 POST_L = -ltermbox #`pkg-config --cflags --libs glib-2.0`
