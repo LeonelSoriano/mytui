@@ -29,6 +29,7 @@ typedef struct ChildContainer{
     int len;
     struct ChildContainer  *next;
     struct childContainerWidget *childContainerWidget;
+    struct childContainerWidget *childContainerWidgetFront;
 }ChildContainer;
 
 /**
@@ -44,6 +45,7 @@ typedef struct childContainerWidget{
     struct MiTuiWidget* widget;
     struct childContainerWidget *next;
 }ChildContainerWidget;
+
 
 typedef struct MytuiContainerParam{
     int bg;

@@ -100,10 +100,10 @@ void update_termbox()
 
 
                 MiTuiWidget* widget2;
-                init_MyTuiWidgetEntry(&widget2, 1, 1, 8, 8, 2);
+                init_MyTuiWidgetEntry(&widget2, 1, 1, 8, 8, 5);
 
 
-                add_childContainerWidget(&mytuiContainer,0,0,1,2,&widget2);
+                add_childContainerWidget(&mytuiContainer,1,1,1,2,&widget2);
 
 
                 //el update

@@ -1,0 +1,9 @@
+TabWidth: 4
+UseTab: Never
+NamespaceIndentation: None
+IndentWidth: 4
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+BreakBeforeBraces: Linux
+ColumnLimit: 80
+AllowAllParametersOfDeclarationOnNextLine: true
