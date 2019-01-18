@@ -8,7 +8,8 @@
  * Enum que posee los distintos widget de core.
  */
 typedef enum {
-    entry = 1 /**< Componente vacio WidgetTypes#entry. */
+    entry = 1, /**< Componente vacio WidgetTypes#entry. */
+    label = 2 /**< Componente label texto WidgetTypes#entry. */
 }WidgetTypes;
 
 #endif

@@ -32,7 +32,8 @@ void init_mytui()
     ini_conf_file();
     load_conf_map(&_confMap);
 
-    // print_info("resolve value que es: %s",resolve_value(_confMap,"entry.bg",NULL) );
+    // print_info("resolve value que es:
+    // %s",resolve_value(_confMap,"entry.bg",NULL) );
 
     init_buffer(&nodeBufer);
     _init_termbox();
@@ -59,58 +60,69 @@ void update_termbox()
 
             case TB_KEY_CTRL_A: {
 
- /*               MiTuiWidget* widget;
+                /*               MiTuiWidget* widget;
 
-                init_MyTuiWidgetEntry(&widget, 1, 1, 8, 8, 1);
-                update_MyTuiWidgetEntry(widget);
+                               init_MyTuiWidgetEntry(&widget, 1, 1, 8, 8, 1);
+                               update_MyTuiWidget(widget);
 
-                free_MyTuiWidgetEntry(&widget);
+                               free_MyTuiWidget(&widget);
 
-                MytuiContainer* stance = NULL;
+                               MytuiContainer* stance = NULL;
 
-                INIT_MYTUI_CONTAINER(type);
+                               INIT_MYTUI_CONTAINER(type);
 
-           //     type.type = MYTUI_CONTAINER_ROOT;
-                type.type = MYTUI_CONTAINER_WIN;
-                type.w = 20;
-                type.h = 10;
-                type.x = 30;
-                type.y = 20;
-                type.decoration = true;
+                          //     type.type = MYTUI_CONTAINER_ROOT;
+                               type.type = MYTUI_CONTAINER_WIN;
+                               type.w = 20;
+                               type.h = 10;
+                               type.x = 30;
+                               type.y = 20;
+                               type.decoration = true;
 
-                mytui_inicialize_container(&stance, type);
-                update_MytuiContainer(stance);
-                free_mytui_container(&stance);
-*/
+                               mytui_inicialize_container(&stance, type);
+                               update_MytuiContainer(stance);
+                               free_mytui_container(&stance);
+               */
 
-
-                MytuiContainer* mytuiContainer = NULL;
+                MytuiContainer *mytuiContainer = NULL;
                 INIT_MYTUI_CONTAINER(paramContainer);
                 paramContainer.type = MYTUI_CONTAINER_ROOT;
                 paramContainer.decoration = true;
                 mytui_inicialize_container(&mytuiContainer, paramContainer);
                 add_ChildContainer(&mytuiContainer);
 
-                MiTuiWidget* widget;
-                init_MyTuiWidgetEntry(&widget, 1, 1, 2, 8, -1);
+                MiTuiWidget *widget = init_MyTuiWidgetEntry(1, 1, 2, 8, -1);
 
-                //update_MyTuiWidgetEntry(widget);
+                // update_MyTuiWidget(widget);
 
-                add_childContainerWidget(&mytuiContainer,0,1,1,3,&widget);
+                add_childContainerWidget(&mytuiContainer, 0, 1, 1, 3, &widget);
 
+                MiTuiWidget *widget2 = init_MyTuiWidgetEntry(1, 1, 8, 8, 5);
 
-                MiTuiWidget* widget2;
-                init_MyTuiWidgetEntry(&widget2, 1, 1, 8, 8, 5);
+                add_childContainerWidget(&mytuiContainer, 1, 1, 1, 2, &widget2);
 
+                MiTuiWidget *widget3 = init_MyTuiWidgetEntry(1, 1, 8, 8, -1);
 
-                add_childContainerWidget(&mytuiContainer,1,1,1,2,&widget2);
+                add_childContainerWidget(&mytuiContainer, 1, 1, 2, 2, &widget3);
 
-
-                //el update
-                //update_MytuiContainer(mytuiContainer);
+                // el update
+                // update_MytuiContainer(mytuiContainer);
                 update_MytuiContainer_childContainer(mytuiContainer);
 
                 free_mytui_container(&mytuiContainer);
+
+
+                /////////////
+                MiTuiWidget *label =
+                    init_MyTuiWidgetLabel("hola", 20, 20, 20, 10, 11, 2);
+
+                update_MyTuiWidget(label);
+
+                free_MyTuiWidget(&label);
+                //////////////////
+
+
+
 
                 screen_manager(&nodeBufer);
                 break;
@@ -118,7 +130,7 @@ void update_termbox()
             }
             break;
         case TB_EVENT_RESIZE:
-//            init_screen_manager(&nodeBufer);
+            //            init_screen_manager(&nodeBufer);
             break;
         }
     }

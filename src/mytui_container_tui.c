@@ -363,7 +363,7 @@ void update_MytuiContainer_childContainer(MytuiContainer *container)
                     counter_container_height +=
                         tmpChildContainerWidget->widget->h +
                         tmpChildContainerWidget->margin_top;
-                    update_MyTuiWidgetEntry(tmpChildContainerWidget->widget);
+                    update_MyTuiWidget(tmpChildContainerWidget->widget);
                 }
             }
 

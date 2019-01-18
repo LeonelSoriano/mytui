@@ -120,6 +120,7 @@ void nodeTranformation_add(NodeTranformation** nodeTranformation, int x, int y,
     }
 }
 
+
 void nodeTranformation_free(NodeTranformation** nodeTranformation)
 {
     if (*nodeTranformation == NULL) {

@@ -1,38 +1,49 @@
 /** @file until.h
-*  @ingroup Conf
-*  @brief widget de mytui
-*  @date 06-01-2019
-*  @author leonelsoriano3@gmail.com
-*/
+ *  @ingroup Conf
+ *  @brief widget de mytui
+ *  @date 06-01-2019
+ *  @author leonelsoriano3@gmail.com
+ */
 #ifndef __MYTUI_WIDGET_H__
 #define __MYTUI_WIDGET_H__
 
 #include "mytui_widget_types.h"
 
-#include "mytui_color.h"
 #include "mytui.h"
-#include "mytui_config.h"
 #include "mytui_buffer.h"
-
+#include "mytui_color.h"
+#include "mytui_config.h"
 
 /**
  * @brief lista de buffer.
  *
  * Esta estructura maneja el buffer para pintado de la terminal.
  */
-typedef struct MiTuiWidget{
+typedef struct MiTuiWidget {
     int x;
     int y;
     int w;
     int h;
-    int bc;
+    int bc;      /**< color backgound MiTuiWidget#bc. */
+    int fc;      /**< color fore MiTuiWidget#bc. */
+    void *extra; /**< structuras que guardan valores unicos de los widget
+                        MiTuiWidget#especific. */
     WidgetTypes type;
-}MiTuiWidget;
+} MiTuiWidget;
 
-void init_MyTuiWidgetEntry(MiTuiWidget ** widget, int x, int y, int w, int h, int bc);
 
-void update_MyTuiWidgetEntry(MiTuiWidget *widget);
 
-void free_MyTuiWidgetEntry(MiTuiWidget **widget);
+typedef struct MiTuiWidgetExtraLabel {
+    char *text;
+}MiTuiWidgetExtraLabel;
+
+MiTuiWidget *init_MyTuiWidgetEntry(int x, int y, int w, int h, int bc);
+
+MiTuiWidget* init_MyTuiWidgetLabel(char *text, int x, int y, int w, int h,
+                                  int bc, int fc);
+
+void update_MyTuiWidget(MiTuiWidget *widget);
+
+void free_MyTuiWidget(MiTuiWidget **widget);
 
 #endif

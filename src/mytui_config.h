@@ -66,7 +66,20 @@ const char* getValueConf(ConfMap *confMap, const char* key);
  */
 char* resolve_value( ConfMap *ConfMap,char *type_conf,const char* component_value);
 
+/**
+ *  busca unvalor en la conf standar
+ * @param configuracion a buscar
+ * @return valor correspondiente al key
+ */
+char* find_std_values(char* type_conf);
 
-char* find_std_values();
+/**
+ * resuelve el color y lo convierte a int
+ * @param diccionario de key value de configuracion
+ * @param coloque se tiene en el widget
+ * @param str estandar en la conf
+ * @return color luego de ser resuelto por la logica
+ */
+int resolve_color(ConfMap* _confMap, int actual_color, char* str_conf);
 
 #endif

@@ -63,7 +63,7 @@ EXECUTABLE_TEST=mytui_test
 
 all: $(MAIN) $(SOURCES)  $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS)
+$(EXECUTABLE): $(OBJECTS_MAIN)
 	$(CC)   $(LDFLAGS)  $(OBJECTS_MAIN) $(POST_L)  -o $@
 
 .c.o:
