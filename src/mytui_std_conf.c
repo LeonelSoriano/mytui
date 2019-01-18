@@ -8,6 +8,6 @@ const char* mytui_std_conf_optiones[] = {
     "container.minimize=55",
     "container.border=249",
     "label.bg=1",
-    "label.fc=3",
+    "label.fg=3",
     "pruebaXd=2"
 };

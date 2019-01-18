@@ -1,6 +1,7 @@
 #include "mytui_widget.h"
 
 
+
 /**
  * interna de dibujado de Entry
  * @see init_mytui
@@ -51,16 +52,30 @@ static void _update_MyTuiWidgetLabel(MiTuiWidget *widget){
 
     MiTuiWidgetExtraLabel* extra = (MiTuiWidgetExtraLabel*) widget->extra;
 
-    int str_size = str_len(extra->text);
+    int str_size = strlen(extra->text);
+
+    int draw_x = (widget->w < str_size)? str_size: widget->w;
 
     for (int i = widget->y; i < (widget->h + widget->y); i++) {
-        for (int j = widget->x; j < (widget->w + widget->x); j++) {
-            nodeTranformation_add(&node, j, i, bc_color, fc_color, 'a');
+
+        int character_line = 0;
+
+        for (int j = widget->x; j < (draw_x + widget->x); j++) {
+
+            //si el caracter es igual a la linea uno y
+            // en menor al string para evitar over flow
+            if(i == widget->y && character_line <  str_size){
+                nodeTranformation_add(&node, j, i, bc_color, fc_color,
+                        extra->text[character_line]);
+            }else{
+                nodeTranformation_add(&node, j, i, bc_color,
+                        MYTUI_COLOR_DEFAULT, ' ');
+            }
+            character_line++;
         }
     }
     node_bufffer_vs_tranformator(&nodeBufer, node);
     nodeTranformation_free(&node);
-
 }
 
 

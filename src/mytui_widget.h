@@ -14,6 +14,8 @@
 #include "mytui_color.h"
 #include "mytui_config.h"
 
+#include <string.h>
+
 /**
  * @brief lista de buffer.
  *

@@ -105,22 +105,17 @@ void update_termbox()
 
                 add_childContainerWidget(&mytuiContainer, 1, 1, 2, 2, &widget3);
 
+                MiTuiWidget *label =
+                    init_MyTuiWidgetLabel("leonelsoriano", 1, 1, -1, 1, 8, 6);
+
+                add_childContainerWidget(&mytuiContainer, 0, 1, 0, 0, &label);
+
+
                 // el update
                 // update_MytuiContainer(mytuiContainer);
                 update_MytuiContainer_childContainer(mytuiContainer);
 
                 free_mytui_container(&mytuiContainer);
-
-
-                /////////////
-                MiTuiWidget *label =
-                    init_MyTuiWidgetLabel("hola", 20, 20, 20, 10, 11, 2);
-
-                update_MyTuiWidget(label);
-
-                free_MyTuiWidget(&label);
-                //////////////////
-
 
 
 

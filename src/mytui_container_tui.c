@@ -352,13 +352,20 @@ void update_MytuiContainer_childContainer(MytuiContainer *container)
                             tmpChildContainerWidget->margin_bottom;
                     }
 
+
                     tmpChildContainerWidget->widget->y =
                         counter_container_height +
                         tmpChildContainerWidget->margin_top;
 
-                    tmpChildContainerWidget->widget->w =
-                        infoTerm.width - tmpChildContainerWidget->margin_left -
-                        tmpChildContainerWidget->margin_right;
+                    if(tmpChildContainerWidget->widget->type != label && tmpChildContainerWidget->widget->w > 0){
+                        tmpChildContainerWidget->widget->w =
+                            infoTerm.width - tmpChildContainerWidget->margin_left -
+                            tmpChildContainerWidget->margin_right;
+                    }else{
+  tmpChildContainerWidget->widget->w =
+                            infoTerm.width - tmpChildContainerWidget->margin_left -
+                            tmpChildContainerWidget->margin_right;
+                    }
 
                     counter_container_height +=
                         tmpChildContainerWidget->widget->h +
