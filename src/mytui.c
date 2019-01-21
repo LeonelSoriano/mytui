@@ -18,7 +18,7 @@ static void _init_termbox()
         print_error("_init_termbox: errror al iniciar terbox ");
         exit(EXIT_FAILURE);
     }
-    // tb_select_input_mode( TB_INPUT_MOUSE);
+    tb_select_input_mode(TB_INPUT_ESC | TB_INPUT_MOUSE);
     tb_select_output_mode(TB_OUTPUT_256);
 }
 
@@ -52,6 +52,14 @@ void update_termbox()
     struct tb_event ev;
     while (tb_poll_event(&ev)) {
         switch (ev.type) {
+
+        case TB_EVENT_MOUSE:
+            if (ev.key == TB_KEY_MOUSE_LEFT) {
+                //				mx = ev.x;
+                //				my = ev.y;
+                print_error("mouse: %d , %d ", ev.x, ev.y);
+            }
+            break;
         case TB_EVENT_KEY:
             switch (ev.key) {
             case TB_KEY_ESC:
@@ -95,31 +103,19 @@ void update_termbox()
 
                 // update_MyTuiWidget(widget);
 
-                add_childContainerWidget(&mytuiContainer, 0, 1, 1, 3, &widget);
+                add_childContainerWidget(&mytuiContainer, 1, 1, 0, 1, &widget);
 
-                MiTuiWidget *widget2 = init_MyTuiWidgetEntry(1, 1, 8, 8, 5);
+                MiTuiWidget *label = init_MyTuiWidgetLabel("leonelsoriano", 0, 0, -1, 1, -1, -1);
 
-                add_childContainerWidget(&mytuiContainer, 1, 1, 1, 2, &widget2);
-
-                MiTuiWidget *widget3 = init_MyTuiWidgetEntry(1, 1, 8, 8, -1);
-
-                add_childContainerWidget(&mytuiContainer, 1, 1, 2, 2, &widget3);
-
-                MiTuiWidget *label =
-                    init_MyTuiWidgetLabel("leonelsoriano", 1, 1, -1, 1, 8, 6);
-
-                add_childContainerWidget(&mytuiContainer, 0, 1, 0, 0, &label);
-
+                add_childContainerWidget(&mytuiContainer, 1, 1, 0, 1, &label);
 
                 // el update
-                // update_MytuiContainer(mytuiContainer);
                 update_MytuiContainer_childContainer(mytuiContainer);
 
                 free_mytui_container(&mytuiContainer);
 
-
-
                 screen_manager(&nodeBufer);
+
                 break;
             }
             }

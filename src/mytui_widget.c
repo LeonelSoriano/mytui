@@ -1,7 +1,6 @@
 #include "mytui_widget.h"
 
 
-
 /**
  * interna de dibujado de Entry
  * @see init_mytui
@@ -131,11 +130,11 @@ void update_MyTuiWidget(MiTuiWidget *widget)
 void free_MyTuiWidget(MiTuiWidget **widget)
 {
     if((*widget)->type == label){
+
         MiTuiWidgetExtraLabel* extra = (MiTuiWidgetExtraLabel*)(*widget)->extra;
         free(extra->text);
-        free((*widget)->extra);
+        free(extra);
     }
-
     if (*widget != NULL) {
         free(*widget);
     }

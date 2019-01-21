@@ -9,7 +9,8 @@
  */
 typedef enum {
     entry = 1, /**< Componente vacio WidgetTypes#entry. */
-    label = 2 /**< Componente label texto WidgetTypes#entry. */
+    label = 2, /**< Componente label texto WidgetTypes#label. */
+    button = 3 /**< Componente label texto WidgetTypes#button. */
 }WidgetTypes;
 
 #endif

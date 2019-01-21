@@ -1,41 +1,40 @@
 /** @file mytui_config.h
-*  @ingroup Conf
-*  @brief costantes de colores y foreground de la terminal
-*  @date 28-11-2018
-*  @author leonelsoriano3@gmail.com
-*/
+ *  @ingroup Conf
+ *  @brief costantes de colores y foreground de la terminal
+ *  @date 28-11-2018
+ *  @author leonelsoriano3@gmail.com
+ */
 #ifndef __MYTUI_CONFIG__
 #define __MYTUI_CONFIG__
 
 //#include <glib.h>
-#include <string.h>
 #include <stdbool.h>
+#include <string.h>
 
-#include "until.h"
 #include "mytui_std_conf.h"
+#include "until.h"
 
-typedef struct ConfMap{
+typedef struct ConfMap {
     char *key;
     char *value;
-    struct ConfMap  *next;
-}ConfMap;
+    struct ConfMap *next;
+} ConfMap;
 
 /**
  * tiene la informacion del archivo de conf en memoria
  */
-//GHashTable* hash_conf;
+// GHashTable* hash_conf;
 
 #ifdef __MINGW32__
-    static const char* SEPARATOR_FOLDER = "\\";
+static const char *SEPARATOR_FOLDER = "\\";
 #else
-    static const char* SEPARATOR_FOLDER = "/";
+static const char *SEPARATOR_FOLDER = "/";
 #endif
 
 /**
-* gestiona el inicio la conf de la libreria
-*/
+ * gestiona el inicio la conf de la libreria
+ */
 void ini_conf_file();
-
 
 void init_conf_map(ConfMap *confMap);
 
@@ -45,13 +44,13 @@ void init_conf_map(ConfMap *confMap);
  * @param el key a agregar
  * @param el value a agregar
  */
-void conf_map_add(ConfMap **confMap,  char* key,  char* value);
+void conf_map_add(ConfMap **confMap, char *key, char *value);
 
 void free_conf_map(ConfMap **confMap);
 
 void load_conf_map(ConfMap **confMap);
 
-const char* getValueConf(ConfMap *confMap, const char* key);
+const char *getValueConf(ConfMap *confMap, const char *key);
 
 /**
  * resolve el valor de configuración si se envía al componente es este, de lo
@@ -64,14 +63,14 @@ const char* getValueConf(ConfMap *confMap, const char* key);
  *  cuenta
  * @return color luego de ser resuelto
  */
-char* resolve_value( ConfMap *ConfMap,char *type_conf,const char* component_value);
+char *resolve_value(ConfMap *ConfMap, char *type_conf, const char *component_value);
 
 /**
  *  busca unvalor en la conf standar
  * @param configuracion a buscar
  * @return valor correspondiente al key
  */
-char* find_std_values(char* type_conf);
+char *find_std_values(char *type_conf);
 
 /**
  * resuelve el color y lo convierte a int
@@ -80,6 +79,6 @@ char* find_std_values(char* type_conf);
  * @param str estandar en la conf
  * @return color luego de ser resuelto por la logica
  */
-int resolve_color(ConfMap* _confMap, int actual_color, char* str_conf);
+int resolve_color(ConfMap *_confMap, int actual_color, char *str_conf);
 
 #endif

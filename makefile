@@ -44,7 +44,7 @@ LDFLAGS= -L$(ROOT_DIR)/termbox/build/usr/lib/ -Wl,-rpath=$(ROOT_DIR)/termbox/bui
 MAIN=main.c
 MAIN_TEST=./test/test.c
 
-SOURCES=./src/until.c  ./src/mytui_config.c ./src/mytui.c ./src/mytui_buffer.c ./src/mytui_widget.c ./src/mytui_std_conf.c ./src/mytui_container_tui.c
+SOURCES=./src/until.c  ./src/mytui_config.c ./src/mytui.c ./src/mytui_buffer.c ./src/mytui_widget.c ./src/mytui_std_conf.c ./src/mytui_container_tui.c ./src/mytui_mouse_manager.c
 
 OBJECTS =  $(SOURCES:.c=.o)
 OBJECTS_MAIN = $(MAIN:.c=.o) $(SOURCES:.c=.o)

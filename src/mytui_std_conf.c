@@ -7,7 +7,7 @@ const char* mytui_std_conf_optiones[] = {
     "container.close=1",
     "container.minimize=55",
     "container.border=249",
-    "label.bg=1",
-    "label.fg=3",
+    "label.bg=253",
+    "label.fg=237",
     "pruebaXd=2"
 };

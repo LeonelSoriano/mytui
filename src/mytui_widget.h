@@ -33,16 +33,13 @@ typedef struct MiTuiWidget {
     WidgetTypes type;
 } MiTuiWidget;
 
-
-
 typedef struct MiTuiWidgetExtraLabel {
     char *text;
-}MiTuiWidgetExtraLabel;
+} MiTuiWidgetExtraLabel;
 
 MiTuiWidget *init_MyTuiWidgetEntry(int x, int y, int w, int h, int bc);
 
-MiTuiWidget* init_MyTuiWidgetLabel(char *text, int x, int y, int w, int h,
-                                  int bc, int fc);
+MiTuiWidget *init_MyTuiWidgetLabel(char *text, int x, int y, int w, int h, int bc, int fc);
 
 void update_MyTuiWidget(MiTuiWidget *widget);
 
