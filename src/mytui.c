@@ -68,30 +68,6 @@ void update_termbox()
 
             case TB_KEY_CTRL_A: {
 
-                /*               MiTuiWidget* widget;
-
-                               init_MyTuiWidgetEntry(&widget, 1, 1, 8, 8, 1);
-                               update_MyTuiWidget(widget);
-
-                               free_MyTuiWidget(&widget);
-
-                               MytuiContainer* stance = NULL;
-
-                               INIT_MYTUI_CONTAINER(type);
-
-                          //     type.type = MYTUI_CONTAINER_ROOT;
-                               type.type = MYTUI_CONTAINER_WIN;
-                               type.w = 20;
-                               type.h = 10;
-                               type.x = 30;
-                               type.y = 20;
-                               type.decoration = true;
-
-                               mytui_inicialize_container(&stance, type);
-                               update_MytuiContainer(stance);
-                               free_mytui_container(&stance);
-               */
-
                 MytuiContainer *mytuiContainer = NULL;
                 INIT_MYTUI_CONTAINER(paramContainer);
                 paramContainer.type = MYTUI_CONTAINER_ROOT;
@@ -100,17 +76,24 @@ void update_termbox()
                 add_ChildContainer(&mytuiContainer);
 
                 MiTuiWidget *widget = init_MyTuiWidgetEntry(1, 1, 2, 8, -1);
-
-                // update_MyTuiWidget(widget);
-
                 add_childContainerWidget(&mytuiContainer, 1, 1, 0, 1, &widget);
 
-                MiTuiWidget *label = init_MyTuiWidgetLabel("leonelsoriano", 0, 0, -1, 1, -1, -1);
 
+                MiTuiWidget *label = init_MyTuiWidgetLabel("leonelsoriano", 0, 0, -1, 1, -1, -1);
                 add_childContainerWidget(&mytuiContainer, 1, 1, 0, 1, &label);
 
                 // el update
                 update_MytuiContainer_childContainer(mytuiContainer);
+
+
+                //prueba de nouse_managet
+
+//void add_mytui_event_listener(void (*call_back)(), EventType eventType, MiTuiWidget *widget)
+                add_mytui_event_listener(NULL, mytuiEventTypePrincipal, label);
+                delete_mytui_listener(label, mytuiEventTypePrincipal);
+
+//void delete_mytui_listener(MiTuiWidget *widget, EventType eventType){
+
 
                 free_mytui_container(&mytuiContainer);
 

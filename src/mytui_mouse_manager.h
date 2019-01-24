@@ -3,30 +3,29 @@
 
 #include "mytui_widget.h"
 
-
-
 /**
  * @brief enumeracion de widget en el core.
  *
  * Enum que posee los distintos widget de core.
  */
 typedef enum {
-    eventTypePrincipal = 1,
-}EventType;
-
-
+    mytuiEventTypePrincipal = 1,
+} EventType;
 
 /**
  * @brief lista para tranformacion del buffer.
  *
  * Esta estructura maneja el buffer para pintado de la terminal.
  */
-typedef struct stackMouseEvent{
+typedef struct mytuiStackMouseEvent {
     void (*call_back)();
     EventType eventType;
     MiTuiWidget *widget;
-    struct stackMouseEvent *next;
-}StackMouseEvent;
+    struct mytuiStackMouseEvent *next;
+} MytuiStackMouseEvent;
 
+void add_mytui_event_listener(void (*call_back)(), EventType eventType, MiTuiWidget *widget);
+
+void delete_mytui_listener(MiTuiWidget *widget, EventType eventType);
 
 #endif
