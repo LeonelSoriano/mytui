@@ -1,6 +1,7 @@
 #ifndef __MYTUI_MOUSE_MANAGER__
 #define __MYTUI_MOUSE_MANAGER__
 
+
 #include "mytui_widget.h"
 
 /**
@@ -20,12 +21,15 @@ typedef enum {
 typedef struct mytuiStackMouseEvent {
     void (*call_back)();
     EventType eventType;
-    MiTuiWidget *widget;
+    struct MiTuiWidget *widget;
     struct mytuiStackMouseEvent *next;
 } MytuiStackMouseEvent;
 
-void add_mytui_event_listener(void (*call_back)(), EventType eventType, MiTuiWidget *widget);
+void add_mytui_event_listener(void (*call_back)(), EventType eventType, struct MiTuiWidget *widget);
 
-void delete_mytui_listener(MiTuiWidget *widget, EventType eventType);
+void delete_mytui_listener( struct MiTuiWidget *widget, EventType eventType);
+
+
+void delete_mytui_listener_all();
 
 #endif

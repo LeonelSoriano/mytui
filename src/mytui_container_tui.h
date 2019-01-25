@@ -5,6 +5,7 @@
 #include <stdbool.h>
 
 #include "mytui_widget.h"
+
 #include "mytui.h"
 #include "mytui_config.h"
 #include "mytui_buffer.h"

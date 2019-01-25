@@ -2,7 +2,7 @@
 
 static MytuiStackMouseEvent *stackMouseEvent = NULL;
 
-void add_mytui_event_listener(void (*call_back)(), EventType eventType, MiTuiWidget *widget)
+void add_mytui_event_listener(void (*call_back)(), EventType eventType, struct MiTuiWidget *widget)
 {
     if (stackMouseEvent == NULL) {
         stackMouseEvent = (MytuiStackMouseEvent *)malloc(sizeof(MytuiStackMouseEvent));
@@ -24,7 +24,7 @@ void add_mytui_event_listener(void (*call_back)(), EventType eventType, MiTuiWid
     }
 }
 
-void delete_mytui_listener(MiTuiWidget *widget, EventType eventType)
+void delete_mytui_listener( struct MiTuiWidget *widget, EventType eventType)
 {
     if (widget == NULL || stackMouseEvent == NULL) {
         return;
@@ -38,10 +38,26 @@ void delete_mytui_listener(MiTuiWidget *widget, EventType eventType)
         if (tmpStackMouseEvent->widget == widget && tmpStackMouseEvent->eventType == eventType) {
             print_error("eliminado");
 
+            if(prevStackMouseEvent != NULL){
+                prevStackMouseEvent->next = tmpStackMouseEvent->next;
+                free(tmpStackMouseEvent);
+                tmpStackMouseEvent = NULL;
+            }else{
 
+                free(tmpStackMouseEvent);
+                tmpStackMouseEvent = NULL;
+            }
             break;
         }
         prevStackMouseEvent = tmpStackMouseEvent;
         tmpStackMouseEvent = tmpStackMouseEvent->next;
     }
 }
+
+
+
+
+void delete_mytui_listener_all(){
+
+}
+
