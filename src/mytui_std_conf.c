@@ -9,5 +9,15 @@ const char* mytui_std_conf_optiones[] = {
     "container.border=249",
     "label.bg=253",
     "label.fg=237",
+    "button.bg=237",
+    "button.fg=237",
+    "button.active=237",
+    "button.fg-active=237",
+    "button.shadow=237",
     "pruebaXd=2"
 };
+//color texto
+//color normal
+//color pulsado
+//color text pulsado
+//color sombra

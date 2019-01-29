@@ -37,9 +37,46 @@ typedef struct MiTuiWidgetExtraLabel {
     char *text;
 } MiTuiWidgetExtraLabel;
 
+
+typedef struct MiTuiWidgetExtraButton {
+    char *text;
+    int shadow;
+    bool shadowActive;
+    int active;
+    int fgActive;
+
+} MiTuiWidgetExtraButton;
+
+
 MiTuiWidget *init_MyTuiWidgetEntry(int x, int y, int w, int h, int bc);
 
+/**
+* inicia un widget como label
+* @param texto del label
+* @param posición en x
+* @param posición en y
+* @param ancho del label
+* @param alto del label
+* @param color de fondo
+* @param color de el texto
+* @return widget inicializado como un label
+*/
 MiTuiWidget *init_MyTuiWidgetLabel(char *text, int x, int y, int w, int h, int bc, int fc);
+
+
+/**
+* inicia un widget como un button
+* @param texto del label
+* @param posición en x
+* @param posición en y
+* @param ancho del label
+* @param alto del label
+* @param color de fondo
+* @param color de el texto
+* @param color de la sombra si es -1 no tendrá sombra
+* @return widget inicializado como un label
+*/
+MiTuiWidget* init_MyTuiWidgetButton(char *text, int x, int y, int w, int h,int bc, int fc, int shadow);
 
 void update_MyTuiWidget(MiTuiWidget *widget);
 

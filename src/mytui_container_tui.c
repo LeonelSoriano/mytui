@@ -323,7 +323,7 @@ void update_MytuiContainer_childContainer(MytuiContainer *container)
                     tmpChildContainerWidget->widget->y =
                         counter_container_height + tmpChildContainerWidget->margin_top;
 
-                    if (tmpChildContainerWidget->widget->type == label &&
+                    if (tmpChildContainerWidget->widget->type == mytuiLabel &&
                         tmpChildContainerWidget->widget->w != -1) {
                     } else {
                         tmpChildContainerWidget->widget->w = infoTerm.width -

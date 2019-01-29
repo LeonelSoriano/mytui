@@ -45,6 +45,7 @@ void end_mytui()
     _free_termbox();
     free_conf_map(&_confMap);
     free_buffer(&nodeBufer);
+    delete_mytui_listener_all();
 }
 
 void update_termbox()
@@ -58,6 +59,7 @@ void update_termbox()
                 //				mx = ev.x;
                 //				my = ev.y;
                 print_error("mouse: %d , %d ", ev.x, ev.y);
+                mouse_manager_event_fire(ev.x,  ev.y);
             }
             break;
         case TB_EVENT_KEY:
@@ -75,8 +77,6 @@ void update_termbox()
                 mytui_inicialize_container(&mytuiContainer, paramContainer);
                 add_ChildContainer(&mytuiContainer);
 
-                MiTuiWidget *widget = init_MyTuiWidgetEntry(1, 1, 2, 8, -1);
-                add_childContainerWidget(&mytuiContainer, 1, 1, 0, 1, &widget);
 
 
                 MiTuiWidget *label = init_MyTuiWidgetLabel("leonelsoriano", 0, 0, -1, 1, -1, -1);
@@ -84,15 +84,12 @@ void update_termbox()
 
                 // el update
                 update_MytuiContainer_childContainer(mytuiContainer);
-
-
-                //prueba de nouse_managet
-
-//void add_mytui_event_listener(void (*call_back)(), EventType eventType, MiTuiWidget *widget)
                 add_mytui_event_listener(NULL, mytuiEventTypePrincipal, label);
                 delete_mytui_listener(label, mytuiEventTypePrincipal);
 
-//void delete_mytui_listener(MiTuiWidget *widget, EventType eventType){
+
+                MiTuiWidget *btn =  init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, 3, 22, -1);
+                update_MyTuiWidget(btn);
 
 
                 free_mytui_container(&mytuiContainer);
