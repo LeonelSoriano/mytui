@@ -1,0 +1,12 @@
+✓ ✗ ★
+
+★ sistema de animacion
+
+✗ agregar la animaciones a trabajar en un segundo hilo
+
+✗ mejorar sistema de event con un enentro global
+    que llame z los evento en los widget que se agregan
+
+✗ pasar los eventos a hilos este puede ser como no puede ser
+
+✗ teminar boton widget

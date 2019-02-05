@@ -21,7 +21,7 @@
  *
  * Esta estructura maneja el buffer para pintado de la terminal.
  */
-typedef struct MiTuiWidget {
+ typedef  struct MiTuiWidget {
     int x;
     int y;
     int w;

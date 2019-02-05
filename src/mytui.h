@@ -11,10 +11,13 @@
 
 #include "../termbox/build/usr/include/termbox.h"
 
+
+#include "mytui_animation.h"
 #include "mytui_buffer.h"
 #include "mytui_widget.h"
 #include "mytui_container_tui.h"
 #include "mytui_mouse_manager.h"
+
 
 /**
  * global para administrar el buffer de pantalla

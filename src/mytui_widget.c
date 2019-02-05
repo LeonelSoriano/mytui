@@ -209,7 +209,12 @@ void free_MyTuiWidget(MiTuiWidget **widget)
         MiTuiWidgetExtraLabel *extra = (MiTuiWidgetExtraLabel *)(*widget)->extra;
         free(extra->text);
         free(extra);
+    }else if((*widget)->type == mytuiButton){
+        MiTuiWidgetExtraButton *extra = (MiTuiWidgetExtraButton *)(*widget)->extra;
+        free(extra->text);
+        free(extra);
     }
+
     if (*widget != NULL) {
         free(*widget);
     }

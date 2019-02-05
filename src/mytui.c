@@ -88,8 +88,19 @@ void update_termbox()
                 delete_mytui_listener(label, mytuiEventTypePrincipal);
 
 
+                //init btn
                 MiTuiWidget *btn =  init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, 3, 22, -1);
                 update_MyTuiWidget(btn);
+
+                    //prueba animacion
+                    MytuiAnimation* animation = init_MytuiAnimation(btn);
+                    add_step_MytuiAnimation(&animation, mytuiAnimationBox, 1,1);
+                    add_step_MytuiAnimation(&animation, mytuiAnimationBox, 1,1);
+                    free_MytuiAnimation(&animation);
+
+                free_MyTuiWidget(&btn);
+
+                //fin btn
 
 
                 free_mytui_container(&mytuiContainer);

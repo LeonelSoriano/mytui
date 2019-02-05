@@ -72,8 +72,14 @@ void nodeTranformation_init(NodeTranformation **nodeTranformation);
 
 void nodeTranformation_add(NodeTranformation **nodeTranformation, int x, int y, int fg, int bg, uint32_t ch);
 
+
 void nodeTranformation_free(NodeTranformation **nodeTranformation);
 
+/**
+ * agrega a la matriz global el node e indica que puede ser usado para el repintar
+ * @param el node buffer que se agrega
+ * @param la matriz global o mejor llamado nodeTranformation
+ */
 void node_bufffer_vs_tranformator(NodeBufer **nodeBufer, NodeTranformation *nodeTranformation);
 
 #endif
