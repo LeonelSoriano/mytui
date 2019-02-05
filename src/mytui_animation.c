@@ -39,12 +39,10 @@ void add_step_MytuiAnimation(MytuiAnimation** animation, MytuiAnimationTypes typ
 
 void free_MytuiAnimation(MytuiAnimation** animation){
 
-
     if(*animation == NULL){
         print_error("free_MytuiAnimation: MytuiAnimation** no puede ser NULL");
         return;
     }
-
 
     if((*animation)->listAnimationsStep != NULL){
 
@@ -55,6 +53,25 @@ void free_MytuiAnimation(MytuiAnimation** animation){
             (*animation)->listAnimationsStep = tmpStepAnimation;
         }
     }
-
     free(*animation);
+}
+
+
+void updata_mytuiAnimation(MytuiAnimation** animation){
+//	sleep(2);
+
+    MytuiStepAnimation* tmpAnimationStep =  (* animation)->listAnimationsStep;
+	while(tmpAnimationStep != NULL){
+
+		switch(tmpAnimationStep->typeAnimation){
+		case  mytuiAnimationBox:
+
+
+			break;
+		}
+
+
+		tmpAnimationStep = tmpAnimationStep->next;
+	}
+
 }
