@@ -57,20 +57,24 @@ void free_MytuiAnimation(MytuiAnimation** animation){
 }
 
 
-void updata_mytuiAnimation(MytuiAnimation** animation){
+void update_mytuiAnimation(MytuiAnimation** animation){
 //	sleep(2);
 
-    MytuiStepAnimation* tmpAnimationStep =  (* animation)->listAnimationsStep;
+    MytuiStepAnimation* tmpAnimationStep =  (*animation)->listAnimationsStep;
 	while(tmpAnimationStep != NULL){
 
 		switch(tmpAnimationStep->typeAnimation){
 		case  mytuiAnimationBox:
+            if((*animation)->widget->type == mytuiButton){
+                (*animation)->widget->x = 100;
+                update_MyTuiWidget((*animation)->widget);
 
+            }
 
 			break;
 		}
 
-
+        screen_manager(&nodeBufer);
 		tmpAnimationStep = tmpAnimationStep->next;
 	}
 

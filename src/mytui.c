@@ -96,7 +96,10 @@ void update_termbox()
                     MytuiAnimation* animation = init_MytuiAnimation(btn);
                     add_step_MytuiAnimation(&animation, mytuiAnimationBox, 1,1);
                     add_step_MytuiAnimation(&animation, mytuiAnimationBox, 1,1);
-                    updata_mytuiAnimation(&animation);
+
+
+                    clean_MyTuiWidget(btn, NULL);
+                    update_mytuiAnimation(&animation);
                     free_MytuiAnimation(&animation);
 
                 free_MyTuiWidget(&btn);

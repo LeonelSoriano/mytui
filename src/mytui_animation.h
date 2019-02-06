@@ -59,7 +59,7 @@ void free_MytuiAnimation(MytuiAnimation** animation);
  *  @brief genera la animacion del componente
  *  @param structura que posee la informacion de la animacion
  */
-void updata_mytuiAnimation(struct MytuiAnimation** animation);
+void update_mytuiAnimation(struct MytuiAnimation** animation);
 
 
 #endif

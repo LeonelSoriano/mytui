@@ -13,6 +13,7 @@
 #include "mytui_buffer.h"
 #include "mytui_color.h"
 #include "mytui_config.h"
+#include "mytui_container_tui.h"
 
 #include <string.h>
 
@@ -81,5 +82,14 @@ MiTuiWidget* init_MyTuiWidgetButton(char *text, int x, int y, int w, int h,int b
 void update_MyTuiWidget(MiTuiWidget *widget);
 
 void free_MyTuiWidget(MiTuiWidget **widget);
+
+/**
+* borra de la pantalla un anterior widget
+* @param el widget que se eliminara
+* @param el container que posee al widget actual
+*/
+
+void clean_MyTuiWidget(MiTuiWidget *widget, struct mytuiContainer *stance);
+
 
 #endif
