@@ -94,11 +94,9 @@ void update_termbox()
 
                     //prueba animacion
                     MytuiAnimation* animation = init_MytuiAnimation(btn);
-                    add_step_MytuiAnimation(&animation, mytuiAnimationBox, 1,1);
-                    add_step_MytuiAnimation(&animation, mytuiAnimationBox, 1,1);
+                    add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double []){ 1, 2, 3, 4 },1.12);
+                    add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double []){ 1, 2, 3, 4 },1.2);
 
-
-                    clean_MyTuiWidget(btn, NULL);
                     update_mytuiAnimation(&animation);
                     free_MytuiAnimation(&animation);
 

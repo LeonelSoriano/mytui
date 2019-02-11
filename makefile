@@ -38,7 +38,7 @@ ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
 POST_L = -ltermbox #`pkg-config --cflags --libs glib-2.0`
 CC=gcc
-CFLAGS=-c -g -Wall  -pedantic-errors  -Wextra -std=c99   $(shell pkg-config --cflags glib-2.0)
+CFLAGS=-c -g -Wall  -pedantic-errors  -Wextra -std=c99 -D _POSIX_C_SOURCE=200809L    $(shell pkg-config --cflags glib-2.0)
 LDFLAGS= -L$(ROOT_DIR)/termbox/build/usr/lib/ -Wl,-rpath=$(ROOT_DIR)/termbox/build/usr/lib/
 
 MAIN=main.c

@@ -10,13 +10,15 @@
 #include "mytui_widget.h"
 #include <unistd.h>
 
+#include <time.h>
+
 /**
  * @brief enumeración de tipos de animacionesa en el core.
  *
  * Enum que posee los tipos de animaciones.
  */
 typedef enum {
-    mytuiAnimationBox = 1, /**< anima una caja de widget MytuiAnimationTypes#mytuiAnimationBox */
+    mytuiAnimationMove = 1, /**< anima una caja de widget MytuiAnimationTypes#mytuiAnimationBox */
 } MytuiAnimationTypes;
 
 typedef struct MytuiAnimation {
@@ -26,8 +28,8 @@ typedef struct MytuiAnimation {
 
 typedef struct mytuiStepAnimation {
     MytuiAnimationTypes typeAnimation;
-    double value;
-    uint32_t step_time;
+    double values[4];
+    float step_time;
     struct mytuiStepAnimation *next;
 } MytuiStepAnimation;
 
@@ -47,7 +49,7 @@ MytuiAnimation* init_MytuiAnimation(struct MiTuiWidget *widget);
  *  @param duracion del paso en milisecond
  */
 void add_step_MytuiAnimation(struct MytuiAnimation** animation, MytuiAnimationTypes typeAnimation,
-        double value, uint32_t step_time);
+        double values[4], float step_time);
 
 /**
  *  @brief libera la memoria de una mytui animation
