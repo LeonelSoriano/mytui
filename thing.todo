@@ -1,6 +1,6 @@
 ✓ ✗ ★
 
-★ sistema de animacion
+★ sistema de animacion  
 
 ✗ agregar la animaciones a trabajar en un segundo hilo
 
@@ -10,3 +10,5 @@
 ✗ pasar los eventos a hilos este puede ser como no puede ser
 
 ✗ teminar boton widget
+
+✗ crear widget de debug y comando

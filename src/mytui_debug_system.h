@@ -1,0 +1,4 @@
+#ifndef __MYTUI_DEBUG_SYSTEM__
+#define __MYTUI_MOUSE_MANAGER__
+
+

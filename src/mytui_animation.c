@@ -16,7 +16,7 @@ MytuiAnimation* init_MytuiAnimation(MiTuiWidget *widget)
 
 
 void add_step_MytuiAnimation(MytuiAnimation** animation, MytuiAnimationTypes typeAnimation,
-        double values[4], float step_time){
+        double values[4], double step_time){
     if (*animation == NULL) {
         print_error("add_step_MytuiAnimation: MytuiAnimation* no pueden ser NULL");
     }
@@ -73,20 +73,13 @@ void update_mytuiAnimation(MytuiAnimation** animation){
                 (*animation)->widget->y += tmpAnimationStep->values[1];
                 update_MyTuiWidget((*animation)->widget);
 
-                float seconds = tmpAnimationStep->step_time - ((int)tmpAnimationStep->step_time) ;
+                double stepTime = tmpAnimationStep->step_time;
+                float seconds = stepTime - ((long)tmpAnimationStep->step_time) ;
 
-float nanoseconds2 = 1000000000;
-    //        double tmp_float = ( tmpAnimationStep->step_time - seconds);
+                float nanoseconds_base = 1000000000;
 
-
-            //long nanoseconds = ((long) tmp_float ) * 100000000;
-
-            print_error("valor %f", (seconds) * nanoseconds2);
-
-
-    print_info("time %f - %.0lf",tmpAnimationStep->step_time , (double)((seconds * 10)* nanoseconds2));
-
-            //    struct timespec reqDelay = {seconds, nanoseconds}; nanosleep(&reqDelay, (struct timespec *) NULL);
+                struct timespec reqDelay = {(long)tmpAnimationStep->step_time,  (long)( (seconds) * nanoseconds_base)  };
+                nanosleep(&reqDelay, (struct timespec *) NULL);
             }
 
 			break;

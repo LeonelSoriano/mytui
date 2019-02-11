@@ -29,7 +29,7 @@ typedef struct MytuiAnimation {
 typedef struct mytuiStepAnimation {
     MytuiAnimationTypes typeAnimation;
     double values[4];
-    float step_time;
+    double step_time;
     struct mytuiStepAnimation *next;
 } MytuiStepAnimation;
 
@@ -49,7 +49,7 @@ MytuiAnimation* init_MytuiAnimation(struct MiTuiWidget *widget);
  *  @param duracion del paso en milisecond
  */
 void add_step_MytuiAnimation(struct MytuiAnimation** animation, MytuiAnimationTypes typeAnimation,
-        double values[4], float step_time);
+        double values[4], double step_time);
 
 /**
  *  @brief libera la memoria de una mytui animation

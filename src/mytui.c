@@ -92,10 +92,12 @@ void update_termbox()
                 MiTuiWidget *btn =  init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, 3, 22, -1);
                 update_MyTuiWidget(btn);
 
+screen_manager(&nodeBufer);
+
                     //prueba animacion
                     MytuiAnimation* animation = init_MytuiAnimation(btn);
-                    add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double []){ 1, 2, 3, 4 },1.12);
-                    add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double []){ 1, 2, 3, 4 },1.2);
+                    add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double []){ -1, -1, 3, 4 },0.2);
+                    add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double []){ 1, 1, 3, 4 },0.2);
 
                     update_mytuiAnimation(&animation);
                     free_MytuiAnimation(&animation);
