@@ -10,7 +10,8 @@
 //#include <glib.h>
 #include <stdbool.h>
 #include <string.h>
-
+#include <dirent.h>
+#include <errno.h>
 #include "mytui_std_conf.h"
 #include "until.h"
 
@@ -24,12 +25,6 @@ typedef struct ConfMap {
  * tiene la informacion del archivo de conf en memoria
  */
 // GHashTable* hash_conf;
-
-#ifdef __MINGW32__
-static const char *SEPARATOR_FOLDER = "\\";
-#else
-static const char *SEPARATOR_FOLDER = "/";
-#endif
 
 /**
  * gestiona el inicio la conf de la libreria

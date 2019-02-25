@@ -1,6 +1,6 @@
 ✓ ✗ ★
 
-★ sistema de animacion  
+✓ sistema de animacion  
 
 ✗ agregar la animaciones a trabajar en un segundo hilo
 
@@ -11,4 +11,7 @@
 
 ✗ teminar boton widget
 
-✗ crear widget de debug y comando
+
+★ pasar info y error a un log cuando se pasa el param debug (.)
+
+✗ crear widget de debug y comando "este lo pensare como un widget especial"

@@ -4,8 +4,8 @@
 *  @date 28-11-2018
 *  @author leonelsoriano3@gmail.com
 */
-#ifndef __UNTIL__
-#define __UNTIL__
+#ifndef __UNTIL_H__
+#define __UNTIL_H__
 
 #include <sys/stat.h>
 #include <sys/ioctl.h>
@@ -34,6 +34,28 @@ struct InfoTerm{
     unsigned int width;
     unsigned int height;
 };
+
+/* nombre de archivos y folder usados */
+#ifdef __MINGW32__
+//static const char *SEPARATOR_FOLDER = "\\";
+#else
+static const char *SEPARATOR_FOLDER = "/";
+#endif
+
+static const char *CONF_FONDER = ".config";
+static const char *TUI_FOLDER_CONF = "mytui";
+
+static const char *TUI_FOLDER_LOG = "log";
+
+static const char *CONF_FILE_NAME = "init.conf";
+
+
+/**
+ * consigue elk path de toda la conf de mytui
+ * @return el path de mytui
+ */
+const char *get_file_mytui_path();
+
 
 /**
  * llena la inormacion de la terminal

@@ -9,11 +9,11 @@
 #include "src/mytui.h"
 
 //#include "./termbox/build/usr/include/termbox.h"
-
+extern bool mytuiDebugModeState;
 
 int main(int argc, char** argv) {
 //int ret = tb_init();
-
+    mytuiDebugModeState = true;
  /*   if(argc > 1){
         for (int i = 1;  i < argc; i++) {
             if(strcmp(argv[i], "-TEST") == 0){

@@ -12,6 +12,7 @@
 #include "../termbox/build/usr/include/termbox.h"
 
 
+#include "mytui_logger.h"
 #include "mytui_animation.h"
 #include "mytui_buffer.h"
 #include "mytui_widget.h"

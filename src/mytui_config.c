@@ -1,8 +1,6 @@
 #include "mytui_config.h"
 
-static const char *CONF_FONDER = ".config";
-static const char *TUI_FOLDER_CONF = "mytui";
-static const char *CONF_FILE_NAME = "init.conf";
+
 
 static void create_default_conf();
 
@@ -19,6 +17,19 @@ void ini_conf_file()
 {
     print_info("ini_con_file");
 
+    const char *folder_home = get_home_folder();
+    const char *folder_mytui = get_file_mytui_path();
+
+    DIR* dir = opendir(folder_mytui);
+
+    if ( ENOENT == errno){
+        printf("Create folder  %s \n", folder_home );
+        mkdir(folder_mytui, 0700);
+    }
+    if(dir != NULL){
+        free(dir);
+    }
+
     char *mytui_conf_file = get_file_conf_path();
     bool exist_file_conf = false;
 
@@ -26,8 +37,8 @@ void ini_conf_file()
         exist_file_conf = true;
     }
 
-    print_info(
-        "terminada verificacion de existencia de archivos de configuracion");
+    printf(
+        "terminada verificacion de existencia de archivos de configuracion \n");
 
     if (exist_file_conf == false) {
         print_info("recreando conf file");
@@ -92,6 +103,7 @@ static bool verification_init_file()
     strcpy(conf_folder_resolution, folder_home);
     strcat(conf_folder_resolution, SEPARATOR_FOLDER);
     strcat(conf_folder_resolution, CONF_FONDER);
+
 
     if (exist_file(conf_folder_resolution) == false) {
         print_error("No se consigue archivo .conf");

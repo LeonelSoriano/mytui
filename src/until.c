@@ -15,6 +15,25 @@ struct InfoTerm get_info_term()
     return infoTerm;
 }
 
+const char *get_file_mytui_path()
+{
+    const char *folder_home = get_home_folder();
+
+    static char conf_folder_resolution[sizeof folder_home +
+                                (sizeof SEPARATOR_FOLDER * 3) +
+                                sizeof CONF_FONDER + sizeof TUI_FOLDER_CONF];
+
+    strcpy(conf_folder_resolution, folder_home);
+    strcat(conf_folder_resolution, SEPARATOR_FOLDER);
+    strcat(conf_folder_resolution, CONF_FONDER);
+    strcat(conf_folder_resolution, SEPARATOR_FOLDER);
+    strcat(conf_folder_resolution, TUI_FOLDER_CONF);
+    strcat(conf_folder_resolution, SEPARATOR_FOLDER);
+
+    return conf_folder_resolution;
+}
+
+
 void run_cmd_silent(const char *cmd)
 {
     const char *cmd_silent = " >/dev/null 2>&1";
@@ -80,6 +99,8 @@ void print_error(const char *msg, ...)
     vfprintf(stderr, tmp_str, args);
     va_end(args);
 }
+
+
 
 void print_info(const char *msg, ...)
 {

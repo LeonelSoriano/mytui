@@ -35,6 +35,7 @@ void init_mytui()
     // print_info("resolve value que es:
     // %s",resolve_value(_confMap,"entry.bg",NULL) );
 
+    init_mytui_logger();
     init_buffer(&nodeBufer);
     _init_termbox();
     screen_manager(&nodeBufer);
@@ -44,6 +45,7 @@ void end_mytui()
 {
     _free_termbox();
     free_conf_map(&_confMap);
+    free_mytui_logger();
     free_buffer(&nodeBufer);
     delete_mytui_listener_all();
 }
@@ -59,7 +61,7 @@ void update_termbox()
                 //				mx = ev.x;
                 //				my = ev.y;
                 print_error("mouse: %d , %d ", ev.x, ev.y);
-                mouse_manager_event_fire(ev.x,  ev.y);
+                mouse_manager_event_fire(ev.x, ev.y);
             }
             break;
         case TB_EVENT_KEY:
@@ -77,8 +79,6 @@ void update_termbox()
                 mytui_inicialize_container(&mytuiContainer, paramContainer);
                 add_ChildContainer(&mytuiContainer);
 
-
-
                 MiTuiWidget *label = init_MyTuiWidgetLabel("leonelsoriano", 0, 0, -1, 1, -1, -1);
                 add_childContainerWidget(&mytuiContainer, 1, 1, 0, 1, &label);
 
@@ -87,25 +87,25 @@ void update_termbox()
                 add_mytui_event_listener(NULL, mytuiEventTypePrincipal, label);
                 delete_mytui_listener(label, mytuiEventTypePrincipal);
 
-
-                //init btn
-                MiTuiWidget *btn =  init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, 3, 22, -1);
+                // init btn
+                MiTuiWidget *btn = init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, 3, 22, -1);
                 update_MyTuiWidget(btn);
 
-screen_manager(&nodeBufer);
+                screen_manager(&nodeBufer);
 
-                    //prueba animacion
-                    MytuiAnimation* animation = init_MytuiAnimation(btn);
-                    add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double []){ -1, -1, 3, 4 },0.2);
-                    add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double []){ 1, 1, 3, 4 },0.2);
+                // prueba animacion
+                MytuiAnimation *animation = init_MytuiAnimation(btn);
+                add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double[]){-1, -1, 3, 4},
+                                        0.2);
+                add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double[]){1, 1, 3, 4},
+                                        0.2);
 
-                    update_mytuiAnimation(&animation);
-                    free_MytuiAnimation(&animation);
+                update_mytuiAnimation(&animation);
+                free_MytuiAnimation(&animation);
 
                 free_MyTuiWidget(&btn);
 
-                //fin btn
-
+                // fin btn
 
                 free_mytui_container(&mytuiContainer);
 
