@@ -6,7 +6,7 @@ int mytuiDebugModeState;
 
 static const char *LOG_LAST_FILE_NAME = "last.log";
 
-static char *LOG_FILE_NAME_PRE = "info";
+static  char *LOG_FILE_NAME_PRE = "info";
 static char *LOG_FILE_NAME_POST = ".log";
 
 static FILE *fileLog = NULL;
@@ -15,7 +15,7 @@ static FILE *fileLog = NULL;
 static int actual_line_log = 0;
 
 /*lineas maximas en los archivos de log */
-static const int MAX_LINE_FILE_LOG = 10;
+static const int MAX_LINE_FILE_LOG = 3;
 
 static const char *get_path_log()
 {
@@ -55,51 +55,9 @@ static const char *get_path_next_file_log()
     return conf_folder_resolution;
 }
 
-/* Function returns the index of str where word is found */
-static int search(char str[], char word[])
-{
-    int l, i, j;
-
-    /* finding length of word */
-    for (l = 0; word[l] != '\0'; l++)
-        ;
-
-    for (i = 0, j = 0; str[i] != '\0' && word[j] != '\0'; i++) {
-        if (str[i] == word[j]) {
-            j++;
-        } else {
-            j = 0;
-        }
-    }
-
-    if (j == l) {
-        /* substring found */
-        return (i - j);
-    } else {
-        return -1;
-    }
-}
-
-static int delete_word(char str[], char word[])
-{
-    int index = search(str, word);
-    if (index == -1) {
-        return 0;
-    }
-
-    int i, l;
-    /* finding length of word */
-    for (l = 0; word[l] != '\0'; l++)
-        ;
-
-    for (i = index; str[i] != '\0'; i++) {
-        str[i] = str[i + l];
-    }
-    return 1;
-}
-
 static void get_next_file()
 {
+
     DIR *d;
     struct dirent *dir;
     int maxValueInFile = 0;
@@ -112,16 +70,14 @@ static void get_next_file()
             }
             if (strstr(dir->d_name, LOG_FILE_NAME_PRE) != NULL) {
                 // contains
-                //
-                printf("%s\n", dir->d_name);
                 char a[strlen(dir->d_name)];
                 strcpy(a, dir->d_name);
-                delete_word(a, LOG_FILE_NAME_PRE);
-
                 delete_word(a, LOG_FILE_NAME_POST);
 
+                delete_word(a, LOG_FILE_NAME_PRE);
+
                 if (strIsInt(a)) {
-                    printf("es numero %s\n", a);
+                  //  printf("es numero %s\n", a);
                     int valueFromFile = atoi(a);
                     if (valueFromFile > maxValueInFile)
                         maxValueInFile = valueFromFile;
@@ -139,10 +95,31 @@ static void get_next_file()
     strcpy(name_new_file, LOG_FILE_NAME_PRE);
     strcat(name_new_file, maxValueInFileStr);
     strcat(name_new_file, LOG_FILE_NAME_POST);
-    printf("archivo es %s \n", name_new_file);
+
+    const char *folder_log = get_path_log();
+    char logFile[strlen(folder_log) + strlen(LOG_LAST_FILE_NAME)];
+    strcpy(logFile, folder_log);
+    strcat(logFile, LOG_LAST_FILE_NAME);
+
+    char logNewFile[strlen(folder_log) + strlen(name_new_file)];
+    strcpy(logNewFile, folder_log);
+    strcat(logNewFile, name_new_file);
+
+
+printf("nombre %s", logNewFile);
+ fclose(fileLog);
+    if(copy_file(logFile, logNewFile)){
+
+
+       remove(logFile);
+
+
+        fileLog = fopen(logFile, "wb");
+        actual_line_log = 0;
+    }
 }
 
-static void print_line_log(const char *msg, ...)
+void print_line_log(const char *msg, ...)
 {
 
     actual_line_log++;
@@ -169,6 +146,12 @@ static void print_line_log(const char *msg, ...)
     vfprintf(fileLog, tmp_str, args);
 
     va_end(args);
+    //TODO cuando hace rotamiento de archivo no consigue otro 
+    if (actual_line_log > MAX_LINE_FILE_LOG) {
+        get_next_file();
+        return;
+    }
+
 }
 
 static void init_cursor_file_log()
@@ -187,6 +170,7 @@ static void init_cursor_file_log()
         fileLog = fopen(logFile, "r+");
         if (fileLog == NULL) {
             printf("No se pudo encontrar el ultimo archivo de log\n");
+            fileLog = fopen(logFile, "wb");
         }
 
         while ((read = getline(&line, &len, fileLog)) != -1) {
@@ -200,7 +184,8 @@ static void init_cursor_file_log()
         }
 
         if (actual_line_log > MAX_LINE_FILE_LOG) {
-
+            get_next_file();
+            init_cursor_file_log();
             return;
         }
     }
@@ -224,15 +209,8 @@ static void verificate_fold_log()
 void init_mytui_logger()
 {
 
-    get_next_file();
-    return;
     verificate_fold_log();
-    // print_error("hola %s",get_path_log());
-    // print_error("valor es %d", mytuiDebugModeState);
-    //
     init_cursor_file_log();
-
-    print_line_log("hola %d", 1987);
 }
 
 void free_mytui_logger()

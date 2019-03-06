@@ -80,7 +80,23 @@ void update_termbox()
                 add_ChildContainer(&mytuiContainer);
 
                 MiTuiWidget *label = init_MyTuiWidgetLabel("leonelsoriano", 0, 0, -1, 1, -1, -1);
-                add_childContainerWidget(&mytuiContainer, 1, 1, 0, 1, &label);
+                add_childContainerWidget(&mytuiContainer, 2, 1, 0, 1, &label);
+
+
+
+
+
+                print_line_log("hola %d", 1988);
+
+                print_line_log("hola %d", 1981);
+                print_line_log("hola %d", 1982);
+
+                print_line_log("hola %d", 1983);
+
+
+                print_line_log("hola %d", 1983);
+
+
 
                 // el update
                 update_MytuiContainer_childContainer(mytuiContainer);

@@ -56,7 +56,6 @@ static const char *CONF_FILE_NAME = "init.conf";
  */
 const char *get_file_mytui_path();
 
-
 /**
  * llena la inormacion de la terminal
  * @return struct InfoTerm
@@ -119,5 +118,30 @@ int isDefaulValueInt(int value);
 
 
 int dump(void *myStruct, long size);
+
+/**
+ * busca una palabra y devuelve su indeice 
+ * @param string donde se buscara
+ * @param palabra a buscar
+ * @return indice inical donde se encuentra la palabra
+ */
+int search(char str[], char word[]);
+
+/**
+ * elimina una plabra deontro de un string
+ * @param string donde se buscara
+ * @param palabra que se removera
+ * @return devuelve 1 si consigue la plabra, 0 si no puede eliminar o no se euentra
+ */
+int delete_word(char str[], char word[]);
+
+
+/**
+ * pasa la informacion de  un archivo de texto a otro y vacia el primero
+ * @param path del archivo de origen
+ * @param path al nuevo archivo
+ * @return devuelve verdadero si no hay errores
+ */
+bool copy_file(const char*origin_file, const char* new_file);
 
 #endif

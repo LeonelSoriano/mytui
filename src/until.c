@@ -174,3 +174,90 @@ int dump(void *myStruct, long size)
     printf("\n\n");
     return 0;
 }
+
+/* Function returns the index of str where word is found */
+int search(char str[], char word[]){
+    int l, i, j;
+
+    /* finding length of word */
+    for (l = 0; word[l] != '\0'; l++)
+        ;
+
+    for (i = 0, j = 0; str[i] != '\0' && word[j] != '\0'; i++) {
+        if (str[i] == word[j]) {
+            j++;
+        } else {
+            j = 0;
+        }
+    }
+
+    if (j == l) {
+        /* substring found */
+        return (i - j);
+    } else {
+        return -1;
+    }
+}
+
+
+int delete_word(char str[], char word[]){
+    int index = search(str, word);
+    if (index == -1) {
+        return 0;
+    }
+
+    int i, l;
+    /* finding length of word */
+    for (l = 0; word[l] != '\0'; l++)
+        ;
+
+    for (i = index; str[i] != '\0'; i++) {
+        str[i] = str[i + l];
+    }
+    return 1;
+}
+
+
+bool copy_file(const char* path_source_file, const char* path_new_file){
+
+
+    FILE *file_source, *file_new;
+
+
+
+    file_source = fopen(path_source_file, "r");
+
+    if(file_source == NULL){
+        printf("pass_file_info: archivo de origen no encontrado %s\n", path_source_file);
+        return false;
+    }
+
+    file_new = fopen(path_new_file, "w");
+
+    if(file_new == NULL){
+        fclose(file_source);
+        printf("pass_file_info: archivco de origen nuevo no encontrado\n");
+        return false;
+    }
+
+    char line[525];
+
+    while (fgets(line, sizeof(line), file_source)) {
+        /* note that fgets don't strip the terminating \n, checking its
+           presence would allow to handle lines longer that sizeof(line) */
+        fputs(line, file_new);
+
+    }
+
+    /*while (c != EOF){
+        printf("char %d", c);
+        fputc(c, file_new);
+        c = fgetc(file_source);
+    }*/
+
+    fclose(file_source);
+    fclose(file_new);
+    return true;
+}
+
+
