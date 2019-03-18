@@ -6,7 +6,7 @@ int mytuiDebugModeState;
 
 static const char *LOG_LAST_FILE_NAME = "last.log";
 
-static  char *LOG_FILE_NAME_PRE = "info";
+static char *LOG_FILE_NAME_PRE = "info";
 static char *LOG_FILE_NAME_POST = ".log";
 
 static FILE *fileLog = NULL;
@@ -15,7 +15,7 @@ static FILE *fileLog = NULL;
 static int actual_line_log = 0;
 
 /*lineas maximas en los archivos de log */
-static const int MAX_LINE_FILE_LOG = 3;
+static const int MAX_LINE_FILE_LOG = 1000;
 
 static const char *get_path_log()
 {
@@ -57,7 +57,6 @@ static const char *get_path_next_file_log()
 
 static void get_next_file()
 {
-
     DIR *d;
     struct dirent *dir;
     int maxValueInFile = 0;
@@ -77,7 +76,6 @@ static void get_next_file()
                 delete_word(a, LOG_FILE_NAME_PRE);
 
                 if (strIsInt(a)) {
-                  //  printf("es numero %s\n", a);
                     int valueFromFile = atoi(a);
                     if (valueFromFile > maxValueInFile)
                         maxValueInFile = valueFromFile;
@@ -85,13 +83,13 @@ static void get_next_file()
             }
         }
         closedir(d);
-    }//end while
+    } // end while
     maxValueInFile++;
     char maxValueInFileStr[12];
-    sprintf(maxValueInFileStr , "%d", maxValueInFile);
+    sprintf(maxValueInFileStr, "%d", maxValueInFile);
 
     char name_new_file[strlen(maxValueInFileStr) + strlen(LOG_FILE_NAME_PRE) +
-        strlen(LOG_FILE_NAME_POST)];
+                       strlen(LOG_FILE_NAME_POST)];
     strcpy(name_new_file, LOG_FILE_NAME_PRE);
     strcat(name_new_file, maxValueInFileStr);
     strcat(name_new_file, LOG_FILE_NAME_POST);
@@ -105,23 +103,18 @@ static void get_next_file()
     strcpy(logNewFile, folder_log);
     strcat(logNewFile, name_new_file);
 
+    fclose(fileLog);
+    if (copy_file(logFile, logNewFile)) {
 
-printf("nombre %s", logNewFile);
- fclose(fileLog);
-    if(copy_file(logFile, logNewFile)){
-
-
-       remove(logFile);
-
+        remove(logFile);
 
         fileLog = fopen(logFile, "wb");
         actual_line_log = 0;
     }
 }
 
-void print_line_log(const char *msg, ...)
+void print_line_log(MytuiLoggerType mytuiLoggerType, const char *msg, ...)
 {
-
     actual_line_log++;
     time_t timer;
     char buffer_time[26];
@@ -146,12 +139,11 @@ void print_line_log(const char *msg, ...)
     vfprintf(fileLog, tmp_str, args);
 
     va_end(args);
-    //TODO cuando hace rotamiento de archivo no consigue otro 
+    // TODO cuando hace rotamiento de archivo no consigue otro
     if (actual_line_log > MAX_LINE_FILE_LOG) {
         get_next_file();
         return;
     }
-
 }
 
 static void init_cursor_file_log()
@@ -174,8 +166,6 @@ static void init_cursor_file_log()
         }
 
         while ((read = getline(&line, &len, fileLog)) != -1) {
-            printf("Retrieved line of length %zu:\n", read);
-            printf("%s", line);
             actual_line_log++;
         }
 

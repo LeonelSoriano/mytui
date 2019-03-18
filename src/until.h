@@ -22,6 +22,7 @@
 
 #include "mytui_color.h"
 #include "mytui_cmd.h"
+#include "mytui_logger.h"
 
 
 //#define NUMARGS(...)  (sizeof((int[]){__VA_ARGS__})/sizeof(int))

@@ -84,7 +84,7 @@ const char *get_home_folder()
 
 void print_error(const char *msg, ...)
 {
-    va_list args;
+    /*va_list args;
     va_start(args, msg);
     int msg_len = strlen(msg);
     int msg_len_red = strlen(MYTUI_COLOR_RED);
@@ -97,7 +97,7 @@ void print_error(const char *msg, ...)
     strcat(tmp_str, MYTUI_COLOR_RNM);
     strcat(tmp_str, "\n");
     vfprintf(stderr, tmp_str, args);
-    va_end(args);
+    va_end(args);*/
 }
 
 
@@ -105,7 +105,7 @@ void print_error(const char *msg, ...)
 void print_info(const char *msg, ...)
 {
 
-    time_t timer;
+  /*  time_t timer;
     char buffer[26];
     struct tm *tm_info;
     time(&timer);
@@ -132,6 +132,7 @@ void print_info(const char *msg, ...)
     strcat(tmp_str, "\n");
     vfprintf(stderr, tmp_str, args);
     va_end(args);
+    */
 }
 
 bool strIsInt(const char *str)
