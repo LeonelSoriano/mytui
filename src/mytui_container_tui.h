@@ -1,3 +1,9 @@
+/** @file mytui_container_tui.h
+ *  @ingroup Widget
+ *  @brief contenedores de widget
+ *  @date 26-03-2019
+ *  @author leonelsoriano3@gmail.com
+ */
 #ifndef __MYTUI_CONTAINER_TUI_H__
 #define __MYTUI_CONTAINER_TUI_H__
 

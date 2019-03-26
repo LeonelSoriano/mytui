@@ -1,3 +1,9 @@
+/** @file mytui_logger.h
+ *  @ingroup Logger
+ *  @brief base de sistema de logger
+ *  @date 26-03-2019
+ *  @author leonelsoriano3@gmail.com
+ */
 #ifndef __MYTUI_LOGGER_CONF_H__
 #define __MYTUI_LOGGER_CONF_H__
 

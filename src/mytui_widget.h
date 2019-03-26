@@ -1,5 +1,5 @@
-/** @file until.h
- *  @ingroup Conf
+/** @file mytui_widget.h
+ *  @ingroup Widget
  *  @brief widget de mytui
  *  @date 06-01-2019
  *  @author leonelsoriano3@gmail.com

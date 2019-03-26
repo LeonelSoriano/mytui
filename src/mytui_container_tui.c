@@ -187,6 +187,7 @@ void update_MytuiContainer(MytuiContainer *container)
 
 void free_mytui_container(MytuiContainer **stance)
 {
+    printf("%p que es \n", *stance);
     if (*stance != NULL) {
 
         while ((*stance)->childContainer != NULL) {

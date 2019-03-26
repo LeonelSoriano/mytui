@@ -1,3 +1,9 @@
+/** @file mytui_widget_types.h
+ *  @ingroup Widget
+ *  @brief lista de tipos de mytuiWidGet
+ *  @date 26-03-2019
+ *  @author leonelsoriano3@gmail.com
+ */
 #ifndef __MYTUI_WIDGET_TYPES_H__
 #define __MYTUI_WIDGET_TYPES_H__
 

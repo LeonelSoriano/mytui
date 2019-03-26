@@ -56,6 +56,7 @@ static void holaEvent(){
 
 void update_termbox()
 {
+
     struct tb_event ev;
     while (tb_poll_event(&ev)) {
         switch (ev.type) {
@@ -70,8 +71,7 @@ void update_termbox()
         case TB_EVENT_KEY:
             switch (ev.key) {
             case TB_KEY_ESC:
-                end_mytui();
-                exit(EXIT_SUCCESS);
+                goto OUT_EVENT_POOL;
 
             case TB_KEY_CTRL_A: {
 
@@ -137,4 +137,6 @@ void update_termbox()
             break;
         }
     }
+OUT_EVENT_POOL:
+    return;
 }
