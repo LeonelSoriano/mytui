@@ -1,7 +1,6 @@
 #include "mytui_config.h"
 
 
-
 static void create_default_conf();
 
 /**

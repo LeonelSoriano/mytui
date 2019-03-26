@@ -101,7 +101,6 @@ void print_error(const char *msg, ...)
 }
 
 
-
 void print_info(const char *msg, ...)
 {
 
@@ -221,10 +220,7 @@ int delete_word(char str[], char word[]){
 
 bool copy_file(const char* path_source_file, const char* path_new_file){
 
-
     FILE *file_source, *file_new;
-
-
 
     file_source = fopen(path_source_file, "r");
 
@@ -260,5 +256,4 @@ bool copy_file(const char* path_source_file, const char* path_new_file){
     fclose(file_new);
     return true;
 }
-
 

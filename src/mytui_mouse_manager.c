@@ -79,8 +79,8 @@ void delete_mytui_listener_all()
 
 
 
-    void mouse_manager_event_fire(int32_t x, int32_t y){
-        
-    }
+void mouse_manager_event_fire(int32_t x, int32_t y){
+
+}
 
 

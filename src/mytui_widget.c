@@ -1,45 +1,45 @@
 #include "mytui_widget.h"
 
-/**
- * interna de dibujado de Entry
- * @see init_mytui
- */
-static void _update_MyTuiWidgetEntry(MiTuiWidget *widget)
-{
-    NodeTranformation *node = NULL;
+    /**
+     * interna de dibujado de Entry
+     * @see init_mytui
+     */
+    static void _update_MyTuiWidgetEntry(MiTuiWidget *widget)
+    {
+        NodeTranformation *node = NULL;
 
-    char *bg_str;
+        char *bg_str;
 
-    unsigned int bg = widget->bc;
-    if (widget->bc < 0) {
-        bg_str = resolve_value(_confMap, "entry.bg", NULL);
-    } else {
-        char buffer_str[255];
-        sprintf(buffer_str, "%d", widget->bc);
-        bg_str = resolve_value(_confMap, "entry.bg", buffer_str);
-    }
-
-    if (strIsInt(bg_str) == true) {
-
-        bg = atoi(bg_str);
-
-        if (bg > MAX_COLORS_VALUES) {
-            char *std_value = find_std_values("entry.bg");
-            bg = atoi(std_value);
+        unsigned int bg = widget->bc;
+        if (widget->bc < 0) {
+            bg_str = resolve_value(_confMap, "entry.bg", NULL);
+        } else {
+            char buffer_str[255];
+            sprintf(buffer_str, "%d", widget->bc);
+            bg_str = resolve_value(_confMap, "entry.bg", buffer_str);
         }
-    } else {
-        // si tiene mal el valor en conf sera el por defecto
-        bg = MYTUI_COLOR_DEFAULT;
-    }
 
-    for (int i = widget->y; i < (widget->h + widget->y); i++) {
-        for (int j = widget->x; j < (widget->w + widget->x); j++) {
-            nodeTranformation_add(&node, j, i, bg, MYTUI_COLOR_DEFAULT, ' ');
+        if (strIsInt(bg_str) == true) {
+
+            bg = atoi(bg_str);
+
+            if (bg > MAX_COLORS_VALUES) {
+                char *std_value = find_std_values("entry.bg");
+                bg = atoi(std_value);
+            }
+        } else {
+            // si tiene mal el valor en conf sera el por defecto
+            bg = MYTUI_COLOR_DEFAULT;
         }
+
+        for (int i = widget->y; i < (widget->h + widget->y); i++) {
+            for (int j = widget->x; j < (widget->w + widget->x); j++) {
+                nodeTranformation_add(&node, j, i, bg, MYTUI_COLOR_DEFAULT, ' ');
+            }
+        }
+        node_bufffer_vs_tranformator(&nodeBufer, node);
+        nodeTranformation_free(&node);
     }
-    node_bufffer_vs_tranformator(&nodeBufer, node);
-    nodeTranformation_free(&node);
-}
 
 static void _update_MyTuiWidgetLabel(MiTuiWidget *widget)
 {

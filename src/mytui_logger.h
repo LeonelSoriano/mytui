@@ -9,10 +9,10 @@
  *
  */
 typedef enum {
-    MytuiLoggerTypeError = 1, /**< tipo error */
-    MytuiLoggerTypeInfo = 2 /**< tipo info */
+    MytuiLoggerTypeError = 0, /**< tipo error */
+    MytuiLoggerTypeInfo = 1, /**< tipo info */
+    MytuiLoggerTypeWarning = 2 /**< tipo advertencia */
 } MytuiLoggerType;
-
 
 /**
  * inicia el comopnente de logger

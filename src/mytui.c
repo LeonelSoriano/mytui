@@ -50,6 +50,10 @@ void end_mytui()
     delete_mytui_listener_all();
 }
 
+static void holaEvent(){
+    print_line_log(MytuiLoggerTypeError, "hola Desde evento");
+}
+
 void update_termbox()
 {
     struct tb_event ev;
@@ -60,7 +64,6 @@ void update_termbox()
             if (ev.key == TB_KEY_MOUSE_LEFT) {
                 //				mx = ev.x;
                 //				my = ev.y;
-                print_error("mouse: %d , %d ", ev.x, ev.y);
                 mouse_manager_event_fire(ev.x, ev.y);
             }
             break;
@@ -84,24 +87,22 @@ void update_termbox()
 
 
 
+                print_line_log(MytuiLoggerTypeError, "hola %d", 1981);
 
-
-                print_line_log("hola %d", 1988);
-
-                print_line_log("hola %d", 1981);
-                print_line_log("hola %d", 1982);
-
-                print_line_log("hola %d", 1983);
-
-
-                print_line_log("hola %d", 1983);
 
 
 
                 // el update
                 update_MytuiContainer_childContainer(mytuiContainer);
-                add_mytui_event_listener(NULL, mytuiEventTypePrincipal, label);
+                add_mytui_event_listener(holaEvent, mytuiEventTypePrincipal, label);
+
+
+
                 delete_mytui_listener(label, mytuiEventTypePrincipal);
+
+
+
+
 
                 // init btn
                 MiTuiWidget *btn = init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, 3, 22, -1);
