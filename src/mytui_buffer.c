@@ -78,12 +78,13 @@ void screen_manager(NodeBufer** nodeBufer)
         tb_present();
         ANY_CHANGES_BUFFER = false;
     }
+
 }
 
 void init_screen_manager(NodeBufer** nodeBufer)
 {
     if(*(nodeBufer) !=  NULL){
-	free_buffer(nodeBufer);
+        free_buffer(nodeBufer);
     }
 
     init_buffer(nodeBufer);
@@ -96,7 +97,7 @@ void nodeTranformation_init(NodeTranformation** nodeTranformation)
 }
 
 void nodeTranformation_add(NodeTranformation** nodeTranformation, int x, int y,
-    int fg, int bg,uint32_t ch)
+        int fg, int bg,uint32_t ch)
 {
     if (*nodeTranformation == NULL) {
         *nodeTranformation = (NodeTranformation*)malloc(sizeof(NodeTranformation));

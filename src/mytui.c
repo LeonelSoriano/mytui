@@ -56,6 +56,43 @@ static void holaEvent(){
 
 void update_termbox()
 {
+    MytuiContainer *mytuiContainer = NULL;
+    INIT_MYTUI_CONTAINER(paramContainer);
+    paramContainer.type = MYTUI_CONTAINER_ROOT;
+    paramContainer.decoration = true;
+    mytui_inicialize_container(&mytuiContainer, paramContainer);
+    add_ChildContainer(&mytuiContainer);
+
+
+    MiTuiWidget *label = init_MyTuiWidgetLabel("leonelsoriano", 0, 0, -1, 1, -1, -1);
+    add_childContainerWidget(&mytuiContainer, 2, 1, 0, 1, &label);
+
+    // el update
+    update_MytuiContainer_childContainer(mytuiContainer);
+    add_mytui_event_listener(holaEvent, mytuiEventTypePrincipal, label);
+
+
+
+
+
+    // init btn
+    MiTuiWidget *btn = init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, 3, 22, -1);
+    update_MyTuiWidget(btn);
+
+
+    // prueba animacion
+/*    MytuiAnimation *animation = init_MytuiAnimation(btn);
+    add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double[]){-1, -1, 3, 4},
+                            0.2);
+    add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double[]){1, 1, 3, 4},
+                            0.2);
+
+    update_mytuiAnimation(&animation);
+    free_MytuiAnimation(&animation);
+*/
+
+    screen_manager(&nodeBufer);
+
 
     struct tb_event ev;
     while (tb_poll_event(&ev)) {
@@ -70,73 +107,28 @@ void update_termbox()
             break;
         case TB_EVENT_KEY:
             switch (ev.key) {
-            case TB_KEY_ESC:
-                goto OUT_EVENT_POOL;
+                case TB_KEY_ESC:
+                    free_mytui_container(&mytuiContainer);
+                    goto OUT_EVENT_POOL;
 
-            case TB_KEY_CTRL_A: {
+                case TB_KEY_CTRL_A: {
 
-                MytuiContainer *mytuiContainer = NULL;
-                INIT_MYTUI_CONTAINER(paramContainer);
-                paramContainer.type = MYTUI_CONTAINER_ROOT;
-                paramContainer.decoration = true;
-                mytui_inicialize_container(&mytuiContainer, paramContainer);
-                add_ChildContainer(&mytuiContainer);
-
-                MiTuiWidget *label = init_MyTuiWidgetLabel("leonelsoriano", 0, 0, -1, 1, -1, -1);
-                add_childContainerWidget(&mytuiContainer, 2, 1, 0, 1, &label);
-
-
-
-                print_line_log(MytuiLoggerTypeError, "hola %d", 1981);
-
-
-
-
-                // el update
-                update_MytuiContainer_childContainer(mytuiContainer);
-                add_mytui_event_listener(holaEvent, mytuiEventTypePrincipal, label);
-
-
-
-                delete_mytui_listener(label, mytuiEventTypePrincipal);
-
-
-
-
-
-                // init btn
-                MiTuiWidget *btn = init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, 3, 22, -1);
-                update_MyTuiWidget(btn);
-
-                screen_manager(&nodeBufer);
-
-                // prueba animacion
-                MytuiAnimation *animation = init_MytuiAnimation(btn);
-                add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double[]){-1, -1, 3, 4},
-                                        0.2);
-                add_step_MytuiAnimation(&animation, mytuiAnimationMove, (double[]){1, 1, 3, 4},
-                                        0.2);
-
-                update_mytuiAnimation(&animation);
-                free_MytuiAnimation(&animation);
-
-                free_MyTuiWidget(&btn);
-
-                // fin btn
-
-                free_mytui_container(&mytuiContainer);
-
-                screen_manager(&nodeBufer);
-
-                break;
-            }
+                    break;
+                }
             }
             break;
         case TB_EVENT_RESIZE:
-            //            init_screen_manager(&nodeBufer);
+            //init_screen_manager(&nodeBufer);
             break;
         }
+
     }
+
+
 OUT_EVENT_POOL:
+
+    delete_mytui_listener(label, mytuiEventTypePrincipal);
+    free_MyTuiWidget(&btn);
     return;
+
 }

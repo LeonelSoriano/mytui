@@ -79,7 +79,20 @@ void delete_mytui_listener_all()
 
 
 
+
 void mouse_manager_event_fire(int32_t x, int32_t y){
+    if(stackMouseEvent == NULL){
+        return;
+    }
+        MytuiStackMouseEvent *validate_stackMouseEvent = stackMouseEvent;
+        while (validate_stackMouseEvent != NULL) {
+            /*if (validate_stackMouseEvent->widget == widget &&
+                validate_stackMouseEvent->eventType == eventType) {
+            }*/
+            printf("hola\n");
+            validate_stackMouseEvent = validate_stackMouseEvent->next;
+        }
+
 
 }
 

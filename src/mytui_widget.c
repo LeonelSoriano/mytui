@@ -1,45 +1,45 @@
 #include "mytui_widget.h"
 
-    /**
-     * interna de dibujado de Entry
-     * @see init_mytui
-     */
-    static void _update_MyTuiWidgetEntry(MiTuiWidget *widget)
-    {
-        NodeTranformation *node = NULL;
+/**
+ * interna de dibujado de Entry
+ * @see init_mytui
+ */
+static void _update_MyTuiWidgetEntry(MiTuiWidget *widget)
+{
+    NodeTranformation *node = NULL;
 
-        char *bg_str;
+    char *bg_str;
 
-        unsigned int bg = widget->bc;
-        if (widget->bc < 0) {
-            bg_str = resolve_value(_confMap, "entry.bg", NULL);
-        } else {
-            char buffer_str[255];
-            sprintf(buffer_str, "%d", widget->bc);
-            bg_str = resolve_value(_confMap, "entry.bg", buffer_str);
-        }
-
-        if (strIsInt(bg_str) == true) {
-
-            bg = atoi(bg_str);
-
-            if (bg > MAX_COLORS_VALUES) {
-                char *std_value = find_std_values("entry.bg");
-                bg = atoi(std_value);
-            }
-        } else {
-            // si tiene mal el valor en conf sera el por defecto
-            bg = MYTUI_COLOR_DEFAULT;
-        }
-
-        for (int i = widget->y; i < (widget->h + widget->y); i++) {
-            for (int j = widget->x; j < (widget->w + widget->x); j++) {
-                nodeTranformation_add(&node, j, i, bg, MYTUI_COLOR_DEFAULT, ' ');
-            }
-        }
-        node_bufffer_vs_tranformator(&nodeBufer, node);
-        nodeTranformation_free(&node);
+    unsigned int bg = widget->bc;
+    if (widget->bc < 0) {
+        bg_str = resolve_value(_confMap, "entry.bg", NULL);
+    } else {
+        char buffer_str[255];
+        sprintf(buffer_str, "%d", widget->bc);
+        bg_str = resolve_value(_confMap, "entry.bg", buffer_str);
     }
+
+    if (strIsInt(bg_str) == true) {
+
+        bg = atoi(bg_str);
+
+        if (bg > MAX_COLORS_VALUES) {
+            char *std_value = find_std_values("entry.bg");
+            bg = atoi(std_value);
+        }
+    } else {
+        // si tiene mal el valor en conf sera el por defecto
+        bg = MYTUI_COLOR_DEFAULT;
+    }
+
+    for (int i = widget->y; i < (widget->h + widget->y); i++) {
+        for (int j = widget->x; j < (widget->w + widget->x); j++) {
+            nodeTranformation_add(&node, j, i, bg, MYTUI_COLOR_DEFAULT, ' ');
+        }
+    }
+    node_bufffer_vs_tranformator(&nodeBufer, node);
+    nodeTranformation_free(&node);
+}
 
 static void _update_MyTuiWidgetLabel(MiTuiWidget *widget)
 {
@@ -76,11 +76,11 @@ static void _update_MyTuiWidgetLabel(MiTuiWidget *widget)
 }
 
 /*    "button.bg=237",
-    "button.fg=237",
-    "button.active=237",
-    "button.fg-active=237",
-    "button.shadow=237",
-*/
+      "button.fg=237",
+      "button.active=237",
+      "button.fg-active=237",
+      "button.shadow=237",
+      */
 //char *text, int x, int y, int w, int h, int bc, int fc,int shadow
 static void _update_MyTuiWidgetButton(MiTuiWidget *widget){
 
@@ -159,7 +159,7 @@ MiTuiWidget *init_MyTuiWidgetLabel(char *text, int x, int y, int w, int h, int b
 }
 
 MiTuiWidget *init_MyTuiWidgetButton(char *text, int x, int y, int w, int h, int bc, int fc,
-                                    int shadow)
+        int shadow)
 {
     MiTuiWidget *widget = (MiTuiWidget *)malloc(sizeof(MiTuiWidget));
     widget->type = mytuiButton;
@@ -187,18 +187,18 @@ void update_MyTuiWidget(MiTuiWidget *widget)
 {
     if (widget == NULL) {
         print_error("update_MyTuiWidget: No se puede inicializar un Entry "
-                    "en NULL");
+                "en NULL");
     }
     switch (widget->type) {
-    case mytuiEntry:
-        _update_MyTuiWidgetEntry(widget);
-        break;
-    case mytuiLabel:
-        _update_MyTuiWidgetLabel(widget);
-        break;
-    case mytuiButton:
-        _update_MyTuiWidgetButton(widget);
-        break;
+        case mytuiEntry:
+            _update_MyTuiWidgetEntry(widget);
+            break;
+        case mytuiLabel:
+            _update_MyTuiWidgetLabel(widget);
+            break;
+        case mytuiButton:
+            _update_MyTuiWidgetButton(widget);
+            break;
     }
 }
 
@@ -257,19 +257,19 @@ void clean_MyTuiWidget(MiTuiWidget *widget, MytuiContainer *stance){
 
     if (widget == NULL) {
         print_error("update_MyTuiWidget: No se puede inicializar un Entry "
-                    "en NULL");
+                "en NULL");
     }
     switch (widget->type) {
-    case mytuiEntry:
-    //    _update_MyTuiWidgetEntry(widget);
-        break;
-    case mytuiLabel:
-//        _update_MyTuiWidgetLabel(widget);
-        break;
-    case mytuiButton:
+        case mytuiEntry:
+            //    _update_MyTuiWidgetEntry(widget);
+            break;
+        case mytuiLabel:
+            //        _update_MyTuiWidgetLabel(widget);
+            break;
+        case mytuiButton:
 
-        _clean_MyTuiWidgetButton(widget);
-        break;
+            _clean_MyTuiWidgetButton(widget);
+            break;
     }
 
 
