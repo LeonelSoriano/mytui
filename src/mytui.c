@@ -69,7 +69,7 @@ void update_termbox()
 
     // el update
     update_MytuiContainer_childContainer(mytuiContainer);
-    add_mytui_event_listener(holaEvent, mytuiEventTypePrincipal, label);
+   // add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, label);
 
 
 
@@ -78,7 +78,7 @@ void update_termbox()
     // init btn
     MiTuiWidget *btn = init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, 3, 22, -1);
     update_MyTuiWidget(btn);
-
+    add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, btn);
 
     // prueba animacion
 /*    MytuiAnimation *animation = init_MytuiAnimation(btn);
@@ -102,7 +102,10 @@ void update_termbox()
             if (ev.key == TB_KEY_MOUSE_LEFT) {
                 //				mx = ev.x;
                 //				my = ev.y;
+
                 mouse_manager_event_fire(ev.x, ev.y);
+
+                screen_manager(&nodeBufer);
             }
             break;
         case TB_EVENT_KEY:
@@ -127,7 +130,7 @@ void update_termbox()
 
 OUT_EVENT_POOL:
 
-    delete_mytui_listener(label, mytuiEventTypePrincipal);
+    delete_mytui_listener(label, mytuiEventClickPrincipal);
     free_MyTuiWidget(&btn);
     return;
 

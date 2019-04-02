@@ -78,8 +78,16 @@ void delete_mytui_listener_all()
 }
 
 
+/*
+typedef struct mytuiStackMouseEvent {
+    void (*call_back)();
+    EventType eventType;
+    struct MiTuiWidget *widget;
+    struct mytuiStackMouseEvent *next;
+} MytuiStackMouseEvent;
 
-
+mytuiEventClickPrincipal
+*/
 void mouse_manager_event_fire(int32_t x, int32_t y){
     if(stackMouseEvent == NULL){
         return;
@@ -89,7 +97,53 @@ void mouse_manager_event_fire(int32_t x, int32_t y){
             /*if (validate_stackMouseEvent->widget == widget &&
                 validate_stackMouseEvent->eventType == eventType) {
             }*/
-            printf("hola\n");
+
+
+            switch (validate_stackMouseEvent->eventType) {
+                case mytuiEventClickPrincipal: /*mytuiEventClickPrincipal*/
+                    if(validate_stackMouseEvent->widget->type ==  mytuiButton){
+
+
+                        if((y >= validate_stackMouseEvent->widget->y &&
+                            y <=  validate_stackMouseEvent->widget->y +
+                            validate_stackMouseEvent->widget->h) &&
+                             (x >= validate_stackMouseEvent->widget->x &&
+                             x <=  validate_stackMouseEvent->widget->x +
+                             validate_stackMouseEvent->widget->w)){
+
+                            MytuiAnimation *animation = init_MytuiAnimation( validate_stackMouseEvent->widget);
+                            add_step_MytuiAnimation(&animation, mytuiAnimationMove,
+                                (double[]){-1, -1, 3, 4},0.2);
+                            add_step_MytuiAnimation(&animation, mytuiAnimationMove,
+                                (double[]){1, 1, 3, 4},0.2);
+
+                            update_mytuiAnimation(&animation);
+                            free_MytuiAnimation(&animation);
+
+                            validate_stackMouseEvent->call_back();
+                        }
+
+
+
+                    }else if(validate_stackMouseEvent->widget->type == mytuiLabel){
+
+
+                        if((y >= validate_stackMouseEvent->widget->y &&
+                            y <=  validate_stackMouseEvent->widget->y +
+                            validate_stackMouseEvent->widget->h) &&
+                             (x >= validate_stackMouseEvent->widget->x &&
+                             x <=  validate_stackMouseEvent->widget->x +
+                             validate_stackMouseEvent->widget->w)){
+
+                            validate_stackMouseEvent->call_back();
+
+                        }
+                    }
+
+                    break;
+            }
+
+
             validate_stackMouseEvent = validate_stackMouseEvent->next;
         }
 

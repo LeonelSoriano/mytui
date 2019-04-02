@@ -2,7 +2,7 @@
 
 int mytuiDebugModeState;
 
-static const char* mytuiLoggerTypeStr[] = {" ERROR ", " INFO ", " ADVERTENCIA "};
+static const char *mytuiLoggerTypeStr[] = {" ERROR ", " INFO ", " ADVERTENCIA "};
 
 // static char *_mytui_last_file_logger_in_memory = "";
 
@@ -128,9 +128,8 @@ void print_line_log(MytuiLoggerType mytuiLoggerType, const char *msg, ...)
     const char *after_date_str = " : ";
     const char *new_line = "\n";
 
-
-    char tmp_str[strlen(msg) + strlen(buffer_time) + strlen(after_date_str) + strlen(new_line) + 
-        strlen(mytuiLoggerTypeStr[mytuiLoggerType]) ];
+    char tmp_str[strlen(msg) + strlen(buffer_time) + strlen(after_date_str) + strlen(new_line) +
+                 strlen(mytuiLoggerTypeStr[mytuiLoggerType])];
 
     strcpy(tmp_str, buffer_time);
     strcat(tmp_str, mytuiLoggerTypeStr[mytuiLoggerType]);

@@ -9,7 +9,7 @@
  * enum que posee los distintos widget de core.
  */
 typedef enum {
-    mytuiEventTypePrincipal = 1,
+    mytuiEventClickPrincipal = 1,
 } EventType;
 
 /**
