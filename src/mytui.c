@@ -51,7 +51,7 @@ void end_mytui()
 }
 
 static void holaEvent(){
-    print_line_log(MytuiLoggerTypeError, "hola Desde evento");
+    //print_line_log(MytuiLoggerTypeError, "hola Desde evento");
 }
 
 void update_termbox()
@@ -73,10 +73,10 @@ void update_termbox()
 
 
 
-
-
     // init btn
-    MiTuiWidget *btn = init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, 3, 22, -1);
+    MiTuiWidget *btn = init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, -1, -1, -1);
+
+    change_active_miTuiWidget(btn);
     update_MyTuiWidget(btn);
     add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, btn);
 

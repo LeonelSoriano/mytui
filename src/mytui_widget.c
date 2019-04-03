@@ -177,7 +177,6 @@ MiTuiWidget *init_MyTuiWidgetButton(char *text, int x, int y, int w, int h, int 
     strcpy(extra->text, text);
     extra->shadow = shadow;
     extra->active = -1;
-    extra->shadow = -1;
     extra->shadowActive = true;
     widget->extra = extra;
     return widget;

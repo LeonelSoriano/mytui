@@ -77,17 +77,6 @@ void delete_mytui_listener_all()
     }
 }
 
-
-/*
-typedef struct mytuiStackMouseEvent {
-    void (*call_back)();
-    EventType eventType;
-    struct MiTuiWidget *widget;
-    struct mytuiStackMouseEvent *next;
-} MytuiStackMouseEvent;
-
-mytuiEventClickPrincipal
-*/
 void mouse_manager_event_fire(int32_t x, int32_t y){
     if(stackMouseEvent == NULL){
         return;
@@ -149,5 +138,4 @@ void mouse_manager_event_fire(int32_t x, int32_t y){
 
 
 }
-
 
