@@ -10,12 +10,14 @@ static void resolve_type_widget(MytuiActiveWidget *mytuiActiveWidget){
             _mytuiActiveWidget->miTuiWidget->bc = resolve_color(_confMap, -1 , "button.active");
             _mytuiActiveWidget->miTuiWidget->fc = resolve_color(_confMap, -1 , "button.fg-active");
             break;
+        case mytuiTextBox:
+            _mytuiActiveWidget->miTuiWidget->bc = resolve_color(_confMap, -1 , "tex.active");
+            _mytuiActiveWidget->miTuiWidget->fc = resolve_color(_confMap, -1 , "button.fg-active");
+            break;
     }
 }
 
-/*    "button.active=237",
-    "button.fg-active=237",
-*/
+
 void change_active_miTuiWidget(MiTuiWidget *miTuiWidget){
 
     if(_mytuiActiveWidget != NULL && _mytuiActiveWidget->miTuiWidget != NULL &&
@@ -30,9 +32,6 @@ void change_active_miTuiWidget(MiTuiWidget *miTuiWidget){
         _mytuiActiveWidget->fc = miTuiWidget->fc;
         _mytuiActiveWidget->miTuiWidget = miTuiWidget;
         //cambiar aca los colores de selecionado depende el tipo
-print_line_log(MytuiLoggerTypeError, "antes %d",_mytuiActiveWidget->bc );
-
-
 
         resolve_type_widget( _mytuiActiveWidget);
 

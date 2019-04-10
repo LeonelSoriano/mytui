@@ -94,7 +94,6 @@ void mouse_manager_event_fire(int32_t x, int32_t y){
                 case mytuiEventClickPrincipal: /*mytuiEventClickPrincipal*/
                     if(validate_stackMouseEvent->widget->type ==  mytuiButton){
 
-
                         if((y >= validate_stackMouseEvent->widget->y &&
                             y <=  validate_stackMouseEvent->widget->y +
                             validate_stackMouseEvent->widget->h) &&
@@ -141,6 +140,13 @@ void mouse_manager_event_fire(int32_t x, int32_t y){
                         }
                     }
 
+                    break;
+                case mytuiEventShadow:
+                    if(validate_stackMouseEvent->widget->type == mytuiTextBox){
+                        change_active_miTuiWidget(validate_stackMouseEvent->widget);
+                        
+                        update_MyTuiWidget(validate_stackMouseEvent->widget);
+                    }
                     break;
             }
 

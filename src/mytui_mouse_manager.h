@@ -8,9 +8,12 @@
  * @brief enumeración de widget en el core.
  *
  * enum que posee los distintos widget de core.
+ * Los de tipo Shadow son eventos con callback null internos para ejemplo
+ *  colocar el widget en activo
  */
 typedef enum {
     mytuiEventClickPrincipal = 1,
+    mytuiEventShadow = 2
 } EventType;
 
 /**

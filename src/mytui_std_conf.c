@@ -14,12 +14,12 @@ const char* mytui_std_conf_optiones[] = {
     "button.active=11",
     "button.fg-active=233",
     "button.shadow=237",
-    "combobox.bg=3",
-    "combobox.fg=242",
-    "combobox.border-up=249",
-    "combobox.border-down=249",
-    "combobox.bg-active=11",
-    "combobox.fg-active=233",
+    "textbox.bg=240",
+    "textbobox.fg=7",
+    "textbox.border-up=249",
+    "textbox.border-down=249",
+    "textbox.bg-active=11",
+    "textbox.fg-active=233",
     "pruebaXd=2"
 };
 //color texto

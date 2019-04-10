@@ -75,13 +75,7 @@ static void _update_MyTuiWidgetLabel(MiTuiWidget *widget)
     nodeTranformation_free(&node);
 }
 
-/*    "button.bg=237",
-      "button.fg=237",
-      "button.active=237",
-      "button.fg-active=237",
-      "button.shadow=237",
-      */
-//char *text, int x, int y, int w, int h, int bc, int fc,int shadow
+
 static void _update_MyTuiWidgetButton(MiTuiWidget *widget){
 
     NodeTranformation *node = NULL;
@@ -127,9 +121,75 @@ static void _update_MyTuiWidgetButton(MiTuiWidget *widget){
 }
 
 
-static void _update_MyTuiWidgetTextBox(MiTuiWidget *widget){
-//TODO
+static void _internal_shadow_event(MiTuiWidget *widget){
+	print_line_log(MytuiLoggerTypeError, "hola Desde eventWidget %d", widget->w);
 }
+
+
+static void _update_MyTuiWidgetTextBox(MiTuiWidget *widget){
+    NodeTranformation *node = NULL;
+
+    MiTuiWidgetExtraTextBox *extra = (MiTuiWidgetExtraTextBox*) widget->extra;
+
+    char *bg_str;
+
+    int bc_color = resolve_color(_confMap, widget->bc, "textbox.bg");
+    int fc_color = resolve_color(_confMap, widget->fc, "textbox.fg");
+
+    int str_size = strlen(extra->text);
+    int draw_x = (widget->w < str_size) ? str_size : widget->w;
+
+
+    for (int i = widget->y ; i < (widget->h + widget->y) ; i++) {
+
+		int character_line = 0;
+
+        for (int j = widget->x; j < (widget->w + widget->x); j++) {
+
+            // si el carácter es igual a la linea uno y
+            // en menor al string para evitar over flow
+            if (i == widget->y && character_line < str_size) {
+                nodeTranformation_add(&node, j, i, bc_color, fc_color, extra->text[character_line]);
+            } else {
+            	nodeTranformation_add(&node, j, i, bc_color, MYTUI_COLOR_DEFAULT, ' ');
+            }
+            character_line++;
+
+        }
+    }
+
+
+    if(! add_mytui_event_listener(_internal_shadow_event(widget), mytuiEventShadow, widget)){
+		print_line_log(MytuiLoggerTypeError, "Problemas en agregar event shadow para TextBox");
+	}
+
+
+    node_bufffer_vs_tranformator(&nodeBufer, node);
+    nodeTranformation_free(&node);
+}
+
+
+
+MiTuiWidget *init_MyTuiWidgetTextBox(int x, int y, int w, int h, int bc, int fc,
+    char* text){
+    MiTuiWidget *widget = (MiTuiWidget *)malloc(sizeof(MiTuiWidget));
+    widget->type = mytuiTextBox;
+    widget->h = h;
+    widget->w = w;
+    widget->y = y;
+    widget->x = x;
+    widget->bc = bc;
+    widget->fc = fc;
+
+    MiTuiWidgetExtraButton *extra =
+        (MiTuiWidgetExtraButton *)malloc(sizeof(MiTuiWidgetExtraButton));
+    extra->text = malloc(strlen(text) + 1);
+    strcpy(extra->text, text);
+    widget->extra = extra;
+    return widget;
+}
+
+
 
 MiTuiWidget *init_MyTuiWidgetEntry(int x, int y, int w, int h, int bc)
 {
@@ -177,7 +237,6 @@ MiTuiWidget *init_MyTuiWidgetButton(char *text, int x, int y, int w, int h, int 
     MiTuiWidgetExtraButton *extra =
         (MiTuiWidgetExtraButton *)malloc(sizeof(MiTuiWidgetExtraButton));
     extra->text = malloc(strlen(text) + 1);
-    ;
     strcpy(extra->text, text);
     extra->shadow = shadow;
     extra->active = -1;
@@ -211,12 +270,15 @@ void update_MyTuiWidget(MiTuiWidget *widget)
 void free_MyTuiWidget(MiTuiWidget **widget)
 {
     if ((*widget)->type == mytuiLabel) {
-
         MiTuiWidgetExtraLabel *extra = (MiTuiWidgetExtraLabel *)(*widget)->extra;
         free(extra->text);
         free(extra);
     }else if((*widget)->type == mytuiButton){
         MiTuiWidgetExtraButton *extra = (MiTuiWidgetExtraButton *)(*widget)->extra;
+        free(extra->text);
+        free(extra);
+    }else if((*widget)->type == mytuiTextBox){
+        MiTuiWidgetExtraTextBox *extra = (MiTuiWidgetExtraTextBox *)(*widget)->extra;
         free(extra->text);
         free(extra);
     }
@@ -227,7 +289,9 @@ void free_MyTuiWidget(MiTuiWidget **widget)
 }
 
 
-static void _clean_MyTuiWidgetButton(MiTuiWidget *widget){
+static void _clean_MyTuiWidgetButton(MiTuiWidget *widget)
+{
+
     NodeTranformation *node = NULL;
     MiTuiWidgetExtraButton *extra = (MiTuiWidgetExtraButton*) widget->extra;
 
@@ -278,5 +342,4 @@ void clean_MyTuiWidget(MiTuiWidget *widget, MytuiContainer *stance){
 
 
 }
-
 

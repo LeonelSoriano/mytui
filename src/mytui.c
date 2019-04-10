@@ -73,7 +73,6 @@ void update_termbox()
    // add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, label);
 
 
-
     // init btn
     MiTuiWidget *btn = init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, -1, -1, -1);
 
@@ -87,6 +86,11 @@ void update_termbox()
 
     add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, btn2);
     update_MyTuiWidget(btn2);
+
+
+    MiTuiWidget *textBox = init_MyTuiWidgetTextBox(30, 30, 20, 1, -1, -1, "hola");
+    update_MyTuiWidget(textBox);
+
 
     // prueba animacion
 /*    MytuiAnimation *animation = init_MytuiAnimation(btn);
@@ -140,8 +144,8 @@ OUT_EVENT_POOL:
 
     delete_mytui_listener(label, mytuiEventClickPrincipal);
     free_MyTuiWidget(&btn);
-
     free_MyTuiWidget(&btn2);
+    free_MyTuiWidget(&textBox);
     return;
 
 }

@@ -48,11 +48,15 @@ typedef struct MiTuiWidgetExtraButton {
 
 } MiTuiWidgetExtraButton;
 
+typedef struct MiTuiWidgetExtraTextBox {
+    char *text;
+} MiTuiWidgetExtraTextBox;
+
 
 MiTuiWidget *init_MyTuiWidgetEntry(int x, int y, int w, int h, int bc);
 
 
-MiTuiWidget *init_MyTuiWidgetTextBox(int x, int y, int w, int h, int bc, int fc);
+MiTuiWidget *init_MyTuiWidgetTextBox(int x, int y, int w, int h, int bc, int fc, char* text);
 
 /**
 * inicia un widget como label
