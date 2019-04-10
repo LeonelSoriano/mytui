@@ -1,3 +1,5 @@
+#taskbook -t @mytui agregar el widget de textbox  p:3
+# __attribute__((unused))
 #clogedaria
 #https://stackoverflow.com/questions/3501338/c-read-file-line-by-line
 #minoca

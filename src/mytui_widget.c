@@ -90,8 +90,8 @@ static void _update_MyTuiWidgetButton(MiTuiWidget *widget){
 
     int bc_color = resolve_color(_confMap, widget->bc, "button.bg");
     int fc_color = resolve_color(_confMap, widget->fc, "button.fg");
-    int active_color = resolve_color(_confMap, extra->active , "button.active");
-    int fg_active_color = resolve_color(_confMap, extra->active , "button.fg-active");
+//    int active_color = resolve_color(_confMap, extra->active , "button.active");
+//   int fg_active_color = resolve_color(_confMap, extra->active , "button.fg-active");
     int shadow_color = resolve_color(_confMap, extra->active , "button.shadow");
 
     int str_size = strlen(extra->text);
@@ -126,6 +126,10 @@ static void _update_MyTuiWidgetButton(MiTuiWidget *widget){
     nodeTranformation_free(&node);
 }
 
+
+static void _update_MyTuiWidgetTextBox(MiTuiWidget *widget){
+//TODO
+}
 
 MiTuiWidget *init_MyTuiWidgetEntry(int x, int y, int w, int h, int bc)
 {
@@ -198,6 +202,9 @@ void update_MyTuiWidget(MiTuiWidget *widget)
         case mytuiButton:
             _update_MyTuiWidgetButton(widget);
             break;
+        case mytuiTextBox:
+            _update_MyTuiWidgetTextBox(widget);
+            break;
     }
 }
 
@@ -218,8 +225,6 @@ void free_MyTuiWidget(MiTuiWidget **widget)
         free(*widget);
     }
 }
-
-
 
 
 static void _clean_MyTuiWidgetButton(MiTuiWidget *widget){

@@ -15,8 +15,9 @@
  */
 typedef enum {
     mytuiEntry = 1, /**< Componente vació WidgetTypes#entry. */
-    mytuiLabel = 2, /**< Componente label texto WidgetTypes#label. */
-    mytuiButton = 3 /**< Componente label texto WidgetTypes#button. */
+    mytuiLabel = 2, /**< Componente label texto WidgetTypes#mituiLabel. */
+    mytuiButton = 3, /**< Componente label texto WidgetTypes#mytuiButton. */
+    mytuiTextBox = 4 /**< Componente caja de texto WidgetTypes#mituiTextBox. */
 }WidgetTypes;
 
 #endif

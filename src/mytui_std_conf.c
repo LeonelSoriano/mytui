@@ -14,10 +14,15 @@ const char* mytui_std_conf_optiones[] = {
     "button.active=11",
     "button.fg-active=233",
     "button.shadow=237",
+    "combobox.bg=3",
+    "combobox.fg=242",
+    "combobox.border-up=249",
+    "combobox.border-down=249",
+    "combobox.bg-active=11",
+    "combobox.fg-active=233",
     "pruebaXd=2"
 };
 //color texto
-//color normal
-//color pulsado
+//color normal color pulsado
 //color text pulsado
 //color sombra

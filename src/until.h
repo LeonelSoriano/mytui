@@ -40,15 +40,15 @@ struct InfoTerm{
 #ifdef __MINGW32__
 //static const char *SEPARATOR_FOLDER = "\\";
 #else
-static const char *SEPARATOR_FOLDER = "/";
+static const char  __attribute__((unused)) *SEPARATOR_FOLDER = "/";
 #endif
 
-static const char *CONF_FONDER = ".config";
-static const char *TUI_FOLDER_CONF = "mytui";
+static const char __attribute__((unused)) *CONF_FONDER = ".config";
+static const char __attribute__((unused)) *TUI_FOLDER_CONF = "mytui";
 
-static const char *TUI_FOLDER_LOG = "log";
+static const char __attribute__((unused)) *TUI_FOLDER_LOG = "log";
 
-static const char *CONF_FILE_NAME = "init.conf";
+static const char __attribute__((unused)) *CONF_FILE_NAME = "init.conf";
 
 
 /**

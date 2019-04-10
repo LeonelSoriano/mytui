@@ -51,6 +51,9 @@ typedef struct MiTuiWidgetExtraButton {
 
 MiTuiWidget *init_MyTuiWidgetEntry(int x, int y, int w, int h, int bc);
 
+
+MiTuiWidget *init_MyTuiWidgetTextBox(int x, int y, int w, int h, int bc, int fc);
+
 /**
 * inicia un widget como label
 * @param texto del label

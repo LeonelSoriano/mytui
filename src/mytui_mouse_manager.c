@@ -78,6 +78,8 @@ void delete_mytui_listener_all()
 }
 
 void mouse_manager_event_fire(int32_t x, int32_t y){
+
+
     if(stackMouseEvent == NULL){
         return;
     }
@@ -100,6 +102,10 @@ void mouse_manager_event_fire(int32_t x, int32_t y){
                              x <=  validate_stackMouseEvent->widget->x +
                              validate_stackMouseEvent->widget->w)){
 
+
+                            change_active_miTuiWidget(validate_stackMouseEvent->widget);
+
+                            //animation del boton al pulsar
                             MytuiAnimation *animation = init_MytuiAnimation( validate_stackMouseEvent->widget);
                             add_step_MytuiAnimation(&animation, mytuiAnimationMove,
                                 (double[]){-1, -1, 3, 4},0.2);
@@ -107,7 +113,13 @@ void mouse_manager_event_fire(int32_t x, int32_t y){
                                 (double[]){1, 1, 3, 4},0.2);
 
                             update_mytuiAnimation(&animation);
+
+
+
+                            //update_MyTuiWidget(validate_stackMouseEvent->widget);
                             free_MytuiAnimation(&animation);
+                            // end de animacion del boton
+
 
                             validate_stackMouseEvent->call_back();
                         }

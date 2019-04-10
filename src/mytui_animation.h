@@ -11,6 +11,8 @@
 #include <unistd.h>
 
 #include <time.h>
+#include <errno.h>
+
 
 /**
  * @brief enumeración de tipos de animacionesa en el core.

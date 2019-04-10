@@ -47,6 +47,7 @@ void end_mytui()
     free_conf_map(&_confMap);
     free_mytui_logger();
     free_buffer(&nodeBufer);
+    delete_active_miTuiWidget();
     delete_mytui_listener_all();
 }
 
@@ -76,9 +77,16 @@ void update_termbox()
     // init btn
     MiTuiWidget *btn = init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, -1, -1, -1);
 
-    change_active_miTuiWidget(btn);
+
     update_MyTuiWidget(btn);
     add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, btn);
+
+
+
+    MiTuiWidget *btn2 = init_MyTuiWidgetButton("BTN2", 40, 10, 10, 2, -1, -1, -1);
+
+    add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, btn2);
+    update_MyTuiWidget(btn2);
 
     // prueba animacion
 /*    MytuiAnimation *animation = init_MytuiAnimation(btn);
@@ -132,6 +140,8 @@ OUT_EVENT_POOL:
 
     delete_mytui_listener(label, mytuiEventClickPrincipal);
     free_MyTuiWidget(&btn);
+
+    free_MyTuiWidget(&btn2);
     return;
 
 }

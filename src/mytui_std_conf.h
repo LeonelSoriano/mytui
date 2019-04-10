@@ -9,7 +9,7 @@
 
 
 
-#define MYTUI_CONF_MAX 13
+#define MYTUI_CONF_MAX 19
 extern const char* mytui_std_conf_optiones[];
 
 #endif

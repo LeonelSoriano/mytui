@@ -14,21 +14,21 @@
  *
  * Esta estructura maneja el buffer para pintado de la terminal.
  */
-typedef struct MytuiActiveWidget {
-    MiTuiWidget *miTuiWidget;    /**< posición x MytuiActiveWidget#miTuiWidget. */
+struct MytuiActiveWidget {
+    struct MiTuiWidget *miTuiWidget;    /**< posición x MytuiActiveWidget#miTuiWidget. */
     int bc;      /**< before color backgound MytuiActiveWidget#bc. */
     int fc;      /**< before color fore MytuiActiveWidget#bc. */
-}MytuiActiveWidget;
-
+};
+typedef struct MytuiActiveWidget  MytuiActiveWidget;
 
 /**
  *  @brief cambia el widget activo en mytui
  *  @param Widget que sera el actual activo
  */
-void change_active_miTuiWidget(MiTuiWidget *miTuiWidget);
+void change_active_miTuiWidget(struct MiTuiWidget *miTuiWidget);
 
 
-void delete_active_miTuiWidget();
+extern void delete_active_miTuiWidget();
 
 
 #endif

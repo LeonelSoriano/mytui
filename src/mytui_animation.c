@@ -56,9 +56,13 @@ void free_MytuiAnimation(MytuiAnimation **animation)
     free(*animation);
 }
 
+static int a = 0;
+static int b = 0;
+
 void update_mytuiAnimation(MytuiAnimation **animation)
 {
     MytuiStepAnimation *tmpAnimationStep = (*animation)->listAnimationsStep;
+
     while (tmpAnimationStep != NULL) {
 
         switch (tmpAnimationStep->typeAnimation) {
@@ -76,11 +80,14 @@ void update_mytuiAnimation(MytuiAnimation **animation)
 
                 struct timespec reqDelay = {(long)tmpAnimationStep->step_time,
                                             (long)((seconds)*nanoseconds_base)};
-                nanosleep(&reqDelay, (struct timespec *)NULL);
+                int value = nanosleep(&reqDelay, (struct timespec *)NULL);
+
             }
 
             break;
         }
+
+
         screen_manager(&nodeBufer);
         tmpAnimationStep = tmpAnimationStep->next;
     }

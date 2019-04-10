@@ -2,6 +2,7 @@
 #define __MYTUI_MOUSE_MANAGER__
 
 #include "mytui_widget.h"
+#include "mytui_animation.h"
 
 /**
  * @brief enumeración de widget en el core.
