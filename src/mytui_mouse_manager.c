@@ -2,7 +2,7 @@
 
 static MytuiStackMouseEvent *stackMouseEvent = NULL;
 
-bool add_mytui_event_listener(void (*call_back)(), EventType eventType, struct MiTuiWidget *widget)
+bool add_mytui_event_listener(void (*call_back)(struct MiTuiWidget *widget), EventType eventType, struct MiTuiWidget *widget)
 {
     if (stackMouseEvent == NULL) {
         stackMouseEvent = (MytuiStackMouseEvent *)malloc(sizeof(MytuiStackMouseEvent));
@@ -120,7 +120,7 @@ void mouse_manager_event_fire(int32_t x, int32_t y){
                             // end de animacion del boton
 
 
-                            validate_stackMouseEvent->call_back();
+                            validate_stackMouseEvent->call_back(validate_stackMouseEvent->widget);
                         }
 
 
@@ -135,7 +135,7 @@ void mouse_manager_event_fire(int32_t x, int32_t y){
                              x <=  validate_stackMouseEvent->widget->x +
                              validate_stackMouseEvent->widget->w)){
 
-                            validate_stackMouseEvent->call_back();
+                            validate_stackMouseEvent->call_back(validate_stackMouseEvent->widget);
 
                         }
                     }
@@ -144,8 +144,9 @@ void mouse_manager_event_fire(int32_t x, int32_t y){
                 case mytuiEventShadow:
                     if(validate_stackMouseEvent->widget->type == mytuiTextBox){
                         change_active_miTuiWidget(validate_stackMouseEvent->widget);
-                        
                         update_MyTuiWidget(validate_stackMouseEvent->widget);
+                        stackMouseEvent->call_back(validate_stackMouseEvent->widget);
+
                     }
                     break;
             }

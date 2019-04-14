@@ -22,7 +22,7 @@ typedef enum {
  * Esta estructura maneja el buffer para pintado de la terminal.
  */
 typedef struct mytuiStackMouseEvent {
-    void (*call_back)();
+    void (*call_back)(struct MiTuiWidget *widget);
     EventType eventType;
     struct MiTuiWidget *widget;
     struct mytuiStackMouseEvent *next;
@@ -35,7 +35,7 @@ typedef struct mytuiStackMouseEvent {
 * @param widget que va asociado el evento
 * @return verdadero si se pudo insertar
 */
-bool add_mytui_event_listener(void (*call_back)(), EventType eventType, struct MiTuiWidget *widget);
+bool add_mytui_event_listener(void (*call_back)(struct MiTuiWidget *widget), EventType eventType, struct MiTuiWidget *widget);
 
 /**
 * borra un listener asociado a un widget, coinciden los dos parámetros los eliminas

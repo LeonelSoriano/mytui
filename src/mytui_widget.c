@@ -121,7 +121,9 @@ static void _update_MyTuiWidgetButton(MiTuiWidget *widget){
 }
 
 
-static void _internal_shadow_event(MiTuiWidget *widget){
+static void _internal_shadow_event(struct MiTuiWidget *widget){
+
+	//print_line_log(MytuiLoggerTypeError, "hola Desde eventWidget ");
 	print_line_log(MytuiLoggerTypeError, "hola Desde eventWidget %d", widget->w);
 }
 
@@ -158,11 +160,14 @@ static void _update_MyTuiWidgetTextBox(MiTuiWidget *widget){
         }
     }
 
+add_mytui_event_listener(
+_internal_shadow_event,
+        mytuiEventShadow, widget);
 
-    if(! add_mytui_event_listener(_internal_shadow_event(widget), mytuiEventShadow, widget)){
+ /*   if(! add_mytui_event_listener(_internal_shadow_event(widget), mytuiEventShadow, widget)){
 		print_line_log(MytuiLoggerTypeError, "Problemas en agregar event shadow para TextBox");
 	}
-
+*/
 
     node_bufffer_vs_tranformator(&nodeBufer, node);
     nodeTranformation_free(&node);

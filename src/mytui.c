@@ -127,6 +127,8 @@ void update_termbox()
                     goto OUT_EVENT_POOL;
 
                 case TB_KEY_CTRL_A: {
+                    print_line_log(MytuiLoggerTypeError, "hola Desde eventWidget %c",ev.key
+                            );
 
                     break;
                 }
