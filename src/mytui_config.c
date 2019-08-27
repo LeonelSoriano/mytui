@@ -26,7 +26,7 @@ void ini_conf_file()
         mkdir(folder_mytui, 0700);
     }
     if(dir != NULL){
-        free(dir);
+        closedir(dir);
     }
 
     char *mytui_conf_file = get_file_conf_path();
@@ -73,7 +73,7 @@ static char *get_file_conf_path()
     char conf_folder_resolution[strlen(folder_home) +
                                 (strlen(SEPARATOR_FOLDER) * 3) +
                                 strlen(CONF_FONDER) + strlen(TUI_FOLDER_CONF) +
-                                strlen(CONF_FILE_NAME)];
+                                strlen(CONF_FILE_NAME) + 1];
 
     strcpy(conf_folder_resolution, folder_home);
     strcat(conf_folder_resolution, SEPARATOR_FOLDER);
@@ -264,8 +264,9 @@ const char *getValueConf(ConfMap *confMap, const char *key)
 char *resolve_value(ConfMap *confMap, char *type_conf,
                     const char *component_value)
 {
+
     if (component_value != NULL && strcmp(component_value, "") != 0) {
-        return (char *)component_value;
+        return strdup(component_value);
     }
 
     char *memory_value = (char *)getValueConf(confMap, type_conf);
@@ -288,7 +289,7 @@ char *find_std_values(char *type_conf)
     for (int i = 0; i < MYTUI_CONF_MAX; i++) {
         char *token;
 
-        char str[strlen(mytui_std_conf_optiones[i])];
+        char str[strlen(mytui_std_conf_optiones[i]) + 1];
         strcpy(str, mytui_std_conf_optiones[i]);
         token = strtok(str, separator);
 
@@ -322,6 +323,9 @@ int resolve_color(ConfMap *_confMap, int actual_color, char *str_conf)
     } else {
         char buffer_str[255];
         sprintf(buffer_str, "%d", actual_color);
+	    print_line_log(MytuiLoggerTypeError,
+                "entro a resolver con %s", buffer_str);
+
         bg_str = resolve_value(_confMap, str_conf, buffer_str);
     }
 

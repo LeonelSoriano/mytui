@@ -129,7 +129,8 @@ void print_line_log(MytuiLoggerType mytuiLoggerType, const char *msg, ...)
     const char *new_line = "\n";
 
     char tmp_str[strlen(msg) + strlen(buffer_time) + strlen(after_date_str) + strlen(new_line) +
-                 strlen(mytuiLoggerTypeStr[mytuiLoggerType])];
+                 strlen(mytuiLoggerTypeStr[mytuiLoggerType]) + 10];
+
 
     strcpy(tmp_str, buffer_time);
     strcat(tmp_str, mytuiLoggerTypeStr[mytuiLoggerType]);
@@ -155,7 +156,7 @@ static void init_cursor_file_log()
     if (fileLog == NULL) {
         const char *folder_log = get_path_log();
 
-        char logFile[strlen(folder_log) + strlen(LOG_LAST_FILE_NAME)];
+        char logFile[strlen(folder_log) + strlen(LOG_LAST_FILE_NAME) + 1];
         char *line = NULL;
         size_t len = 0;
         ssize_t read;

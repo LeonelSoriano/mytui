@@ -59,6 +59,7 @@ void free_MytuiAnimation(MytuiAnimation **animation)
 static int a = 0;
 static int b = 0;
 
+// TODO enviar esto a un hilo a proceso
 void update_mytuiAnimation(MytuiAnimation **animation)
 {
     MytuiStepAnimation *tmpAnimationStep = (*animation)->listAnimationsStep;

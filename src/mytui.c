@@ -70,14 +70,16 @@ void update_termbox()
 
     // el update
     update_MytuiContainer_childContainer(mytuiContainer);
-   // add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, label);
+    add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, label);
 
 
     // init btn
+    // test
     MiTuiWidget *btn = init_MyTuiWidgetButton("BTN", 10, 10, 10, 2, -1, -1, -1);
 
 
     update_MyTuiWidget(btn);
+    
     add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, btn);
 
 
@@ -90,6 +92,7 @@ void update_termbox()
 
     MiTuiWidget *textBox = init_MyTuiWidgetTextBox(30, 30, 20, 1, -1, -1, "hola");
     update_MyTuiWidget(textBox);
+    // test
 
 
     // prueba animacion

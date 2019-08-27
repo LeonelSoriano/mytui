@@ -137,17 +137,31 @@ void print_info(const char *msg, ...)
 bool strIsInt(const char *str)
 {
     if (str == NULL) {
-        print_error("strIsInt: no se puede verficiar un string NULL");
+	    print_line_log(MytuiLoggerTypeError,
+                "strIsInt: no se puede verficiar un string NULL");
         return false;
     }
-    unsigned int i = 0;
-    while (str[i] != '\0') {
+
+
+    for (int i = 0; i < strlen(str); i++)
+    {
+
         if (str[i] != '\n' && str[i] != '-' &&
             (isdigit(str[i]) == 0 || str[i] == '\0')) {
             return false;
         }
-        ++i;
+
     }
+
+
+    /*while (str[i] != '\0') {
+        if (str[i] != '\n' && str[i] != '-' &&
+            (isdigit(str[i]) == 0 || str[i] == '\0')) {
+            return false;
+        }
+        i++;
+    }*/
+
     return true;
 }
 

@@ -34,14 +34,20 @@
 #break en file  break /Full/path/to/service.cpp:45
 #inflo variables, info locals, info args
 
+#export ASAN_OPTIONS="log_path=asan.log"
+
 
 #https://www.sanfoundry.com/c-program-queue-using-linked-list/
 ROOT_DIR:=$(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-POST_L = -ltermbox -no-pie #`pkg-config --cflags --libs glib-2.0`
+POST_L = -ltermbox -no-pie -fsanitize=address  -fno-omit-frame-pointer#`pkg-config --cflags --libs glib-2.0`
+
+CFLAGS=-c -g -Wall  -pedantic-errors -no-pie -Wextra -fsanitize=address -fno-omit-frame-pointer  -std=c99 -D _POSIX_C_SOURCE=200809L    $(shell pkg-config --cflags glib-2.0)
+
+#POST_L = -ltermbox -no-pie #`pkg-config --cflags --libs glib-2.0`
 CC=gcc
-CFLAGS=-c -g -Wall  -pedantic-errors -no-pie -Wextra -std=c99 -D _POSIX_C_SOURCE=200809L    $(shell pkg-config --cflags glib-2.0)
-LDFLAGS= -L$(ROOT_DIR)/termbox/build/usr/lib/ -Wl,-rpath=$(ROOT_DIR)/termbox/build/usr/lib/
+#CFLAGS=-c -g -Wall  -pedantic-errors -no-pie -Wextra  -std=c99 -D _POSIX_C_SOURCE=200809L    $(shell pkg-config --cflags glib-2.0)
+LDFLAGS= -L$(ROOT_DIR)/termbox/build/usr/lib/ -Wl,-rpath $(ROOT_DIR)/termbox/build/usr/lib/
 
 MAIN=main.c
 MAIN_TEST=./test/test.c
@@ -56,7 +62,7 @@ OBJECTS_TEST = $(MAIN_TEST:.c=.o) $(SOURCES_TEST:.c=.o)
 SOURCES_TEST=#./test/test.c
 
 LDLIBS_TEST = -lcmocka -fprofile-arcs -ftest-coverage
-LDFLAGS_TEST = -Wl,--wrap=write -Wl,--wrap=read
+LDFLAGS_TEST =  -Wl,--wrap=write -Wl,--wrap=read
 
 
 
