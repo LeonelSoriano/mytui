@@ -264,7 +264,6 @@ const char *getValueConf(ConfMap *confMap, const char *key)
 char *resolve_value(ConfMap *confMap, char *type_conf,
                     const char *component_value)
 {
-
     if (component_value != NULL && strcmp(component_value, "") != 0) {
         return strdup(component_value);
     }
@@ -323,9 +322,6 @@ int resolve_color(ConfMap *_confMap, int actual_color, char *str_conf)
     } else {
         char buffer_str[255];
         sprintf(buffer_str, "%d", actual_color);
-	    print_line_log(MytuiLoggerTypeError,
-                "entro a resolver con %s", buffer_str);
-
         bg_str = resolve_value(_confMap, str_conf, buffer_str);
     }
 

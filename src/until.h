@@ -145,4 +145,17 @@ int delete_word(char str[], char word[]);
  */
 bool copy_file(const char*origin_file, const char* new_file);
 
+/**
+ * colision de un rectangulo con un punto
+ * @param posición x del rectagulo
+ * @param posición y del rectagulo
+ * @param ancho del rectagulo
+ * @param alto del rectagulo
+ * @param posición x del punto
+ * @param posición y del punto
+ * @return verdadero si hay colision
+ */
+bool collide_rect_point(unsigned int x, unsigned int y, unsigned int w, unsigned int h,
+        unsigned int px, unsigned int py);
+
 #endif

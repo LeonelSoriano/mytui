@@ -86,7 +86,16 @@ MiTuiWidget *init_MyTuiWidgetLabel(char *text, int x, int y, int w, int h, int b
 */
 MiTuiWidget* init_MyTuiWidgetButton(char *text, int x, int y, int w, int h,int bc, int fc, int shadow);
 
+/**
+* actualiza los widget
+* @param widget que se actualizara
+*/
 void update_MyTuiWidget(MiTuiWidget *widget);
+
+
+bool set_text_MyTuiWidgetTextBox(MiTuiWidget *widget, const char* newText);
+
+
 
 void free_MyTuiWidget(MiTuiWidget **widget);
 

@@ -30,9 +30,9 @@ int main (void)
     {
         //cmocka_unit_test (null_test_success),
         //cmocka_unit_test (null_test_fail),
-        cmocka_unit_test (strIsInt_test)
+        cmocka_unit_test (strIsInt_test),
+        cmocka_unit_test (collide_rect_point_test)
     };
-
 
     /* If setup and teardown functions are not
        needed, then NULL may be passed instead */

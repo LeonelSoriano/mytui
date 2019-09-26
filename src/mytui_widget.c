@@ -122,29 +122,55 @@ static void _update_MyTuiWidgetButton(MiTuiWidget *widget){
 
 
 static void _internal_shadow_event(struct MiTuiWidget *widget){
-
-	//print_line_log(MytuiLoggerTypeError, "hola Desde eventWidget ");
-	print_line_log(MytuiLoggerTypeError, "hola Desde eventWidget %d", widget->w);
+    print_line_log(MytuiLoggerTypeError, "hola Desde eventWidget ");
+    print_line_log(MytuiLoggerTypeError, "hola Desde eventWidget %d", widget->w);
 }
 
+
+
+bool set_text_MyTuiWidgetTextBox(MiTuiWidget *widget, const char* newText) {
+    if (widget->type != mytuiTextBox) {
+        return false;
+    }
+    //TODO aca tengo el agregar me falta el eliminar ademas de el uft8 la eñe y eso
+    MiTuiWidgetExtraTextBox *extra = (MiTuiWidgetExtraTextBox*) widget->extra;
+    free(extra->text);
+    extra->text = malloc(strlen(newText) + 1);
+    strcpy(extra->text, newText);
+
+    /*char* text_before = malloc(strlen(extra->text) + 1);
+    size_t len = strlen(extra->text);
+    strcpy(text_before, extra->text);
+
+    char new_cacharacter = event;
+
+    extra->text = realloc(extra->text, len + 1 + 1);
+    strcpy(extra->text, text_before);
+
+    extra->text[len ++] = new_cacharacter;
+    extra->text[len ++] = '\0';
+
+    free(text_before);*/
+
+    return true;
+}
 
 static void _update_MyTuiWidgetTextBox(MiTuiWidget *widget){
     NodeTranformation *node = NULL;
 
     MiTuiWidgetExtraTextBox *extra = (MiTuiWidgetExtraTextBox*) widget->extra;
 
-    char *bg_str;
+    //char *bg_str;
 
     int bc_color = resolve_color(_confMap, widget->bc, "textbox.bg");
     int fc_color = resolve_color(_confMap, widget->fc, "textbox.fg");
 
     int str_size = strlen(extra->text);
-    int draw_x = (widget->w < str_size) ? str_size : widget->w;
-
+    //int draw_x = (widget->w < str_size) ? str_size : widget->w;
 
     for (int i = widget->y ; i < (widget->h + widget->y) ; i++) {
 
-		int character_line = 0;
+        int character_line = 0;
 
         for (int j = widget->x; j < (widget->w + widget->x); j++) {
 
@@ -160,13 +186,11 @@ static void _update_MyTuiWidgetTextBox(MiTuiWidget *widget){
         }
     }
 
-add_mytui_event_listener(
-_internal_shadow_event,
-        mytuiEventShadow, widget);
+
 
  /*   if(! add_mytui_event_listener(_internal_shadow_event(widget), mytuiEventShadow, widget)){
-		print_line_log(MytuiLoggerTypeError, "Problemas en agregar event shadow para TextBox");
-	}
+            print_line_log(MytuiLoggerTypeError, "Problemas en agregar event shadow para TextBox");
+        }
 */
 
     node_bufffer_vs_tranformator(&nodeBufer, node);
@@ -191,6 +215,11 @@ MiTuiWidget *init_MyTuiWidgetTextBox(int x, int y, int w, int h, int bc, int fc,
     extra->text = malloc(strlen(text) + 1);
     strcpy(extra->text, text);
     widget->extra = extra;
+
+    add_mytui_event_listener(
+        _internal_shadow_event,
+        mytuiEventShadow, widget);
+
     return widget;
 }
 

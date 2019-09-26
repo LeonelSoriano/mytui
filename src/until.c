@@ -142,7 +142,6 @@ bool strIsInt(const char *str)
         return false;
     }
 
-
     for (int i = 0; i < strlen(str); i++)
     {
 
@@ -269,5 +268,11 @@ bool copy_file(const char* path_source_file, const char* path_new_file){
     fclose(file_source);
     fclose(file_new);
     return true;
+}
+
+
+bool collide_rect_point(unsigned int x, unsigned int y, unsigned int w, unsigned int h,
+        unsigned int px, unsigned int py) {
+    return ( (px >= x && px <= x + w)  && ( py >= y && py <= y + h )) ? true : false;
 }
 

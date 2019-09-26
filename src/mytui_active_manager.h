@@ -27,6 +27,12 @@ typedef struct MytuiActiveWidget  MytuiActiveWidget;
  */
 void change_active_miTuiWidget(struct MiTuiWidget *miTuiWidget);
 
+/**
+ *  @brief accion sobre un widget activo
+ *  @param uint16_t char de tecla pulsada
+ *  @param uint16_t codigo de tecla pulsada
+ */
+void action_active_miTuiWidget(uint16_t ch, uint16_t key);
 
 extern void delete_active_miTuiWidget();
 

@@ -62,7 +62,7 @@ OBJECTS_TEST = $(MAIN_TEST:.c=.o) $(SOURCES_TEST:.c=.o)
 SOURCES_TEST=#./test/test.c
 
 LDLIBS_TEST = -lcmocka -fprofile-arcs -ftest-coverage
-LDFLAGS_TEST =  -Wl,--wrap=write -Wl,--wrap=read
+LDFLAGS_TEST =  -Wl
 
 
 

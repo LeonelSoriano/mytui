@@ -70,7 +70,7 @@ void update_termbox()
 
     // el update
     update_MytuiContainer_childContainer(mytuiContainer);
-    add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, label);
+    //add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, label);
 
 
     // init btn
@@ -79,9 +79,7 @@ void update_termbox()
 
 
     update_MyTuiWidget(btn);
-    
     add_mytui_event_listener(holaEvent, mytuiEventClickPrincipal, btn);
-
 
 
     MiTuiWidget *btn2 = init_MyTuiWidgetButton("BTN2", 40, 10, 10, 2, -1, -1, -1);
@@ -130,12 +128,15 @@ void update_termbox()
                     goto OUT_EVENT_POOL;
 
                 case TB_KEY_CTRL_A: {
-                    print_line_log(MytuiLoggerTypeError, "hola Desde eventWidget %c",ev.key
-                            );
 
+//                    print_line_log(MytuiLoggerTypeError, "hola Desde eventWidget %c",ev.key);
                     break;
                 }
             }
+            print_line_log(MytuiLoggerTypeError, "hola Desde eventWidget %d",ev.key);
+            action_active_miTuiWidget(ev.ch, ev.key);
+            screen_manager(&nodeBufer);
+
             break;
         case TB_EVENT_RESIZE:
             //init_screen_manager(&nodeBufer);

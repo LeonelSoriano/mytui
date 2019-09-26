@@ -83,78 +83,85 @@ void mouse_manager_event_fire(int32_t x, int32_t y){
     if(stackMouseEvent == NULL){
         return;
     }
-        MytuiStackMouseEvent *validate_stackMouseEvent = stackMouseEvent;
-        while (validate_stackMouseEvent != NULL) {
-            /*if (validate_stackMouseEvent->widget == widget &&
-                validate_stackMouseEvent->eventType == eventType) {
-            }*/
+    MytuiStackMouseEvent *validate_stackMouseEvent = stackMouseEvent;
+    while (validate_stackMouseEvent != NULL) {
+        /*if (validate_stackMouseEvent->widget == widget &&
+            validate_stackMouseEvent->eventType == eventType) {
+        }*/
+
+        switch (validate_stackMouseEvent->eventType) {
+            case mytuiEventClickPrincipal: /*mytuiEventClickPrincipal*/
+                if(validate_stackMouseEvent->widget->type ==  mytuiButton){
+
+                    if(collide_rect_point(validate_stackMouseEvent->widget->x,
+                                validate_stackMouseEvent->widget->y,
+                                validate_stackMouseEvent->widget->w,
+                                validate_stackMouseEvent->widget->h,
+                                x,
+                                y)){
 
 
-            switch (validate_stackMouseEvent->eventType) {
-                case mytuiEventClickPrincipal: /*mytuiEventClickPrincipal*/
-                    if(validate_stackMouseEvent->widget->type ==  mytuiButton){
+                        change_active_miTuiWidget(validate_stackMouseEvent->widget);
 
-                        if((y >= validate_stackMouseEvent->widget->y &&
-                            y <=  validate_stackMouseEvent->widget->y +
-                            validate_stackMouseEvent->widget->h) &&
-                             (x >= validate_stackMouseEvent->widget->x &&
-                             x <=  validate_stackMouseEvent->widget->x +
-                             validate_stackMouseEvent->widget->w)){
+                        //animation del boton al pulsar
+                        MytuiAnimation *animation = init_MytuiAnimation( validate_stackMouseEvent->widget);
+                        add_step_MytuiAnimation(&animation, mytuiAnimationMove,
+                            (double[]){-1, -1, 3, 4},0.2);
+                        add_step_MytuiAnimation(&animation, mytuiAnimationMove,
+                            (double[]){1, 1, 3, 4},0.2);
 
-
-                            change_active_miTuiWidget(validate_stackMouseEvent->widget);
-
-                            //animation del boton al pulsar
-                            MytuiAnimation *animation = init_MytuiAnimation( validate_stackMouseEvent->widget);
-                            add_step_MytuiAnimation(&animation, mytuiAnimationMove,
-                                (double[]){-1, -1, 3, 4},0.2);
-                            add_step_MytuiAnimation(&animation, mytuiAnimationMove,
-                                (double[]){1, 1, 3, 4},0.2);
-
-                            update_mytuiAnimation(&animation);
+                        update_mytuiAnimation(&animation);
 
 
+                        //update_MyTuiWidget(validate_stackMouseEvent->widget);
+                        free_MytuiAnimation(&animation);
+                        // end de animacion del boton
 
-                            //update_MyTuiWidget(validate_stackMouseEvent->widget);
-                            free_MytuiAnimation(&animation);
-                            // end de animacion del boton
-
-
-                            validate_stackMouseEvent->call_back(validate_stackMouseEvent->widget);
-                        }
-
-
-
-                    }else if(validate_stackMouseEvent->widget->type == mytuiLabel){
-
-
-                        if((y >= validate_stackMouseEvent->widget->y &&
-                            y <=  validate_stackMouseEvent->widget->y +
-                            validate_stackMouseEvent->widget->h) &&
-                             (x >= validate_stackMouseEvent->widget->x &&
-                             x <=  validate_stackMouseEvent->widget->x +
-                             validate_stackMouseEvent->widget->w)){
-
-                            validate_stackMouseEvent->call_back(validate_stackMouseEvent->widget);
-
-                        }
+                        validate_stackMouseEvent->call_back(validate_stackMouseEvent->widget);
                     }
 
-                    break;
-                case mytuiEventShadow:
-                    if(validate_stackMouseEvent->widget->type == mytuiTextBox){
+
+
+                }else if(validate_stackMouseEvent->widget->type == mytuiLabel){
+
+
+                    if((y >= validate_stackMouseEvent->widget->y &&
+                        y <=  validate_stackMouseEvent->widget->y +
+                        validate_stackMouseEvent->widget->h) &&
+                         (x >= validate_stackMouseEvent->widget->x &&
+                         x <=  validate_stackMouseEvent->widget->x +
+                         validate_stackMouseEvent->widget->w)){
+
+                        validate_stackMouseEvent->call_back(validate_stackMouseEvent->widget);
+
+                    }
+                }
+
+                break;
+            case mytuiEventShadow:
+
+                if(validate_stackMouseEvent->widget->type == mytuiTextBox){
+
+                    if(collide_rect_point(validate_stackMouseEvent->widget->x,
+                                validate_stackMouseEvent->widget->y,
+                                validate_stackMouseEvent->widget->w,
+                                validate_stackMouseEvent->widget->h,
+                                x,
+                                y)){
+
                         change_active_miTuiWidget(validate_stackMouseEvent->widget);
                         update_MyTuiWidget(validate_stackMouseEvent->widget);
                         stackMouseEvent->call_back(validate_stackMouseEvent->widget);
-
                     }
-                    break;
-            }
 
 
-            validate_stackMouseEvent = validate_stackMouseEvent->next;
+                }
+                break;
         }
 
+
+        validate_stackMouseEvent = validate_stackMouseEvent->next;
+    }
 
 }
 
