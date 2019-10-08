@@ -57,6 +57,8 @@ void action_active_miTuiWidget(uint16_t ch, uint16_t key) {
         return;
     }
 
+    print_line_log(MytuiLoggerTypeError, "letra que tengo es, %c", ch);
+    print_line_log(MytuiLoggerTypeError, "key que tengo es, %d", key);
     switch (_mytuiActiveWidget->miTuiWidget->type) {
         case mytuiTextBox:
         {
@@ -72,6 +74,16 @@ void action_active_miTuiWidget(uint16_t ch, uint16_t key) {
                 }
 
                 newText[new_len ] = '\0';
+                set_text_MyTuiWidgetTextBox(_mytuiActiveWidget->miTuiWidget, newText);
+                update_MyTuiWidget(_mytuiActiveWidget->miTuiWidget);
+
+            } else if (key == 32) {
+                 char newText[ text_len + 2];
+                strcpy(newText, extra->text);
+
+                newText[text_len ++] = ' ';
+                newText[text_len ++] = '\0';
+
                 set_text_MyTuiWidgetTextBox(_mytuiActiveWidget->miTuiWidget, newText);
                 update_MyTuiWidget(_mytuiActiveWidget->miTuiWidget);
 
